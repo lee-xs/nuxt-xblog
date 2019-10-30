@@ -5,7 +5,7 @@
             <el-col :span="24" v-if="list.length == 0" style="padding: 15px; text-align:center; font-size:14px;">
                 <p>暂时没有任何内容...</p>
             </el-col>
-            <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card" style="position: relative;">
+            <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated bounceInLeft" style="position: relative;">
                 <nuxt-link :to="'/article/' + item.id">
                     <div class="list-img"><img :src="item.cover"/></div>
                     <h4 v-if="item.title.length < 28" v-text="item.title">标题</h4>
@@ -83,12 +83,12 @@ export default {
 
 <style lang="scss" scoped>
 .list-container{
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(26,26,26,.3);
     .list-card{
         font-size: 13px;
         line-height: 25px;
         border-bottom: 1px solid #dcdee6;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(26,26,26,.3);
         h4{
             color:#606266;
             font-size: 15px;
