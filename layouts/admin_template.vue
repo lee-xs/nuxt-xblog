@@ -37,7 +37,7 @@
                     <i :class="isCollapse? 'el-icon-s-unfold':'el-icon-s-fold'" @click="isCollapse = !isCollapse"></i>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" :style="{left: isCollapse? '64px':'200px'}">
                 <nuxt/>
             </div>
         </div>
@@ -53,8 +53,8 @@ export default {
             navs: [
                 {name: '', title: '首页', type: 'el-icon-menu'},
                 {name: 'article', title: '文章管理' , type: 'el-icon-tickets', child: [
+                    {name: 'list', title: '全部文章', type: 'el-icon-takeaway-box'},
                     {name: 'issue', title: '发布文章', type: 'el-icon-edit-outline'},
-                    {name: 'box', title: '草稿/回收', type: 'el-icon-takeaway-box'},
                     {name: 'category', title: '分类', type: 'el-icon-bank-card'},
                     {name: 'tag', title: '标签', type: 'el-icon-discount'},
                 ]},
@@ -84,15 +84,23 @@ export default {
 }
 .main{
     overflow: hidden;
+    width: 100%;
     .abovebar{
         height:50px; 
         width:100%; 
         font-size:30px;
         padding: 0 20px;
+        background-color: #fff;
         box-shadow: 0 1px 3px rgba(26, 26, 26, 0.2);
+        position: fixed;
     }
     .content{
+        margin-top: 50px;
         padding: 15px;
+        left: 200px;
+        right: 0;
+        position: absolute;
+        z-index: -1;
     }
 }
 

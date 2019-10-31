@@ -3,6 +3,17 @@ import request from '@/service'
 const prefix = '/article'
 
 /**
+ * 发布文章
+ */
+export const save = (article) => {
+    return request({
+        url: `${prefix}`,
+        method: 'post',
+        data: article
+    })
+}
+
+/**
  * 首页默认分页查询文章
  */
 export const getPageArticle = (pageCode, pageSize) => {
@@ -100,4 +111,32 @@ export const getArchives = () => {
         url: `${prefix}/archives`,
         method: 'get'
     })
+}
+
+/**
+ * 生成锚点
+ */
+export const createAnchor = (content) => {
+    const regex = /<(h[1-6])[\s\S]*?>/g
+    const arr = content.match(regex)
+
+    const arr2 = []
+    if(arr != null && arr.length > 0){
+        arr.forEach(item => {
+            if(item.length <= 4){
+                let index = content.indexOf(item)+3
+                let front = content.substring(0,index)
+                content = content.substring(index,content.length)
+                arr2.push(front)
+            }
+        });
+    }
+    arr2.push(content)
+    
+    let str = ''
+    for(var i = 0; i < arr2.length-1; i++){
+        str += (arr2[i] + ' id="A' + Math.random().toString(36).substr(-10) + '"')
+    }
+    str+=arr2[arr2.length-1]
+    return str
 }

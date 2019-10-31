@@ -35,7 +35,8 @@ import VSiteCard from '~/components/site-card'
 import VHotCard from '~/components/hot-card'
 import VTagCard from '~/components/tag-card'
 import { getPageArticle, getHotList } from '~/api/article'
-import { getSlide, getNotice } from '~/api/index'
+import { getNotice } from '~/api/index'
+import { getSlideAll } from '~/api/slide'
 import { getSite } from '~/api/site'
 import { getAll } from '~/api/tag'
 export default {
@@ -71,7 +72,7 @@ export default {
         //获取通知
         let noticeData = await getNotice()
         //获取幻灯片
-        let slideData = await getSlide()
+        let slideData = await getSlideAll()
         return {
             list: data.records,//文章list
             total: data.total,//文章总数

@@ -2,7 +2,7 @@
   <el-row class="list">
     <el-col :span="24" class="hidden-md-and-down animated bounceInLeft">
         <el-row class="list-container">
-            <el-col :span="24" v-if="list.length == 0" style="padding: 15px; text-align:center; font-size:14px;">
+            <el-col :span="24" v-if="list.length == 0" style="padding: 15px; box-shadow: 0 1px 3px rgba(26,26,26,.3); text-align:center; font-size:14px;">
                 <p>暂时没有任何内容...</p>
             </el-col>
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated bounceInLeft" style="position: relative;">

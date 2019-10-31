@@ -1,5 +1,10 @@
 <template>
-  <div ref="editorElem"></div>
+   <div ref="editorElem" style="min-height:600px;"></div>
+  <!-- <div>
+    <div id="editorBar" style="border: 1px solid #ccc;"></div>
+    <div style="padding: 5px 0; color: #ccc"></div>
+    <div id="editorElem" style="border: 1px solid #ccc; min-height:600px;"></div> 
+  </div> -->
 </template>
 
 <script>
@@ -20,7 +25,7 @@ export default {
       _this.editor = new wangeditor(this.$refs.editorElem); //创建编辑器实例
       _this.editor.customConfig.onchange = html => {
         this.editorContent = html;
-        this.catchData(this.editorContent); //把这个html通过catchData的方法传入父组件
+        this.$emit("editorContent", this.editorContent)//把这个html通过catchData的方法传入父组件
       };
 
       _this.editor.customConfig.uploadImgServer = _this.uploadUrl; //上传图片的接口
@@ -59,3 +64,8 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.w-e-text-container{
+  height: 550px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
+}
+</style>

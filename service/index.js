@@ -25,7 +25,7 @@ service.interceptors.response.use(
         if(res.code != 20000){
             Message({
                 type: 'error',
-                data: res.data
+                message: res.message
             })
         }
         return res

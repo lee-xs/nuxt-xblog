@@ -3,7 +3,7 @@
         <el-carousel trigger="click" height="250px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
                 <a :href="item.url">
-                    <div>
+                    <div style="width: 100%; height: 250px;">
                         <img :src="item.cover">
                         <div v-text="item.title" class="title"></div>
                     </div>

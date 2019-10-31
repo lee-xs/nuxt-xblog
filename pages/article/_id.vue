@@ -130,7 +130,7 @@ export default {
             data[index] = new Array()
             let num = parseInt(anchor[i].charAt(2))
             let href = '#' + anchor[i].substring(8,19)
-            let title = anchor[i].substring(22,anchor[i].length-5)
+            let title = anchor[i].substring(21,anchor[i].length-5)
             if(num <= 2){
                 child = []
                 current = index
