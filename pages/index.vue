@@ -16,7 +16,7 @@
         <!-- crad -->
         <el-col :span="7" :xs="24" class="hidden-md-and-down right">
              <!-- 站点信息 -->
-            <v-site-card :site="site"></v-site-card>
+            <v-site-card :siteInfo="siteInfo"></v-site-card>
              <!-- 热门文章 -->
             <v-hot-card :hotList="hotList"></v-hot-card>
             <Affix :offset-top="80">
@@ -64,7 +64,7 @@ export default {
         //获取文章列表
         let { data } = await getPageArticle(1, 10)
         //获取站点信息
-        let siteData = await getSite()
+        let siteInfoData = await getSite()
         //获取全部标签
         let tagData = await getAll()
         //获取热门文章
@@ -76,7 +76,7 @@ export default {
         return {
             list: data.records,//文章list
             total: data.total,//文章总数
-            site: siteData.data,//站点信息
+            siteInfo: siteInfoData.data,//站点信息
             tagList: tagData.data,//全部标签
             hotList: hotData.data,//热门文章list
             noticeList: noticeData.data,//通知列表

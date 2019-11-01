@@ -83,7 +83,7 @@
                     </div>
                     <el-collapse-transition>
                         <div v-show="coverTagShow" class="details">
-                            <img :src="cover" @click="dialogChangeCover = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
+                            <img :src="cover" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
                         </div>
                     </el-collapse-transition>
                 </el-col>
@@ -92,44 +92,16 @@
         </el-col>
         
         <!-- 添加封面弹窗 -->
-        <el-dialog title="添加封面图" :visible.sync="dialogChangeCover" :fullscreen="true" :append-to-body='true' width="80%">
-            <el-tabs v-model="activeName" type="card">
-                <el-tab-pane label="所有图片" name="first">
-                    <el-row :gutter="10">
-                        <el-col :span="4" v-for="(img,index) in imageList" :key="index">
-                            <img :src="img.url" @click="handleChangeCover(img.url)" style="width:100%; height:200px; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
-                        </el-col>
-                        <el-col :span="24" style="text-align:center; margin-top:20px;">
-                            <Page
-                            :total="imageTotal"
-                            :current="pageCode"
-                            :page-size="pageSize"
-                            @on-change="handleCurrentChange"></Page>
-                        </el-col>
-                    </el-row>
-                </el-tab-pane>
-                <el-tab-pane label="上传图片" name="second">
-                    <!-- <el-upload
-                        class="avatar-uploader"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :show-file-list="false"
-                        :on-success="handleAvatarSuccess"
-                        :before-upload="beforeAvatarUpload">
-                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload> -->
-                </el-tab-pane>
-            </el-tabs>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogChangeCover = false">取 消</el-button>
-                <el-button type="primary" @click="dialogChangeCover = false">确 定</el-button>
-            </div>
+        <!-- 图片列表 -->
+        <el-dialog title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
+            <v-image-dialog @handleCurrentChange="handleCurrentChange" @handleImageUrl="handleImageUrl" :imageTotal="imageTotal" :imageList="imageList" :pageCode="pageCode"></v-image-dialog>
         </el-dialog>
     </el-row>
 </template>
 
 <script>
 import VMarkdown from '~/components/admin/markdown'
+import VImageDialog from '~/components/admin/image-dialog'
 import { save, createAnchor } from '~/api/article'
 import { getAll as getCategoryAll } from '~/api/category'
 import { getAll as getTagAll } from '~/api/tag'
@@ -168,7 +140,7 @@ export default {
             selectTag: '',
             inputTag: '',
             cover: '/thumbnail.png',
-            dialogChangeCover: false,
+            dialogImage: false,//image列表对话框
             activeName: 'first',//卡片tags
             pageCode: 1,
             pageSize: 12,
@@ -176,6 +148,7 @@ export default {
     },
     components:{
         VMarkdown,
+        VImageDialog,
     },
     methods: {
         //发送文章发布请求
@@ -201,6 +174,13 @@ export default {
                 }
             })
         },
+        //发送获取图片列表请求
+        handleImageList(){
+            getImagePage(this.pageCode, this.pageSize).then(res => {
+                this.imageList = res.data.records
+                this.imageTotal= res.data.total
+            })
+        },
         /**
          * markdown子组件向父组件传入文章内容
          */
@@ -208,16 +188,18 @@ export default {
             this.article.content = data
         },
         /**
-         * 添加封面图相关
+         * 处理图片相关
          */
-        handleCurrentChange(pageCode){
-
+        //接收子组件传来的更改的页码
+        handleCurrentChange(data){
+            this.pageCode = data
+            this.handleImageList()
         },
-        //修改图片路径
-        handleChangeCover(url){
-            this.cover = url
-            this.article.cover = url
-            this.dialogChangeCover = false
+        //接收子组件传来的imageUrl 修改图片路径
+        handleImageUrl(data){
+            this.cover = data
+            this.article.cover = data
+            this.dialogImage = false
         },
         /**
          * 标签添加相关

@@ -9,7 +9,7 @@
            <tbody>
               <tr>
                 <td>文章总数：</td>
-                <td v-text="site.articleCount">0</td>
+                <td v-text="siteInfo.articleCount">0</td>
               </tr>
               <tr class="gray">
                 <td>留言数量：</td>
@@ -21,11 +21,11 @@
               </tr>
               <tr class="gray">
                 <td>浏览总量：</td>
-                <td v-text="site.visitCount">0</td>
+                <td v-text="siteInfo.visitCount">0</td>
               </tr>
               <tr>
                 <td>访客数量：</td>
-                <td v-text="site.userCount">0</td>
+                <td v-text="siteInfo.userCount">0</td>
               </tr>
            </tbody>
           </table>
@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  props:['site']
+  props:['siteInfo']
 };
 </script>
 

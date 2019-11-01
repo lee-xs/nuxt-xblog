@@ -1,9 +1,8 @@
 <template>
     <div class="footer-container">
         <div class="footer-content">
-            <p>Copyright ©  XIN博客 版权所有 网站已运行 <span v-text="time"></span></p>
-            <p>赣公网安备36042102000137</p>
-            <p>赣ICP备17002430号</p>
+            <p>Copyright ©  <span v-text="siteName+'博客'">XIN博客</span> 版权所有 网站已运行 <span v-text="time"></span></p>
+            <p v-text="icp"></p>
         </div>
     </div>
 </template>
@@ -15,6 +14,7 @@ export default {
             time: '',
         }
     },
+    props: ['icp', 'run', 'siteName'],
     methods:{
         runTime(){
             if(process.browser){
@@ -32,7 +32,8 @@ export default {
                 let todayMinute = today.getMinutes();
                 let todaySecond = today.getSeconds();
                 
-                let t1 = Date.UTC(2019,4,8,16)
+                let start = new Date(this.run)
+                let t1 = Date.UTC(start.getFullYear(), start.getMonth()+1, start.getDate())
                 let t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond)
                 let diff = t2-t1
                 
@@ -58,7 +59,7 @@ export default {
     width: 100%;
     top: 85px;
     text-align: center;
-    line-height: 20px;
+    line-height: 25px;
     padding: 20px;
     background: #555555;
     .footer-content{

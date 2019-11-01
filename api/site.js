@@ -19,3 +19,14 @@ export const getSiteInfo = () => {
         method: 'get'
     })
 }
+
+/**
+ * 更新站点信息
+ */
+export const update = (site) => {
+    return request({
+        url: '/site',
+        method: 'put',
+        data: site
+    })
+}

@@ -44,24 +44,15 @@
         </el-col>
 
 
+        <!-- 图片列表 -->
         <el-dialog title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
-            <el-row :gutter="10">
-                <el-col :span="4" v-for="(img,index) in imageList" :key="index">
-                    <img :src="img.url" @click="handleChangeCover(img.url)" style="width:100%; height:200px; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
-                </el-col>
-                <el-col :span="24" style="text-align:center; margin-top:20px;">
-                    <Page
-                    :total="imageTotal"
-                    :current="pageCode"
-                    :page-size="pageSize"
-                    @on-change="handleCurrentChange"></Page>
-                </el-col>
-            </el-row>
+            <v-image-dialog @handleCurrentChange="handleCurrentChange" @handleImageUrl="handleImageUrl" :imageTotal="imageTotal" :imageList="imageList" :pageCode="pageCode"></v-image-dialog>
         </el-dialog>
     </el-row>
 </template>
 
 <script>
+import VImageDialog from '~/components/admin/image-dialog'
 import { getImagePage } from '~/api/image'
 import { getSlideAll, delSlide, updateSlide, save } from '~/api/slide'
 export default {
@@ -109,13 +100,17 @@ export default {
                 this.imageTotal= res.data.total
             })
         },
-        //分页获取图片
-        handleCurrentChange(pageCode){
-            this.pageCode = pageCode
+        /**
+         * 处理图片相关
+         */
+        //接收子组件传来的更改的页码
+        handleCurrentChange(data){
+            this.pageCode = data
             this.handleImageList()
         },
-        handleChangeCover(url){
-            this.cover = url
+        //接收子组件传来的imageUrl 修改图片路径
+        handleImageUrl(data){
+            this.cover = data
             this.dialogImage = false
         },
         /**
@@ -191,6 +186,9 @@ export default {
             this.id = this.title = this.url = this.cover = this.sort = ''
             this.slide = {}
         }
+    },
+    components:{
+        VImageDialog
     }
 }
 </script>
