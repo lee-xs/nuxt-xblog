@@ -2,12 +2,12 @@
     <div class="slide-container animated bounceInLeft">
         <el-carousel trigger="click" height="250px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
-                <a :href="item.url">
+                <el-link :href="item.url" :underline="false" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 250px;">
                         <img :src="item.cover">
                         <div v-text="item.title" class="title"></div>
                     </div>
-                </a>
+                </el-link>
             </el-carousel-item>
         </el-carousel>
     </div>

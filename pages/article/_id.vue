@@ -43,7 +43,7 @@
           <el-row>
             <!-- 卡片 -->
             <el-col :span="24">
-              <v-site-card :site="site"></v-site-card>
+              <v-site-card :siteInfo="siteInfo"></v-site-card>
             </el-col>
             <el-col :span="24" >
               <!-- 目录 -->
@@ -97,11 +97,11 @@ export default {
         let { data } = await getArticle(params.id)
 
         //获取站点信息
-        let siteData = await getSite()
-        let site = siteData.data
+        let siteInfoData = await getSite()
+        let siteInfo = siteInfoData.data
         return {
           article: data,
-          site,
+          siteInfo,
         }
     },
     data(){
@@ -114,7 +114,7 @@ export default {
     methods: {
       randomSketckBg(){
         const rand = Math.floor(Math.random()*5)+1
-        this.sketchBg = '/sketchBg0' + rand+'.jpg'
+        this.sketchBg = 'http://cdn.lixinblog.cn/sketchBg0' + rand+'.jpg'
       },
       handleArticle(){
         //匹配标签里面的所有内容

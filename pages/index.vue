@@ -49,7 +49,7 @@ export default {
     },
     head(){
         return{
-        title: '【XIN-BLOG】首页',
+            title: '【XIN-BLOG】首页',
         }
     },
     components:{
