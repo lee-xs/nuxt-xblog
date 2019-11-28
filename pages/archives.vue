@@ -36,7 +36,7 @@
     <el-col :span="7" style="padding-left:5px;">
       <v-rand-card :randList="randList"></v-rand-card>
       <Affix :offset-top="80">
-        <v-tag-card :tagList="tagList" @tagId="handleTagId"></v-tag-card>
+        <v-tag-card :tagList="tagList"></v-tag-card>
       </Affix>
     </el-col>
   </el-row>

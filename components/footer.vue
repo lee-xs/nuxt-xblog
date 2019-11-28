@@ -1,8 +1,8 @@
 <template>
     <div class="footer-container">
         <div class="footer-content">
-            <p>Copyright ©  <span v-text="siteName+'博客'">XIN博客</span> 版权所有 网站已运行 <span v-text="time"></span></p>
-            <p v-text="icp"></p>
+            <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 网站已运行 <span v-text="time"></span></p>
+            <p v-text="siteInfo.site.icp"></p>
         </div>
     </div>
 </template>
@@ -11,10 +11,10 @@
 export default {
     data(){
         return{
+            siteInfo: this.$store.state.siteInfo,
             time: '',
         }
     },
-    props: ['icp', 'run', 'siteName'],
     methods:{
         runTime(){
             if(process.browser){
@@ -32,7 +32,7 @@ export default {
                 let todayMinute = today.getMinutes();
                 let todaySecond = today.getSeconds();
                 
-                let start = new Date(this.run)
+                let start = new Date(this.siteInfo.site.run)
                 let t1 = Date.UTC(start.getFullYear(), start.getMonth()+1, start.getDate())
                 let t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond)
                 let diff = t2-t1

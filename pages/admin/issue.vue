@@ -83,7 +83,7 @@
                     </div>
                     <el-collapse-transition>
                         <div v-show="coverTagShow" class="details">
-                            <img :src="cover" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
+                            <img :src="cover || 'http://cdn.lixinblog.cn/thumbnail.png'" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
                         </div>
                     </el-collapse-transition>
                 </el-col>
@@ -108,6 +108,11 @@ import { getAll as getTagAll } from '~/api/tag'
 import { getImagePage } from '~/api/image'
 export default {
     layout: 'admin_template',
+    head(){
+        return{
+            title: `【XIN-BLOG】发布文章`,
+        }
+    },
     async asyncData(){
         let categoryData = await getCategoryAll()
         let tagData = await getTagAll()
@@ -139,7 +144,7 @@ export default {
             dynamicTags: [],
             selectTag: '',
             inputTag: '',
-            cover: '/thumbnail.png',
+            cover: '',
             dialogImage: false,//image列表对话框
             activeName: 'first',//卡片tags
             pageCode: 1,

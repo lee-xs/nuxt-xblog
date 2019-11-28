@@ -34,8 +34,11 @@
             <el-form-item label="留言总数：">
                 <el-input v-model="site.leaveWords" :disabled="true"></el-input>
             </el-form-item>  
-            <el-form-item label="qq：">
-                <el-input v-model="site.qq"></el-input>
+            <el-form-item label="github：">
+                <el-input v-model="site.github"></el-input>
+            </el-form-item>
+            <el-form-item label="gitee：">
+                <el-input v-model="site.gitee"></el-input>
             </el-form-item>
             <el-form-item label="qq：">
                 <el-input v-model="site.qq"></el-input>
@@ -89,6 +92,11 @@ import { getImagePage } from '~/api/image'
 import VImageDialog from '~/components/admin/image-dialog'
 export default {
     layout: 'admin_template',
+    head(){
+        return{
+            title: `【XIN-BLOG】站点信息管理`,
+        }
+    },
     async asyncData(){
         let siteData = await getSiteInfo()
         let imageData = await getImagePage(1,12)

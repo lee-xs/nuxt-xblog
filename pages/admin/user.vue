@@ -1,34 +1,41 @@
 <template>
   <div>
-    <el-button @click="show2 = !show2">Click Me</el-button>
-    <div style="display: flex; margin-top: 20px; height: 100px; border:1px solid red;">
-      <transition name="el-zoom-in-top">
-        <div v-show="show2" class="transition-box">.el-zoom-in-top</div>
-      </transition>
-    </div>
+      <el-table :data="userList" border style="width: 100%">
+        <el-table-column prop="id" label="Id" width="180"></el-table-column>
+        <el-table-column prop="username" label="用户名"></el-table-column>
+        <el-table-column prop="email" label="邮箱"></el-table-column>
+        <el-table-column prop="ip" label="IP地址" width="180"></el-table-column>
+        <el-table-column prop="state" label="状态"></el-table-column>
+        <el-table-column prop="visitTime" label="首次访问" width="180"></el-table-column>
+        <el-table-column prop="lastVisitTime" label="上次访问" width="180"></el-table-column>
+        <el-table-column prop="avatar" label="头像"></el-table-column>
+        <el-table-column label="操作"></el-table-column>
+      </el-table>
   </div>
 </template>
 
 <script>
+import { getUserPage } from '~/api/user'
  export default {
     layout: 'admin_template',
+    head(){
+        return{
+            title: `【XIN-BLOG】用户管理`,
+        }
+    },
     data: () => ({
-      show2: true
-    })
+      
+    }),
+    async asyncData(){
+      let userData = await getUserPage(1, 15)
+      return {
+        userList: userData.data.records,
+        userListSize: userData.data.total,
+      }
+    },
   }
 </script>
 
 <style>
-  .transition-box {
-    margin-bottom: 10px;
-    width: 200px;
-    height: 100px;
-    border-radius: 4px;
-    background-color: #409EFF;
-    text-align: center;
-    color: #fff;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    margin-right: 20px;
-  }
+
 </style>

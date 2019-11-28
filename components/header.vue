@@ -3,7 +3,7 @@
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->
-                <nuxt-link to="/">
+                <nuxt-link to="/" @click="this.$router.push('/home')">
                     <el-col :span="2" :xs="5" class="logo">
                         <img src="http://cdn.lixinblog.cn/logo20191017102307.jpg" />
                     </el-col>

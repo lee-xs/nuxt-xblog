@@ -12,7 +12,10 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'http://cdn.lixinblog.cn/user.jpg' || '/favicon.ico' }
+    ],
+    script: [
+      { src: 'https://hm.baidu.com/hm.js?305748ded89cd2c21fb4702ae757ac60' },
     ]
   },
   /*
@@ -34,6 +37,7 @@ module.exports = {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/iview',
+    '@/plugins/baidu'
   ],
   /*
   ** Nuxt.js dev-modules

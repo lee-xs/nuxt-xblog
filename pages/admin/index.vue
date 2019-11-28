@@ -6,7 +6,12 @@
 
 <script>
 export default {
-    layout: 'admin_template'
+    layout: 'admin_template',
+    head(){
+        return{
+            title: `【XIN-BLOG】后台管理首页`,
+        }
+    },
 }
 </script>
 

@@ -3,19 +3,19 @@
         <el-col :span="8" >
             <div class="slide-box" style="margin-right:5px;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>
-                <el-form class="form" label-position="top" label-width="80px">
+                <el-form class="form" :data="slide" label-position="top" label-width="80px">
                     <el-form-item label="标题">
-                        <el-input v-model="title"></el-input>
+                        <el-input v-model="slide.title"></el-input>
                     </el-form-item>
                     <el-form-item label="链接地址">
-                        <el-input v-model="url"></el-input>
+                        <el-input v-model="slide.url"></el-input>
                     </el-form-item>
                     <el-form-item label="图片链接">
-                        <el-input v-model="cover" style="width:80%;"></el-input>
+                        <el-input v-model="slide.cover" style="width:80%;"></el-input>
                         <el-button type="primary" plain @click="dialogImage = true" style="width:18%;">选择</el-button>
                     </el-form-item>
                     <el-form-item label="排序">
-                        <el-input v-model="sort"></el-input>
+                        <el-input v-model="slide.sort"></el-input>
                     </el-form-item>    
                     <div style="margin-top:20px;">
                         <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAddSlide()">添加</el-button>
@@ -57,6 +57,11 @@ import { getImagePage } from '~/api/image'
 import { getSlideAll, delSlide, updateSlide, save } from '~/api/slide'
 export default {
     layout: 'admin_template',
+    head(){
+        return{
+            title: `【XIN-BLOG】幻灯片管理`,
+        }
+    },
     async asyncData(){
         let imageData = await getImagePage(1,12)
         let slideData = await getSlideAll()
@@ -79,11 +84,6 @@ export default {
                 cover: '',
                 sort: '',
             },
-            id: '',
-            title:'',
-            url: '',
-            cover: '',
-            sort: '',
         }
     },
     methods:{
@@ -118,11 +118,7 @@ export default {
          * 将选中的幻灯片信息添加至修改框内
          */
         setSlideInfo(row){
-            this.id = row.id
-            this.title = row.title
-            this.url = row.url
-            this.cover = row.cover
-            this.sort = row.sort
+            this.slide = JSON.parse(JSON.stringify(row))
             this.addOrChange = false
         },
         /**
@@ -139,11 +135,17 @@ export default {
          * 向后台发送添加幻灯片请求
          */
         handleAddSlide(){
-            if(this.beforeHandle()){
-                save(this.slide).then(res => {
-                    this.afterHandle(res)
-                })
+            if(this.slide.title == '' ||
+                this.slide.url == '' ||
+                this.slide.cover == '' ||
+                this.slide.sort == ''){
+                    this.$message.error("参数不能留空")
+                return false
             }
+           
+            save(this.slide).then(res => {
+                this.afterHandle(res)
+            })
         },
         /**
          * 处理删除幻灯片 向后台发送删除请求
@@ -156,23 +158,7 @@ export default {
         //返回至添加幻灯片
         goback(){
             this.addOrChange = true
-            this.id = this.title = this.url = this.cover = this.sort = ''
             this.slide = {}
-        },
-        beforeHandle(){
-            if(this.title == '' ||
-                this.url == '' ||
-                this.cover == '' ||
-                this.sort == ''){
-                    this.$message.error("参数不能留空")
-                return false
-            }
-            this.slide.id = this.id
-            this.slide.title = this.title
-            this.slide.url = this.url
-            this.slide.cover = this.cover
-            this.slide.sort = this.sort
-            return true
         },
         //公共处理方法
         afterHandle(res){
@@ -183,7 +169,6 @@ export default {
                 })
                 this.handleSlideList()
             }
-            this.id = this.title = this.url = this.cover = this.sort = ''
             this.slide = {}
         }
     },
