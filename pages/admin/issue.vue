@@ -83,7 +83,7 @@
                     </div>
                     <el-collapse-transition>
                         <div v-show="coverTagShow" class="details">
-                            <img :src="cover || 'http://cdn.lixinblog.cn/thumbnail.png'" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
+                            <img :src="cover || 'http://aleestar.test.upcdn.net/thumbnail.png'" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
                         </div>
                     </el-collapse-transition>
                 </el-col>

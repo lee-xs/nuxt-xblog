@@ -37,7 +37,8 @@ module.exports = {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/iview',
-    '@/plugins/baidu'
+    '@/plugins/baidu',
+    {src:'@/plugins/loading', ssr:false },
   ],
   /*
   ** Nuxt.js dev-modules

@@ -114,7 +114,7 @@ export default {
     methods: {
       randomSketckBg(){
         const rand = Math.floor(Math.random()*5)+1
-        this.sketchBg = 'http://cdn.lixinblog.cn/sketchBg0' + rand+'.jpg'
+        this.sketchBg = 'http://aleestar.test.upcdn.net/sketchBg0' + rand+'.jpg'
       },
       handleArticle(){
         //匹配标签里面的所有内容

@@ -5,7 +5,7 @@
                 <!-- logo -->
                 <nuxt-link to="/" @click="this.$router.push('/home')">
                     <el-col :span="2" :xs="5" class="logo">
-                        <img src="http://cdn.lixinblog.cn/logo20191017102307.jpg" />
+                        <img :src="siteInfo.site.logo" />
                     </el-col>
                 </nuxt-link>
 
@@ -50,7 +50,8 @@ export default {
                 {name: 'message', title: '留言板' },
                 {name: 'links', title: '友情链接' },
                 {name: 'about', title: '关于' },
-            ]
+            ],
+            siteInfo: this.$store.state.siteInfo
         }
     },
 }

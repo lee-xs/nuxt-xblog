@@ -84,6 +84,34 @@ export const getPageArticleByCategory = (pageCode, pageSize, name) => {
 }
 
 /**
+ * 查询草稿箱
+ */
+export const getDrafts = (pageCode, pageSize) => {
+    return request({
+        url: `${prefix}/drafts`,
+        method: 'get',
+        params: {
+            pageCode,
+            pageSize,
+        }
+    })
+}
+
+/**
+ * 查询回收站
+ */
+export const getRecycle = (pageCode, pageSize) => {
+    return request({
+        url: `${prefix}/recycle`,
+        method: 'get',
+        params: {
+            pageCode,
+            pageSize,
+        }
+    })
+}
+
+/**
  * 获取热门文章列表
  */
 export const getHotList = () => {
@@ -94,7 +122,7 @@ export const getHotList = () => {
 }
 
 /**
- * 获取热门文章列表
+ * 获取随机文章列表
  */
 export const getRandList = () => {
     return request({
