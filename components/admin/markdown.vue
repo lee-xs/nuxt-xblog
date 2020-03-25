@@ -1,10 +1,5 @@
 <template>
    <div ref="editorElem" style="min-height:600px;"></div>
-  <!-- <div>
-    <div id="editorBar" style="border: 1px solid #ccc;"></div>
-    <div style="padding: 5px 0; color: #ccc"></div>
-    <div id="editorElem" style="border: 1px solid #ccc; min-height:600px;"></div> 
-  </div> -->
 </template>
 
 <script>
@@ -14,10 +9,10 @@ export default {
     return {
       editor: null,
       editorContent: "",
-      requestImageUrl: config.baseURL,
       uploadUrl: config.baseURL + "/upload"
     };
   },
+  props: ['compileContent'],
   mounted() {
     if(process.browser){
       const _this = this;
@@ -56,10 +51,13 @@ export default {
           // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
         },
         customInsert: function(insertImg, result, editor) {
-          insertImg(_this.requestImageUrl + result.data.src);
+          insertImg(result.data.url);
         }
       };
       _this.editor.create();
+
+      //初始化传过来的数据
+      _this.editor.txt.html(this.compileContent)
     }
   }
 };

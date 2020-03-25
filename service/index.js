@@ -1,8 +1,9 @@
 import axios from 'axios'
 import config from './config'
-import { Message } from 'element-ui'
+import { Message, Header } from 'element-ui'
 
 if(process.server){
+   //config.baseURL = `http://${process.env.HOST || 'aleestar.cn'}:${process.env.PORT || 2922}`
    config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 2922}`
 }
 

@@ -1,20 +1,20 @@
 <template>
     <el-tabs v-model="activeName">
         <el-tab-pane v-loading="loading" label="已发布" name="first" style="text-align:center;">
-            <v-list-tab key="first" :list="articleList" :total="articleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
+            <v-list-tab key="first" @moveRecycle="moveRecycle" :tabType="'first'" :list="articleList" :total="articleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
-        <el-tab-pane label="草稿箱" name="second">
-            <v-list-tab key="second" :list="draftsList" :total="draftsListTotal" @pageCode="handleCurrentChange"></v-list-tab>
+        <el-tab-pane v-loading="loading" label="草稿箱" name="second">
+            <v-list-tab key="second" @moveRecycle="moveRecycle" :tabType="'second'" :list="draftsList" :total="draftsListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
-        <el-tab-pane label="回收站" name="third">
-            <v-list-tab key="third" :list="recycleList" :total="recycleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
+        <el-tab-pane v-loading="loading" label="回收站" name="third">
+            <v-list-tab key="third" @removeArticle="removeArticle" :tabType="'third'" :list="recycleList" :total="recycleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script>
 import VListTab from '~/components/admin/list-tab'
-import { getPageArticle, getDrafts, getRecycle } from '~/api/article'
+import { getPageArticle, getDrafts, getRecycle, recycle, remove } from '~/api/article'
 export default {
     layout: 'admin_template',
     data(){
@@ -57,29 +57,72 @@ export default {
             switch(this.activeName){
                 case 'first':
                     //默认分页
-                    getPageArticle(this.pageCode, this.pageSize).then(res => {
-                        this.articleList = res.data.records
-                        this.articleListTotal = res.data.total
-                        this.loading = false
-                    })
+                    this.findPageArticle()
                 break;
                 case 'second':
                     //草稿箱分页
-                    getDrafts(this.pageCode, this.pageSize).then(res => {
-                        this.draftsList = res.data.records
-                        this.draftsListTotal = res.data.total
-                        this.loading = false
-                    })
+                    this.findDrafts()
                 break;
                 case 'third':
                     //回收站分页
-                    getDrafts(this.pageCode, this.pageSize).then(res => {
-                        this.recycleList = res.data.records
-                        this.recycleListTotal = res.data.total
-                        this.loading = false
-                    })
+                    this.findRecycle()
                 break;
             }
+        },
+        //移除文章
+        moveRecycle(id){
+            recycle(id).then(res => {
+                if(res.code == 20000){
+                    this.$message({
+                        type: 'success',
+                        message: res.message
+                    })
+                }
+
+                //重载草稿箱和回收站的分页数据
+                this.handleCurrentChange(1)
+                this.findRecycle()
+            })
+        },
+        //回收站彻底删除文章
+        removeArticle(id){
+            let ids = []
+            ids.push(id)
+            remove(ids).then(res => {
+                if(res.code == 20000){
+                    this.$message({
+                        type: 'success',
+                        message: res.message
+                    })
+                }
+
+                //重载草稿箱和回收站的分页数据
+                this.handleCurrentChange(1)
+            })
+        },
+        //默认分页
+        findPageArticle(){
+            getPageArticle(this.pageCode, this.pageSize).then(res => {
+                this.articleList = res.data.records
+                this.articleListTotal = res.data.total
+                this.loading = false
+            })
+        },
+        //草稿箱分页
+        findDrafts(){
+            getDrafts(this.pageCode, this.pageSize).then(res => {
+                this.draftsList = res.data.records
+                this.draftsListTotal = res.data.total
+                this.loading = false
+            })
+        },
+        //回收站分页
+        findRecycle(){
+            getRecycle(this.pageCode, this.pageSize).then(res => {
+                this.recycleList = res.data.records
+                this.recycleListTotal = res.data.total
+                this.loading = false
+            })
         },
     },
 }

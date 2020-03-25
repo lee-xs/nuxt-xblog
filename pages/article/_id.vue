@@ -36,7 +36,7 @@
     <!-- 文章内容 -->
     <el-row class="article-container">
         <el-col :lg="17" :xs="24" class="animated bounceInLeft">
-          <div v-html="article.content" class="content"></div>
+          <div v-html="article.content" class="content" style="line-height: 35px;"></div>
         </el-col>
 
         <el-col class="hidden-md-and-down" :lg="7" :xs="24" key="catalogue" style="padding-left:5px;">
@@ -114,7 +114,7 @@ export default {
     methods: {
       randomSketckBg(){
         const rand = Math.floor(Math.random()*5)+1
-        this.sketchBg = 'http://aleestar.test.upcdn.net/sketchBg0' + rand+'.jpg'
+        this.sketchBg = 'http://qiniu.aleestar.cn/sketchBg0' + rand+'.jpg'
       },
       handleArticle(){
         //匹配标签里面的所有内容

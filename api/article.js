@@ -142,6 +142,38 @@ export const getArchives = () => {
 }
 
 /**
+ * 修改文章
+ * @param {*} article 
+ */
+export const change = (article) => {
+    return request({
+        url: `${prefix}`,
+        method: 'put',
+        data: article
+    })
+}
+
+export const recycle = (id) => {
+    return request({
+        url: `${prefix}/recycle/` + id,
+        method: 'delete',
+    })
+}
+
+/**
+ * 删除文章
+ * @param {*} ids 
+ */
+export const remove = (ids) => {
+    return request({
+        url: `${prefix}`,
+        method: 'delete',
+        data: ids
+    })
+}
+
+
+/**
  * 生成锚点
  */
 export const createAnchor = (content) => {

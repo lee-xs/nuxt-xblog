@@ -1,12 +1,16 @@
 import { getSite } from '~/api/site'
 
 export const state = () => ({
-    siteInfo: {}
+    siteInfo: {},
+    compileArticle: {},
 })
 
 export const mutations = {
     SET_SITEINFO: (state, data) => {
         state.siteInfo = data
+    },
+    SET_COMPILEARTICLE: (state, data) => {
+        state.compileArticle = data
     }      
 }
 

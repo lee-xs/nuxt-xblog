@@ -9,13 +9,14 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      //{ 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'http://cdn.lixinblog.cn/user.jpg' || '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://hm.baidu.com/hm.js?305748ded89cd2c21fb4702ae757ac60' },
+      { src: 'https://hm.baidu.com/hm.js?86a28727a22fc484486d01e00c8e3776' },
     ]
   },
   /*

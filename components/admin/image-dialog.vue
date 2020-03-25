@@ -18,14 +18,13 @@ export default {
     props: ['imageList', 'imageTotal', 'pageCode'],
     data(){
         return{
-            pageCode: 1,
-            pageSize: 12,
+            pageSize: 12
         }
     },
     methods:{
         //向父组件发送更改页码请求
-        handleCurrentChange(pageCode){
-            this.$emit('handleCurrentChange', pageCode)
+        handleCurrentChange(data){
+            this.$emit('handleCurrentChange', data)
         },
         //向父组件发送更改图片url请求
         handleImage(url){

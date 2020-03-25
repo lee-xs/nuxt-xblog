@@ -3,8 +3,8 @@
         <el-col :span="18">
             <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
 
-            <Affix :offset-top="60">
-                <v-markdown style="width:100%;" @editorContent="handleEditorContent"></v-markdown>
+            <Affix :offset-top="60"> <!-- v-model="article.content" :catchData="catchData" -->
+                <v-markdown style="width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown>
             </Affix>
         </el-col>
         <el-col :span="6">
@@ -24,21 +24,21 @@
                             <div style="margin-top:15px;">
                                 <span><b>文章类型：</b></span>
                                 <el-select style="width:200px;" v-model="article.source">
-                                    <el-option label="原创" value="1"></el-option>
-                                    <el-option label="转载" value="2"></el-option>
-                                    <el-option label="翻译" value="3"></el-option>
+                                    <el-option label="原创" :value="1"></el-option>
+                                    <el-option label="转载" :value="2"></el-option>
+                                    <el-option label="翻译" :value="3"></el-option>
                                 </el-select>
                             </div>
                             <div style="margin-top:15px;">
                                 <span><b>开启评论：</b></span>
                                 <el-select style="width:200px;" v-model="article.allowComment">
-                                    <el-option label="是" value="1"></el-option>
-                                    <el-option label="否" value="0"></el-option>
+                                    <el-option label="是" :value="1"></el-option>
+                                    <el-option label="否" :value="0"></el-option>
                                 </el-select>
                             </div>
                             <div style="margin-top:15px;">
-                                <el-button style="width:46%;" @click="handleAddArticle(0)">保存草稿</el-button>
-                                <el-button style="width:46%;" type="primary" @click="handleAddArticle(1)">发布</el-button>
+                                <el-button style="width:46%;" @click="handleArticle(2)">保存草稿</el-button>
+                                <el-button style="width:46%;" type="primary" @click="handleArticle(1)">发布</el-button>
                             </div>
                         </div>
                     </el-collapse-transition>
@@ -102,7 +102,7 @@
 <script>
 import VMarkdown from '~/components/admin/markdown'
 import VImageDialog from '~/components/admin/image-dialog'
-import { save, createAnchor } from '~/api/article'
+import { save, change, createAnchor } from '~/api/article'
 import { getAll as getCategoryAll } from '~/api/category'
 import { getAll as getTagAll } from '~/api/tag'
 import { getImagePage } from '~/api/image'
@@ -117,11 +117,19 @@ export default {
         let categoryData = await getCategoryAll()
         let tagData = await getTagAll()
         let imageData = await getImagePage(1,12)
+        console.log(imageData.data.total)
         return {
             categoryList: categoryData.data,//全部分类
             tagList: tagData.data,//全部标签
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
+        }
+    },
+    created(){
+        if(this.$store.state.compileArticle.id != undefined){
+            this.article = this.$store.state.compileArticle
+            this.cover = this.article.cover
+            this.$store.commit('SET_COMPILEARTICLE', {})
         }
     },
     data(){
@@ -133,8 +141,8 @@ export default {
                 content: '',//内容-Markdown  html格式
                 url: '',//文章路径
                 state: '',//状态 0 回收站 1 已发布 2 草稿箱
-                source: '1',//文章来源 原创1 转载2 翻译3
-                allowComment: '1',//是否允许评论（允许1，禁止0）
+                source: 1,//文章来源 原创1 转载2 翻译3
+                allowComment: 1,//是否允许评论（允许1，禁止0）
                 category: '',//文章所属分类
                 tag: [],//文章所属标签
             },
@@ -156,8 +164,10 @@ export default {
         VImageDialog,
     },
     methods: {
-        //发送文章发布请求
-        handleAddArticle(state){
+        /**
+         * 处理文章
+         */
+        handleArticle(state){
             this.article.state = state    
             if(this.article.title == '' ||
             this.article.content == '' ||
@@ -168,17 +178,42 @@ export default {
                 this.$message.error('必填项不能为空')
                 return
             }
+
+            if(this.article.id == null)
+                this.handleAddArticle(state)
+            else
+                this.handleUpdateArticle(state)     
+        },
+        /**
+         * 发送文章发布请求
+         */
+        handleAddArticle(state){
             //给内容添加锚点
             this.article.content = createAnchor(this.article.content)
             save(this.article).then(res => {
-                if(res.code == 20000){
-                    this.$message({
-                        type: 'success',
-                        message: res.message
-                    })
-                }
+                this.afterHandleArticle(res)
             })
         },
+        /**
+         * 发送修改文章发布请求
+         */
+        handleUpdateArticle(state){
+            //给内容添加锚点
+            this.article.content = createAnchor(this.article.content)
+            change(this.article).then(res => {
+                this.afterHandleArticle(res)
+            })
+        },
+        //处理文章后置处理方法
+        afterHandleArticle(res){
+            if(res.code == 20000){
+                this.$message({
+                    type: 'success',
+                    message: res.message
+                })
+            }
+        },
+
         //发送获取图片列表请求
         handleImageList(){
             getImagePage(this.pageCode, this.pageSize).then(res => {
@@ -206,6 +241,8 @@ export default {
             this.article.cover = data
             this.dialogImage = false
         },
+
+        //##################################################
         /**
          * 标签添加相关
          */
@@ -225,6 +262,9 @@ export default {
         },
         commonHandle(tag){
             let bool = true
+            if(this.article.tag == null){
+                this.article.tag = []
+            }
             this.article.tag.forEach(element => {
                 if(element == tag){
                     bool = false
@@ -232,7 +272,8 @@ export default {
                 }
             });
             if(bool) this.article.tag.push(tag)
-        }
+        },
+        //##################################################
     },
 }
 </script>
