@@ -25,7 +25,7 @@ export const getSiteInfo = () => {
  */
 export const update = (site) => {
     return request({
-        url: '/site',
+        url: '/admin/site',
         method: 'put',
         data: site
     })

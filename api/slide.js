@@ -15,7 +15,7 @@ export const getSlideAll = () => {
  */
 export const updateSlide = (slide) => {
     return request({
-        url: '/slide',
+        url: '/admin/slide',
         method: 'put',
         data: slide
     })
@@ -26,7 +26,7 @@ export const updateSlide = (slide) => {
  */
 export const delSlide = (id) => {
     return request({
-        url: '/slide/' + id,
+        url: '/admin/slide/' + id,
         method: 'delete'
     })
 }
@@ -36,7 +36,7 @@ export const delSlide = (id) => {
  */
 export const save = (slide) => {
     return request({
-        url: '/slide',
+        url: '/admin/slide',
         method: 'post',
         data: slide
     })

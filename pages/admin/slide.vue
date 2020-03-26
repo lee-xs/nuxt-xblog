@@ -110,7 +110,7 @@ export default {
         },
         //接收子组件传来的imageUrl 修改图片路径
         handleImageUrl(data){
-            this.cover = data
+            this.slide.cover = data
             this.dialogImage = false
         },
         /**

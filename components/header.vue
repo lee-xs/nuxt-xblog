@@ -44,14 +44,15 @@ import 'element-ui/lib/theme-chalk/display.css' //element布局隐藏css
 export default {
     data(){
         return{
-            navs: [
-                {name: 'index', title: '首页' },
-                {name: 'archives', title: '归档' },
-                {name: 'message', title: '留言板' },
-                {name: 'links', title: '友情链接' },
-                {name: 'about', title: '关于' },
-            ],
-            siteInfo: this.$store.state.siteInfo
+            // navs: [
+            //     {name: 'index', title: '首页' },
+            //     {name: 'archives', title: '归档' },
+            //     {name: 'message', title: '留言板' },
+            //     {name: 'links', title: '友情链接' },
+            //     {name: 'about', title: '关于' },
+            // ],
+            navs: this.$store.state.menuList,
+            siteInfo: this.$store.state.siteInfo,
         }
     },
 }

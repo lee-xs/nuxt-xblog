@@ -5,7 +5,7 @@ import request from '@/service'
  */
 export const add = (links) => {
     return request({
-        url: '/links/add',
+        url: '/admin/links/add',
         method: 'post',
         data: links
     })
@@ -34,7 +34,7 @@ export const getAll = () => {
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: '/links/page',
+        url: '/admin/links/page',
         method: 'get',
         params: {
             pageCode, 
@@ -45,7 +45,7 @@ export const page = (pageCode, pageSize) => {
 
 export const remove = (ids) => {
     return request({
-        url: '/links',
+        url: '/admin/links',
         method: 'delete',
         data: ids
     })
@@ -53,7 +53,7 @@ export const remove = (ids) => {
 
 export const change = (links) => {
     return request({
-        url: '/links',
+        url: '/admin/links',
         method: 'put',
         data: links
     })
@@ -61,7 +61,7 @@ export const change = (links) => {
 
 export const changeState = (id, state) => {
     return request({
-        url: '/links/state/'+id + '/' + state,
+        url: '/admin/links/state/'+id + '/' + state,
         method: 'put',
     })
 }

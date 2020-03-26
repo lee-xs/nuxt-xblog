@@ -1,6 +1,7 @@
 import axios from 'axios'
 import config from './config'
-import { Message, Header } from 'element-ui'
+import { getToken } from '~/service/auth'
+import { Message } from 'element-ui'
 
 if(process.server){
    //config.baseURL = `http://${process.env.HOST || 'aleestar.cn'}:${process.env.PORT || 2922}`
@@ -12,6 +13,9 @@ const service = axios.create(config)
 //请求处理
 service.interceptors.request.use(
     config => {
+        // if(store.state.token){
+        //     onfig.headers['Token'] = getToken()
+        // }
         return config
     },
     error => {

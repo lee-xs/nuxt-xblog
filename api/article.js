@@ -1,6 +1,6 @@
 import request from '@/service'
 
-const prefix = '/article'
+const prefix = '/admin/article'
 
 /**
  * 发布文章
@@ -18,7 +18,7 @@ export const save = (article) => {
  */
 export const getPageArticle = (pageCode, pageSize) => {
     return request({
-        url: `${prefix}/page`,
+        url: '/article/page',
         method: 'get',
         params: {
             pageCode,
@@ -32,7 +32,7 @@ export const getPageArticle = (pageCode, pageSize) => {
  */
 export const getArticle = (params) => {
     return request({
-        url: `${prefix}/${params}`,
+        url: `/article/${params}`,
         method: 'get'
     })
 }
@@ -40,17 +40,17 @@ export const getArticle = (params) => {
 /**
  * 根据分页查询文章列表
  */
-export const getPageArticleByCategoryId = (pageCode, pageSize, categoryId) => {
-    return request({
-        url: `${prefix}/category`,
-        method: 'get',
-        params: {
-            pageCode,
-            pageSize,
-            categoryId
-        }
-    })
-}
+// export const getPageArticleByCategoryId = (pageCode, pageSize, categoryId) => {
+//     return request({
+//         url: '/article/category',
+//         method: 'get',
+//         params: {
+//             pageCode,
+//             pageSize,
+//             categoryId
+//         }
+//     })
+// }
 
 
 /**
@@ -58,7 +58,7 @@ export const getPageArticleByCategoryId = (pageCode, pageSize, categoryId) => {
  */
 export const getPageArticleByTagId = (pageCode, pageSize, tagId) => {
     return request({
-        url: `${prefix}/tag`,
+        url: '/article/tag',
         method: 'get',
         params: {
             pageCode,
@@ -73,7 +73,7 @@ export const getPageArticleByTagId = (pageCode, pageSize, tagId) => {
  */
 export const getPageArticleByCategory = (pageCode, pageSize, name) => {
     return request({
-        url: `${prefix}/category`,
+        url: '/article/category',
         method: 'get',
         params: {
             pageCode,
@@ -116,7 +116,7 @@ export const getRecycle = (pageCode, pageSize) => {
  */
 export const getHotList = () => {
     return request({
-        url: `${prefix}/hot`,
+        url: '/article/hot',
         method: 'get',
     })
 }
@@ -126,7 +126,7 @@ export const getHotList = () => {
  */
 export const getRandList = () => {
     return request({
-        url: `${prefix}/rand`,
+        url: '/article/rand',
         method: 'get',
     })
 }
@@ -136,7 +136,7 @@ export const getRandList = () => {
  */
 export const getArchives = () => {
     return request({
-        url: `${prefix}/archives`,
+        url: '/article/archives',
         method: 'get'
     })
 }

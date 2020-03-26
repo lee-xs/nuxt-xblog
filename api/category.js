@@ -2,7 +2,7 @@ import request from '@/service'
 
 export const save = (name) => {
     return request({
-        url: '/category',
+        url: '/admin/category',
         method: 'post',
         params: {
             name
@@ -19,7 +19,7 @@ export const getAll = () => {
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: '/category/page',
+        url: '/admin/category/page',
         method: 'get',
         params: {
             pageCode, 
@@ -30,7 +30,7 @@ export const page = (pageCode, pageSize) => {
 
 export const remove = (ids) => {
     return request({
-        url: '/category',
+        url: '/admin/category',
         method: 'delete',
         data: ids
     })
@@ -38,7 +38,7 @@ export const remove = (ids) => {
 
 export const change = (category) => {
     return request({
-        url: '/category',
+        url: '/admin/category',
         method: 'put',
         data: category
     })

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-table :data="userList" border style="width: 100%">
+      <el-table v-loading="loading" :data="list" border style="width: 100%">
         <el-table-column prop="id" label="Id" width="180"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
@@ -11,6 +11,14 @@
         <el-table-column prop="avatar" label="头像"></el-table-column>
         <el-table-column label="操作"></el-table-column>
       </el-table>
+
+      <!-- 分页 -->
+      <Page
+      style="margin: 10px; text-align:center;"
+      :total="total"
+      :current="pageCode"
+      :page-size="pageSize"
+      @on-change="handleCurrentChange"></Page>
   </div>
 </template>
 
@@ -24,15 +32,28 @@ import { getUserPage } from '~/api/user'
         }
     },
     data: () => ({
-      
+      loading: false,
+      pageCode: 1,
+      pageSize: 10,
     }),
     async asyncData(){
-      let userData = await getUserPage(1, 15)
+      let result = await getUserPage(1, 10)
       return {
-        userList: userData.data.records,
-        userListSize: userData.data.total,
+        list: result.data.records,
+        total: result.data.total,
       }
     },
+    methods: {
+      handleCurrentChange(data){
+        this.loading = true
+        this.pageCode = data
+        getUserPage(this.pageCode, this.pageSize).then(res => {
+          this.list = res.data.records
+          this.total = res.data.total
+          this.loading = false
+        })
+      }
+    }
   }
 </script>
 

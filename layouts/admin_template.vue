@@ -58,6 +58,7 @@ export default {
                     {name: 'category', title: '分类', type: 'el-icon-bank-card'},
                     {name: 'tag', title: '标签', type: 'el-icon-discount'},
                 ]},
+                {name: 'menu', title: '菜单管理', type: 'el-icon-menu'},
                 {name: 'links', title: '友链管理', type: 'el-icon-connection'},
                 {name: 'notice', title: '公告管理', type: 'el-icon-bell'},
                 {name: 'picture', title: '图片管理', type: 'el-icon-picture-outline'},
@@ -67,6 +68,7 @@ export default {
             ],
         };
     },
+    middleware: 'interceptor',
     methods: {
     
     }

@@ -117,7 +117,6 @@ export default {
         let categoryData = await getCategoryAll()
         let tagData = await getTagAll()
         let imageData = await getImagePage(1,12)
-        console.log(imageData.data.total)
         return {
             categoryList: categoryData.data,//全部分类
             tagList: tagData.data,//全部标签
