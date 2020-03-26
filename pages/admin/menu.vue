@@ -17,8 +17,11 @@
                         <el-input v-model="menu.weight"></el-input>
                     </el-form-item>    
                     <el-form-item label="状态">
-                        <el-input v-model="menu.state"></el-input>
-                    </el-form-item>    
+                        <el-select style="width:100%;" v-model="menu.state">
+                            <el-option label="展示" :value="1"></el-option>
+                            <el-option label="隐藏" :value="0"></el-option>
+                        </el-select>
+                    </el-form-item>   
                     <div style="margin-top:20px;">
                         <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAdd()">添加</el-button>
                         <div v-else>
@@ -84,7 +87,7 @@ export default {
                 name:'',
                 title: '',
                 weight: '',
-                state: '',
+                state: 1,
             },
         }
     },
@@ -106,18 +109,23 @@ export default {
             })
         },
         handleAdd(){
-            // if(this.category.name != null){
-            //     save(this.category.name).then(res => {
-            //         this.commonAfterHanlde(res)
-            //         this.category = {}
-            //     })
-            // }
+            if(this.menu.name == '' ||
+                this.menu.title == '' ||
+                this.menu.weight == '' ||
+                this.menu.state == ''){
+                return;
+            }
+
+            save(this.menu).then(res => {
+                this.commonAfterHanlde(res)
+                this.menu = {}
+            })
         },
         handleChange(){
-            // change(this.category).then(res => {
-            //     this.commonAfterHanlde(res)
-            //     this.goback()
-            // })
+            change(this.menu).then(res => {
+                this.commonAfterHanlde(res)
+                this.goback()
+            })
         },
         //返回至添加
         goback(){
@@ -131,6 +139,7 @@ export default {
         },
         //修改状态
         handleState(row){
+            console.log(row)
             changeState(row.id, row.state).then(res => {
                 this.commonAfterHanlde(res)
             })

@@ -1,12 +1,12 @@
 import { getSite } from '~/api/site'
 import { getMenuAll } from '~/api/menu'
-import { getToken} from '~/service/auth'
+//import { getToken } from '~/service/auth'
 
 export const state = () => ({
     siteInfo: {},
     compileArticle: {},
     menuList: {},
-    token: getToken(),
+    token: '',
 })
 
 export const mutations = {
@@ -29,5 +29,9 @@ export const actions = {
     async nuxtServerInit({commit}){
         commit('SET_SITEINFO', (await getSite()).data)
         commit('SET_MENU', (await getMenuAll()).data)
+        //if(process.client && window.sessionStorage.getItem("token") != null){
+        //   commit('SET_TOKEN', window.sessionStorage.getItem("token"))
+        //    console.log(sessionStorage.getItem("token"))
+        //}
     }
 }

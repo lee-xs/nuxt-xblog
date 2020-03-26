@@ -33,7 +33,7 @@ export default {
             login(this.username, this.password).then(res => {
                 this.loading = false
                 if(res.code == 20000){
-                    setToken(res.data.token)
+                    //sessionStorage.setItem("token", res.data.token)
                     this.$store.commit('SET_TOKEN', res.data.token)
                     this.$router.push('/admin')
                 }
