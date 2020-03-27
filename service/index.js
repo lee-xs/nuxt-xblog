@@ -10,6 +10,7 @@ if(process.server){
 
 const service = axios.create(config)
 
+
 //请求处理
 service.interceptors.request.use(
     config => {
@@ -27,11 +28,27 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
+        console.log(">>>>>>>>>>>>>>>>>>")
+        console.log(res)
+        console.log("<<<<<<<<<<<<<")
         if(res.code != 20000){
+            
             Message({
                 type: 'error',
                 message: res.message
             })
+
+            //登录失效或未登录
+            if(res.code == 20002){
+                console.log('1111111111111111111111111111111111111111111')
+                Message({
+                    type: 'error',
+                    message: res.message
+                })
+                
+                //window.location.href = "/login"
+                //redirect(true, '/login')
+            }
         }
         return res
     },

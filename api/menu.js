@@ -39,7 +39,7 @@ export const changeState = (id, state) => {
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: `/admin/menu/page`,
+        url: '/menu/page',
         method: 'get',
         params: {
             pageCode, 

@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { getTimer } from '~/api/admin'
 import { login } from '~/api/login'
 import { setToken } from '~/service/auth'
 export default {
@@ -33,7 +34,8 @@ export default {
             login(this.username, this.password).then(res => {
                 this.loading = false
                 if(res.code == 20000){
-                    //sessionStorage.setItem("token", res.data.token)
+                    this.$store.commit('SET_TIMER', setInterval(getTimer, 1000))
+                    setToken(res.data.token)
                     this.$store.commit('SET_TOKEN', res.data.token)
                     this.$router.push('/admin')
                 }

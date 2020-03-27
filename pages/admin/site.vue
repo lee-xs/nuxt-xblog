@@ -18,7 +18,12 @@
                 <el-input v-model="site.logo" style="width:80%;"></el-input>
                 <el-button type="primary" plain @click="handleLogoImage()" style="width:18%;">选择</el-button>
                 <img :src="site.logo" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
-            </el-form-item>  
+            </el-form-item>
+            <el-form-item label="脸面：">
+                <el-input v-model="site.face" style="width:80%;"></el-input>
+                <el-button type="primary" plain @click="handleFaceImage()" style="width:18%;">选择</el-button>
+                <img :src="site.face" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
+            </el-form-item>   
             <el-form-item label="关于站点：">
                 <el-input v-model="site.about"></el-input>
             </el-form-item>  
@@ -137,6 +142,10 @@ export default {
             this.dialogImage = true
             this.changeImageType = 'logo'
         },
+        handleFaceImage(){
+            this.dialogImage = true
+            this.changeImageType = 'face'
+        },
         handleQqCodeImage(){
             this.dialogImage = true
             this.changeImageType = 'qqCode'
@@ -155,6 +164,9 @@ export default {
             switch(this.changeImageType){
                 case 'logo':
                     this.site.logo = data
+                    break;
+                case 'face':
+                    this.site.face = data
                     break;
                 case 'qqCode':
                     this.site.qqCode = data

@@ -88,7 +88,7 @@ export const getPageArticleByCategory = (pageCode, pageSize, name) => {
  */
 export const getDrafts = (pageCode, pageSize) => {
     return request({
-        url: `${prefix}/drafts`,
+        url: '/article/drafts',
         method: 'get',
         params: {
             pageCode,
@@ -102,7 +102,7 @@ export const getDrafts = (pageCode, pageSize) => {
  */
 export const getRecycle = (pageCode, pageSize) => {
     return request({
-        url: `${prefix}/recycle`,
+        url: '/article/recycle',
         method: 'get',
         params: {
             pageCode,

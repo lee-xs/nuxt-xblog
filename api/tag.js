@@ -19,7 +19,7 @@ export const getAll = () => {
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: '/admin/tag/page',
+        url: '/tag/page',
         method: 'get',
         params: {
             pageCode, 

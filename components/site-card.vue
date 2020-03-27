@@ -3,7 +3,7 @@
         <el-col :span="24" class="card-container-site">
           <p class="site-title"><b>网站概况</b></p>
           <div class="site-img">
-            <img :src="siteInfo.site.logo" />
+            <img :src="siteInfo.site.face" />
           </div>
           <table class="site-details">
            <tbody>

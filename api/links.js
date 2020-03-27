@@ -34,7 +34,7 @@ export const getAll = () => {
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: '/admin/links/page',
+        url: '/links/page',
         method: 'get',
         params: {
             pageCode, 
