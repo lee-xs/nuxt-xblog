@@ -40,6 +40,7 @@ module.exports = {
     '@/plugins/iview',
     '@/plugins/baidu',
     {src:'@/plugins/loading', ssr:false },
+    //'@/plugins/axios',
   ],
   /*
   ** Nuxt.js dev-modules

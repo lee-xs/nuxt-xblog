@@ -26,6 +26,7 @@
     "postcss-loader": "^3.0.0",
     "style-loader": "^1.0.0",
     "vuetify": "^2.1.6",
+    "vuex-persistedstate": "^3.0.1",
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {

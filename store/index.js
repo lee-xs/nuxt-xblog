@@ -1,6 +1,7 @@
 import { getSite } from '~/api/site'
 import { getMenuAll } from '~/api/menu'
-import { getTimer } from '~/api/admin'
+import { timerAccess } from '~/api/admin'
+import createPersistedState from 'vuex-persistedstate'
 //import { getToken } from '~/service/auth'
 
 export const state = () => ({
@@ -8,7 +9,8 @@ export const state = () => ({
     compileArticle: {},
     menuList: {},
     timer: '',
-    token: '',
+    cookie: '222222222222222222222222222',
+    token: '111',
 })
 
 export const mutations = {
@@ -26,6 +28,9 @@ export const mutations = {
     },
     SET_TOKEN: (state, token) => {
         state.token = token
+    },
+    SET_COOKIE: (state, data) => {
+        state.token = data
     }    
 }
 
@@ -33,21 +38,18 @@ export const actions = {
     //设置站点,导航菜单信息
     async nuxtServerInit({commit, state}, {req}){
         let cookie = req.headers.cookie
-        let token = parseCookie(cookie)
-        console.log('nuxtServerInit')
-        await getTimer()
-        commit('SET_TOKEN', token.AdminToken)
+        //let token = parseCookie(cookie)
+
+        //console.log(cookie)
+        commit('SET_COOKIE', cookie)
+        console.log(state.token)
+
+        //if(process.browser){
+        //sessionStorage.setItem('Cookie', token)}
+        //commit('SET_TOKEN', token.AdminToken)
         commit('SET_SITEINFO', (await getSite()).data)
         commit('SET_MENU', (await getMenuAll()).data)
     },
-
-    async isLogin(){
-        ///console.log('111111111111')
-        await getTimer().then(res => {
-            //console.log('222222222222')
-        })
-        //console.log('333333333333')
-    }
 }
 
 /**
