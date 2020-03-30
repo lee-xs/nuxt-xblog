@@ -11,7 +11,7 @@ import { timerAccess } from '~/api/admin'
 import { login } from '~/api/login'
 import { setToken } from '~/service/auth'
 export default {
-    layout: 'login_template',
+    layout: 'blank_template',
     head(){
         return{
             title: `【XIN-BLOG】后台登录`,
@@ -34,9 +34,6 @@ export default {
             login(this.username, this.password).then(res => {
                 this.loading = false
                 if(res.code == 20000){
-                    console.log(context)
-
-                    
                     
                     //this.$store.commit('SET_TIMER', setInterval(timerAccess, 1000))
                     //setToken(res.data.token)
