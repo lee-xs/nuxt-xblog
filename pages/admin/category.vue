@@ -92,23 +92,23 @@ export default {
             })
         },
         handleAdd(){
-            if(this.category.name != null){
+            if(this.commonBeforeHandle()){
                 save(this.category.name).then(res => {
                     this.commonAfterHanlde(res)
-                    this.category = {}
                 })
             }
         },
         handleChange(){
-            change(this.category).then(res => {
-                this.commonAfterHanlde(res)
-                this.goback()
-            })
+            if(this.commonBeforeHandle()){
+                change(this.category).then(res => {
+                    this.commonAfterHanlde(res)
+                })
+            }
         },
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.category = {}
+            this.category.name = this.category.count = ''
         },
         //修改分类
         setChangeInfo(row){
@@ -123,7 +123,15 @@ export default {
                 this.commonAfterHanlde(res)
             })
         },
-        commonAfterHanlde(res){
+        //公共处理方法
+        commonBeforeHandle(){
+            if(this.category.name == ''){
+                this.$message.error('必填项不能为空')
+                return false
+            }
+            return true
+        },
+        commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -131,6 +139,7 @@ export default {
                 })
                 this.handleCurrentChange(1)
             }
+            this.goback()
         }
     }
 }

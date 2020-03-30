@@ -14,9 +14,9 @@
                         <el-input v-model="tag.count" :disabled="true"></el-input>
                     </el-form-item>    
                     <div style="margin-top:20px;">
-                        <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAddTag()">添加</el-button>
+                        <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAdd()">添加</el-button>
                         <div v-else>
-                            <el-button type="primary" @click="handleChangeTag()" plain>修改</el-button>
+                            <el-button type="primary" @click="handleChange()" plain>修改</el-button>
                             <el-button type="primary" @click="goback()" plain>返回添加</el-button>
                         </div>
                     </div>
@@ -91,24 +91,24 @@ export default {
                 this.loading = false
             })
         },
-        handleAddTag(){
-            if(this.tag.name != null){
+        handleAdd(){
+            if(this.commonBeforeHandle()){
                 save(this.tag.name).then(res => {
-                    this.commonAfterHanlde(res)
-                    this.tag = {}
+                    this.commonAfterHandle(res)
                 })
             }
         },
-        handleChangeTag(){
-            change(this.tag).then(res => {
-                this.commonAfterHanlde(res)
-                this.goback()
-            })
+        handleChange(){
+            if(this.commonBeforeHandle()){
+                change(this.tag).then(res => {
+                    this.commonAfterHandle(res)
+                })
+            }
         },
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.tag = {}
+            this.tag.name = this.tag.count = ''
         },
         //修改标签
         setChangeInfo(row){
@@ -120,10 +120,18 @@ export default {
             let ids = []
             ids.push(id)
             remove(ids).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
-        commonAfterHanlde(res){
+        //公共处理方法
+        commonBeforeHandle(){
+            if(this.tag.name == ''){
+                this.$message.error('必填项不能为空')
+                return false
+            }
+            return true
+        },
+        commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -131,6 +139,7 @@ export default {
                 })
                 this.handleCurrentChange(1)
             }
+            this.goback()
         }
     }
 }

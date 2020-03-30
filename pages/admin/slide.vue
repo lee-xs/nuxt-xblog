@@ -125,9 +125,9 @@ export default {
          * 向后台发送修改幻灯片请求
          */
         handleChangeSlide(){
-            if(this.beforeHandle()){
+            if(this.commonBeforeHandle()){
                 updateSlide(this.slide).then(res => {
-                    this.afterHandle(res)
+                    this.commonAfterHandle(res)
                 })
             }
         },
@@ -135,6 +135,27 @@ export default {
          * 向后台发送添加幻灯片请求
          */
         handleAddSlide(){
+            if(this.commonBeforeHandle()){
+                save(this.slide).then(res => {
+                    this.commonAfterHandle(res)
+                })
+            }        
+        },
+        /**
+         * 处理删除幻灯片 向后台发送删除请求
+         */
+        handleDelSlide(row){
+            delSlide(row.id).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //返回至添加幻灯片
+        goback(){
+            this.addOrChange = true
+            this.slide.title = this.slide.url = this.slide.cover = this.slide.sort =  ''
+        },
+        //公共处理方法
+        commonBeforeHandle(){
             if(this.slide.title == '' ||
                 this.slide.url == '' ||
                 this.slide.cover == '' ||
@@ -142,26 +163,9 @@ export default {
                     this.$message.error("参数不能留空")
                 return false
             }
-           
-            save(this.slide).then(res => {
-                this.afterHandle(res)
-            })
+            return true
         },
-        /**
-         * 处理删除幻灯片 向后台发送删除请求
-         */
-        handleDelSlide(row){
-            delSlide(row.id).then(res => {
-                this.afterHandle(res)
-            })
-        },
-        //返回至添加幻灯片
-        goback(){
-            this.addOrChange = true
-            this.slide = {}
-        },
-        //公共处理方法
-        afterHandle(res){
+        commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -169,7 +173,7 @@ export default {
                 })
                 this.handleSlideList()
             }
-            this.slide = {}
+            this.goback()
         }
     },
     components:{

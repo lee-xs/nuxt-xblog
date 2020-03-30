@@ -109,28 +109,24 @@ export default {
             })
         },
         handleAdd(){
-            if(this.menu.name == '' ||
-                this.menu.title == '' ||
-                this.menu.weight == '' ||
-                this.menu.state == ''){
-                return;
+            if(this.commonBeforeHandle()){
+                save(this.menu).then(res => {
+                    this.commonAfterHandle(res)
+                })
             }
-
-            save(this.menu).then(res => {
-                this.commonAfterHanlde(res)
-                this.menu = {}
-            })
         },
         handleChange(){
-            change(this.menu).then(res => {
-                this.commonAfterHanlde(res)
-                this.goback()
-            })
+            if(this.commonBeforeHandle()){
+                change(this.menu).then(res => {
+                    this.commonAfterHandle(res)
+                })
+            }
         },
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.menu = {}
+            this.menu.name = this.menu.title = this.menu.weight = ''
+            this.menu.state = 1
         },
         //修改分类
         setChangeInfo(row){
@@ -139,9 +135,8 @@ export default {
         },
         //修改状态
         handleState(row){
-            console.log(row)
             changeState(row.id, row.state).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
         //删除分类
@@ -149,10 +144,20 @@ export default {
             let ids = []
             ids.push(id)
             remove(ids).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
-        commonAfterHanlde(res){
+        //公共处理方法
+        commonBeforeHandle(){
+            if(this.menu.name == '' ||
+                this.menu.title == '' ||
+                this.menu.weight == ''){
+                     this.$message.error('必填项不能为空')
+                return false
+            }
+            return true
+        },
+        commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -160,6 +165,7 @@ export default {
                 })
                 this.handleCurrentChange(1)
             }
+            this.goback()
         }
     }
 }

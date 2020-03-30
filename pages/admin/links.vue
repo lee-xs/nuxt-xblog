@@ -119,31 +119,25 @@ export default {
         },
         //发送添加请求
         handleAdd(){
-            if(this.links.name == '' ||
-                this.links.url == '' ||
-                this.links.logo == '' ||
-                this.links.email == '' ||
-                this.links.state == ''){
-                    this.$message.error('必填项不能为空')
-                    return
-                }
-
-            add(this.links).then(res => {
-                this.commonAfterHanlde(res)
-                this.goback()
-            })
+            if(this.commonBeforeHandle()){
+                add(this.links).then(res => {
+                    this.commonAfterHandle(res)
+                })
+            }            
         },
         //发送删除请求
         handleChange(){
-            change(this.links).then(res => {
-                this.commonAfterHanlde(res)
-                this.goback()
-            })
+            if(this.commonBeforeHandle()){
+                change(this.links).then(res => {
+                    this.commonAfterHandle(res)
+                })
+            }
         },
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.links = {}
+            this.links.name = this.links.url = this.links.logo = this.links.email = this.state = ''
+            this.links.state = 1
         },
         //填充修改信息
         setChangeInfo(row){
@@ -155,17 +149,28 @@ export default {
             let ids = []
             ids.push(id)
             remove(ids).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
         //修改状态
         changeCommentState(id, state){
             changeState(id, state).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
-        //后置公共处理方法
-        commonAfterHanlde(res){
+        //公共处理方法
+        commonBeforeHandle(){
+            if(this.links.name == '' ||
+                this.links.url == '' ||
+                this.links.logo == '' ||
+                this.links.email == '' ||
+                this.links.state == ''){
+                    this.$message.error('必填项不能为空')
+                return false
+            }
+            return true
+        },
+        commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -173,6 +178,7 @@ export default {
                 })
                 this.handleCurrentChange(this.pageCode)
             }
+            this.goback()
         }
     }
 }
