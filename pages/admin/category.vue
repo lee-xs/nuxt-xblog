@@ -58,7 +58,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】分类管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】分类管理`,
         }
     },
     data(){
@@ -108,7 +108,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.category.name = this.category.count = ''
+            this.category.name = this.category.count = this.category.id = ''
         },
         //修改分类
         setChangeInfo(row){

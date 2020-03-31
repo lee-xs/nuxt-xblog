@@ -56,7 +56,7 @@ export default {
   },
   head() {
     return {
-      title: "【XIN-BLOG】归档",
+      title: `【${this.$store.state.siteInfo.site.siteName}】归档`,
     };
   },
   components: {

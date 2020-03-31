@@ -14,7 +14,7 @@ export default {
     layout: 'blank_template',
     head(){
         return{
-            title: `【XIN-BLOG】后台登录`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】后台登录`,
         }
     },
     data: () => ({

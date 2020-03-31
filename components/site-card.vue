@@ -17,7 +17,7 @@
               </tr>
               <tr>
                 <td>友情链接：</td>
-                <td>0</td>
+                <td v-text="siteInfo.linksCount">0</td>
               </tr>
               <tr class="gray">
                 <td>浏览总量：</td>

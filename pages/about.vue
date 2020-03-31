@@ -8,7 +8,7 @@
 export default {
   head(){
     return{
-      title: '【XIN-BLOG】关于',
+      title: `【${this.$store.state.siteInfo.site.siteName}】关于`,
     }
   }
 }

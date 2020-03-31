@@ -81,7 +81,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】友情链接管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】友情链接管理`,
         }
     },
     data(){
@@ -136,7 +136,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.links.name = this.links.url = this.links.logo = this.links.email = this.state = ''
+            this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = ''
             this.links.state = 1
         },
         //填充修改信息

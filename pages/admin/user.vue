@@ -28,7 +28,7 @@ import { getUserPage } from '~/api/user'
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】用户管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】用户管理`,
         }
     },
     data: () => ({

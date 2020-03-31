@@ -7,7 +7,7 @@ export const state = () => ({
     compileArticle: {},
     menuList: {},
     timer: '',
-    cookie: '222222222222222222222222222',
+    cookie: '',
     token: '111',
 })
 

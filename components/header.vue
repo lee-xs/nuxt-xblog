@@ -4,7 +4,7 @@
             <el-row style="height:68px;">
                 <!-- logo -->
                 <nuxt-link to="/" @click="this.$router.push('/home')">
-                    <el-col :span="2" :xs="5" class="logo">
+                    <el-col :span="4" :xs="5" class="logo">
                         <img :src="siteInfo.site.logo" />
                     </el-col>
                 </nuxt-link>
@@ -75,7 +75,7 @@ export default {
             color: #8590a6;
             img{
                 width: 120px;
-                height: 58px;
+                height: 68px;
             }
         }
         .hidden-md-and-down{
@@ -107,6 +107,7 @@ export default {
     .header-container{
         .header{
             width: 1000px;
+            padding:0 5px;
         }
     }   
 }

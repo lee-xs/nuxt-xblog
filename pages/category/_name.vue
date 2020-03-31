@@ -43,7 +43,7 @@ export default {
     },
     head(){
         return{
-            title: `【XIN-BLOG】${this.title}`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】${this.title}`,
         }
     },
     components:{

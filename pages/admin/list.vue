@@ -28,7 +28,7 @@ export default {
     },
     head(){
         return{
-            title: `【XIN-BLOG】文章列表`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】文章列表`,
         }
     },
     components:{

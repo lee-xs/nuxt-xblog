@@ -49,7 +49,7 @@ export default {
     },
     head(){
         return{
-            title: '【XIN-BLOG】首页',
+            title: `【${this.$store.state.siteInfo.site.siteName}】首页`,
         }
     },
     components:{
@@ -59,7 +59,7 @@ export default {
         VSiteCard,
         VHotCard,
         VTagCard,
-    },
+    }, 
     async asyncData() {
         //获取文章列表
         let { data } = await getPageArticle(1, 10)

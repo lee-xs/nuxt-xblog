@@ -58,7 +58,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】标签管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】标签管理`,
         }
     },
     data(){
@@ -108,7 +108,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.tag.name = this.tag.count = ''
+            this.tag.name = this.tag.count = this.tag.id = ''
         },
         //修改标签
         setChangeInfo(row){

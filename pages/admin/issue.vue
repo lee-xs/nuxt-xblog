@@ -93,7 +93,7 @@
         
         <!-- 添加封面弹窗 -->
         <!-- 图片列表 -->
-        <el-dialog title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
+        <el-dialog style="width: 80%; height: 80%; margin: auto;" title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true'>
             <v-image-dialog @handleCurrentChange="handleCurrentChange" @handleImageUrl="handleImageUrl" :imageTotal="imageTotal" :imageList="imageList" :pageCode="pageCode"></v-image-dialog>
         </el-dialog>
     </el-row>
@@ -110,7 +110,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】发布文章`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】发布文章`,
         }
     },
     async asyncData(){

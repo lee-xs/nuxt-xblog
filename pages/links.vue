@@ -55,7 +55,7 @@ import VLinksBox from '~/components/links-box'
 export default {
   head(){
     return{
-      title: '【XIN-BLOG】友情链接',
+      title: `【${this.$store.state.siteInfo.site.siteName}】友情链接`,
     }
   },
   async asyncData(){

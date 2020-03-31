@@ -1,7 +1,7 @@
 <template>
     <el-row v-loading="loading" :gutter="20">
-        <el-col  :span="4" v-for="(img,index) in list" :key="index">
-            <img :src="img.url" style="width:100%; height:200px; margin-bottom:15px; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
+        <el-col :span="4" v-for="(img,index) in list" :key="index">
+            <img @click="setImageInfo(img)" :src="img.url" style="width:100%; height:200px; margin-bottom:15px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
         </el-col>
         <el-col :span="24" style="text-align:center; margin-top:20px;">
             <Page
@@ -10,6 +10,37 @@
             :page-size="pageSize"
             @on-change="handleCurrentChange"></Page>
         </el-col>
+
+        <el-dialog title="图片详情" :visible.sync="visible" width="80%" center :append-to-body="true">
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <img :src="image.url" style="width: 100%; height: 400px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
+                </el-col>
+                <el-col :span="12">
+                    <el-form class="form" :data="image" label-position="left" label-width="80px">
+                        <el-form-item label="ID">
+                            <el-input v-model="image.id" :disabled="true"></el-input>
+                        </el-form-item>
+                        <el-form-item label="URL">
+                            <el-input v-model="image.url" :disabled="true"></el-input>
+                        </el-form-item>
+                        <el-form-item label="PATH">
+                            <el-input v-model="image.path"></el-input>
+                        </el-form-item>
+                        <el-form-item label="存储方式">
+                            <el-input v-model="image.sign" :disabled="true"></el-input>
+                        </el-form-item>    
+                        <el-form-item label="上传时间">
+                            <el-input v-model="image.uploadTime" :disabled="true"></el-input>
+                        </el-form-item>
+                        <div style="margin-top:20px; float: right;">
+                            <el-button type="danger">删除</el-button>
+                            <el-button type="primary">修改</el-button>
+                        </div> 
+                    </el-form>
+                </el-col>
+            </el-row>
+        </el-dialog>
     </el-row>
 </template>
 
@@ -19,13 +50,21 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】图片管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】图片管理`,
         }
     },
     data: () => ({
         loading: false,
+        visible: false,
         pageCode: 1,
         pageSize: 18,
+        image: {
+            id: '',
+            url: '',
+            path: '',
+            sign: '',
+            uploadTime: '',
+        }
     }),
     async asyncData(){
         let result = await getImagePage(1, 18)
@@ -43,11 +82,17 @@ export default {
                 this.total = res.data.total
                 this.loading = false
             })
+        },
+        setImageInfo(data){
+            this.image = data
+            this.visible = true
         }
     }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+/deep/ .el-form-item__content{
+    margin-bottom: 20px;
+}
 </style>

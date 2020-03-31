@@ -4,6 +4,9 @@
             <div class="slide-box" style="margin-right:5px;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>
                 <el-form class="form" :data="slide" label-position="top" label-width="80px">
+                    <el-form-item label="ID">
+                        <el-input v-model="slide.id" :disabled="true"></el-input>
+                    </el-form-item>
                     <el-form-item label="标题">
                         <el-input v-model="slide.title"></el-input>
                     </el-form-item>
@@ -31,21 +34,27 @@
             <div class="slide-box" style="margin-left:5px;">
                 <h3>首页幻灯片</h3>
                 <el-table :data="slideList" style="width: 100%">
-                    <el-table-column prop="title" label="标题"></el-table-column>
-                    <el-table-column prop="sort" label="排序" width="80px"></el-table-column>
-                        <el-table-column label="操作" width="180px">
-                            <template slot-scope="scope">
-                                <el-button type="primary" plain size="mini" @click="setSlideInfo(scope.row)">修改</el-button>
-                                <el-button type="danger" plain size="mini" @click="handleDelSlide(scope.row)">删除</el-button>
-                            </template>
-                        </el-table-column>
+                    <el-table-column align="center" prop="id" label="ID" width="50"></el-table-column>
+                    <el-table-column align="center" prop="title" label="标题"></el-table-column>
+                    <el-table-column align="center" prop="" label="背景" width="80">
+                        <template slot-scope="scope">
+                            <img style="width:60px; height:50px;" :src="scope.row.cover" />
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" prop="sort" label="排序" width="80px"></el-table-column>
+                    <el-table-column align="center" label="操作" width="180px">
+                        <template slot-scope="scope">
+                            <el-button type="primary" plain size="mini" @click="setSlideInfo(scope.row)">修改</el-button>
+                            <el-button type="danger" plain size="mini" @click="handleDelSlide(scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
                 </el-table>
             </div>
         </el-col>
 
 
         <!-- 图片列表 -->
-        <el-dialog title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
+        <el-dialog style="width: 80%; height: 80%; margin: auto;" title="添加封面图" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
             <v-image-dialog @handleCurrentChange="handleCurrentChange" @handleImageUrl="handleImageUrl" :imageTotal="imageTotal" :imageList="imageList" :pageCode="pageCode"></v-image-dialog>
         </el-dialog>
     </el-row>
@@ -59,7 +68,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【XIN-BLOG】幻灯片管理`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】幻灯片管理`,
         }
     },
     async asyncData(){
@@ -152,7 +161,7 @@ export default {
         //返回至添加幻灯片
         goback(){
             this.addOrChange = true
-            this.slide.title = this.slide.url = this.slide.cover = this.slide.sort =  ''
+            this.slide.title = this.slide.url = this.slide.cover = this.slide.sort = this.slide.id = ''
         },
         //公共处理方法
         commonBeforeHandle(){

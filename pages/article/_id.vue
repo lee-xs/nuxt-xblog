@@ -87,7 +87,7 @@ import VSiteCard from '~/components/site-card'
 export default {
     head(){
         return{
-          title: `【XIN-BLOG】${this.article.title}`,
+          title: `【${this.$store.state.siteInfo.site.siteName}】${this.article.title}`,
         }
     },
     components:{
