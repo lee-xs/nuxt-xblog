@@ -4,13 +4,13 @@
             <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
 
             <Affix :offset-top="60"> <!-- v-model="article.content" :catchData="catchData" -->
-                <v-markdown style="width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown>
+                <v-markdown style="background-color:#fff; width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown>
             </Affix>
         </el-col>
         <el-col :span="6">
             <el-row>
                 <!-- 发布 -->
-                <el-col :span="24" class="box-card">
+                <el-col :span="24" class="box-card" style="background-color:#fff;">
                     <div class="clearfix">
                         <span><b>发布</b></span>
                         <el-button style="float: right; padding: 6px 0" type="text" @click="issueShow=!issueShow"><i :class="issueShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
@@ -45,7 +45,7 @@
                 </el-col>
 
                 <!-- 分类/标签 -->
-                <el-col :span="24" class="box-card">
+                <el-col :span="24" class="box-card" style="background-color:#fff;">
                     <div class="clearfix">
                         <span><b>分类/标签</b></span>
                         <el-button style="float: right; padding: 6px 0" type="text" @click="categoryTagShow=!categoryTagShow"><i :class="categoryTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
@@ -76,7 +76,7 @@
                 </el-col>
 
                 <!-- 封面图 -->
-                <el-col :span="24" class="box-card">
+                <el-col :span="24" class="box-card" style="background-color:#fff;">
                     <div class="clearfix">
                         <span><b>封面图</b></span>
                         <el-button style="float: right; padding: 6px 0" type="text" @click="coverTagShow=!coverTagShow"><i :class="categoryTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>

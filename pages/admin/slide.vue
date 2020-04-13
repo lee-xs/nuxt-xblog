@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="8" >
-            <div class="slide-box" style="margin-right:5px;">
+            <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>
                 <el-form class="form" :data="slide" label-position="top" label-width="80px">
                     <el-form-item label="ID">
@@ -31,7 +31,7 @@
             </div>
         </el-col>
         <el-col :span="16">
-            <div class="slide-box" style="margin-left:5px;">
+            <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>首页幻灯片</h3>
                 <el-table :data="slideList" style="width: 100%">
                     <el-table-column align="center" prop="id" label="ID" width="50"></el-table-column>

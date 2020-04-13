@@ -2,11 +2,11 @@
   <el-row class="list">
     <el-col :span="24" class="hidden-md-and-down animated bounceInLeft">
         <el-row class="list-container">
-            <el-col :span="24" v-if="list.length == 0" style="padding: 15px; box-shadow: 0 1px 3px rgba(26,26,26,.3); text-align:center; font-size:14px;">
+            <el-col :span="24" v-if="list.length == 0" style="padding: 15px; background-color:#fff; box-shadow: 0 1px 3px rgba(26,26,26,.3); text-align:center; font-size:14px;">
                 <p>暂时没有任何内容...</p>
             </el-col>
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated bounceInLeft" style="position: relative;">
-                <nuxt-link :to="'/article/' + item.id">
+                <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>
                     <h4 v-if="item.title.length < 28" v-text="item.title">标题</h4>
                     <h4 v-else v-text="item.title.substring(0,28)+'...'">标题</h4>
@@ -23,7 +23,7 @@
                         <i class="el-icon-chat-square">&nbsp;<span class="list-tag" v-text="item.comments">0</span></i>
                     </p>
                 </div>
-                <nuxt-link :to="'/article/'+item.id">
+                <nuxt-link :to="'/'+item.id + '.html'">
                     <p style="color:#606266;" v-text="item.summary+'...'"></p>
                     <div style="background-color: #c40000; position: absolute; top:140px; right:0; color: #ffffff; padding: 3px 8px;">阅读全文</div>
                 </nuxt-link>
@@ -34,7 +34,7 @@
     <el-col :span="24" class="hidden-lg-only">
         <el-row class="list-container">
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card">
-                <nuxt-link :to="'/article/' + item.id">
+                <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>
                     <h4 v-if="item.title.length > 16" v-text="item.title.substring(0,16) + '...'">标题</h4>
                     <h4 v-else v-text="item.title">标题</h4>
@@ -46,7 +46,7 @@
                         <span v-text="item.publishTime.substring(0,10)"></span>
                     </p>
                 </div>
-                <nuxt-link :to="'/article/'+item.id">
+                <nuxt-link :to="'/'+item.id + '.html'">
                     <p style="color:#606266;" v-text="item.summary.substring(0,50)+'...'"></p>
                 </nuxt-link>
             </el-col>

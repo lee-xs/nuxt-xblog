@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="7" >
-            <div class="slide-box" style="margin-right:5px;">
+            <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加分类':'修改分类'"></h3>
                 <el-form class="form" :data="links" label-position="top" label-width="80px">
                     <el-form-item label="ID">
@@ -18,6 +18,9 @@
                     </el-form-item>    
                     <el-form-item label="联系邮箱">
                         <el-input v-model="links.email"></el-input>
+                    </el-form-item>
+                    <el-form-item label="排序">
+                        <el-input v-model="links.sort"></el-input>
                     </el-form-item>    
                     <el-form-item label="状态">
                         <el-select style="width:100%;" v-model="links.state">
@@ -37,7 +40,7 @@
         </el-col>
 
         <el-col :span="17">
-            <div class="slide-box" style="margin-left:5px;">
+            <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>分类列表</h3>
                 <el-table v-loading="loading" :data="list" style="width: 100%">
                     <el-table-column prop="id" label="ID" width="50"></el-table-column>
@@ -48,6 +51,7 @@
                             <img :src="scope.row.logo" style="width: 50px; height: 50px;">
                         </template>
                     </el-table-column>
+                    <el-table-column prop="sort" label="排序" width="50"></el-table-column>
                     <el-table-column prop="email" label="联系邮箱"></el-table-column>
                     <el-table-column prop="" label="状态" width="60">
                         <template slot-scope="scope">
@@ -96,6 +100,7 @@ export default {
                 url: '',
                 logo: '',
                 email: '',
+                sort: '',
                 state: 1,
             },
         }
@@ -136,7 +141,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = ''
+            this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = this.links.sort = ''
             this.links.state = 1
         },
         //填充修改信息

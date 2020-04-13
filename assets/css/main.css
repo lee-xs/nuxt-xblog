@@ -39,6 +39,10 @@
     font-family: "Microsoft YaHei","微软雅黑","MicrosoftJhengHei","华文细黑","STHeiti","MingLiu";
 }
 
+body{
+    background-image: url('http://qiniu.aleestar.cn/brickwall20200413020627.png');
+}
+
 /*解决element-ui的table表格控件表头与内容列不对齐问题*/
 body .el-table th.gutter{
     display: table-cell!important;

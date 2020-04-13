@@ -1,5 +1,5 @@
 <template>
-    <div style="box-shadow: 0 0px 3px rgba(26, 26, 26, 0.3); padding:15px;">
+    <div style="box-shadow: 0 0px 3px rgba(26, 26, 26, 0.3); padding:15px; background-color:#fff;">
         <el-form class="form" :model="site" label-position="top" label-width="80px" style="margin:0 auto;">
             <el-divider><h3>基础信息</h3></el-divider>
             <el-form-item label="站点名：">

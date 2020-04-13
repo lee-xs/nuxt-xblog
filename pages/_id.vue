@@ -94,7 +94,7 @@ export default {
       VSiteCard,
     },
     async asyncData({params}){
-        let { data } = await getArticle(params.id)
+        let { data } = await getArticle(params.id.substring(0, params.id.indexOf('.')))
 
         //获取站点信息
         let siteInfoData = await getSite()

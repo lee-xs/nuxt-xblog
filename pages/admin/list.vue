@@ -1,6 +1,6 @@
 <template>
     <el-tabs v-model="activeName">
-        <el-tab-pane v-loading="loading" label="已发布" name="first" style="text-align:center;">
+        <el-tab-pane v-loading="loading" label="已发布" name="first">
             <v-list-tab key="first" @moveRecycle="moveRecycle" :tabType="'first'" :list="articleList" :total="articleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
         <el-tab-pane v-loading="loading" label="草稿箱" name="second">

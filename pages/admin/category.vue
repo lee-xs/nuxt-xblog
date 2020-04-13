@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="8" >
-            <div class="slide-box" style="margin-right:5px;">
+            <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加分类':'修改分类'"></h3>
                 <el-form class="form" :data="category" label-position="top" label-width="80px">
                     <el-form-item label="ID">
@@ -25,7 +25,7 @@
         </el-col>
 
         <el-col :span="16">
-            <div class="slide-box" style="margin-left:5px;">
+            <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>分类列表</h3>
                 <el-table v-loading="loading" :data="list" style="width: 100%">
                     <el-table-column prop="id" label="ID"></el-table-column>

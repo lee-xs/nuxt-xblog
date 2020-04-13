@@ -7,12 +7,12 @@
                 <el-col :span="24" v-for="(item,index) in randList" :key="index">
                     <el-row :gutter="10" class="content">
                         <el-col :span="8">
-                            <nuxt-link :to="'/article/' + item.id">
+                            <nuxt-link :to="'/' + item.id + '.html'">
                                <div class="content-img-frame"><img :src="item.cover" class="content-img"/></div>
                             </nuxt-link>
                         </el-col>
                         <el-col :span="16" style="padding-top:3px;">
-                            <nuxt-link :to="'/article/' + item.id" class="content-title">
+                            <nuxt-link :to="'/' + item.id + '.html'" class="content-title">
                                 <p v-text="item.title.substring(0,21)"></p>
                             </nuxt-link>
                             <p>
