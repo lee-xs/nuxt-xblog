@@ -56,14 +56,14 @@ export const getArticle = (params) => {
 /**
  * 根据标签查询文章列表
  */
-export const getPageArticleByTagId = (pageCode, pageSize, tagId) => {
+export const getPageArticleByTag = (pageCode, pageSize, tagName) => {
     return request({
         url: '/article/tag',
         method: 'get',
         params: {
             pageCode,
             pageSize,
-            tagId
+            tagName
         }
     })
 }

@@ -4,7 +4,7 @@
         <p class="card-container-title"><b>全部标签</b></p>
         <div class="card-container-content">
           <Tag style="margin-bottom: 6px;" v-for="(item,index) in tagList" :key="index" :color="color[index%17]">
-            <nuxt-link :to="'/tag/' + item.id">
+            <nuxt-link :to="'/tag/' + item.name">
               <span v-text="item.name"></span>
             </nuxt-link>
           </Tag> 

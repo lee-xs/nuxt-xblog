@@ -30,7 +30,7 @@ import VTagCard from '~/components/tag-card'
 import VHotCard from '~/components/hot-card'
 import VRandCard from '~/components/rand-card'
 import { getNotice } from '~/api/index'
-import { getPageArticleByTagId, getHotList, getRandList } from '~/api/article'
+import { getPageArticleByTag, getHotList, getRandList } from '~/api/article'
 import { getAll } from '~/api/tag'
 export default {
     data(){
@@ -55,7 +55,7 @@ export default {
     },
     async asyncData({params}) {
         //获取文章列表
-        let { data } = await getPageArticleByTagId(1, 10, params.id)
+        let { data } = await getPageArticleByTag(1, 10, params.name)
         //获取全部标签
         let tagData = await getAll()
         //获取热门文章
@@ -65,8 +65,8 @@ export default {
         //获取通知
         let noticeData = await getNotice()
         return {
-            title: '标签' + params.id,
-            tagId: params.id,//标签Id
+            title: '标签->' + params.name,
+            tagName: params.name,//标签名
             list: data.records,//文章list
             total: data.total,//文章总数
             tagList: tagData.data,//全部标签
@@ -80,7 +80,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //根据标签分页
-            getPageArticleByTagId(this.pageCode, this.pageSize, this.tagId).then(res => {
+            getPageArticleByTag(this.pageCode, this.pageSize, this.tagName).then(res => {
                this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

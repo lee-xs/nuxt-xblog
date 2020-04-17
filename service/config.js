@@ -2,8 +2,8 @@ import http from 'http'
 import https from 'https'
 
 export default {
-    baseURL: 'https://aleestar.cn/api' || 'https://62.234.142.187/api',
-    //baseURL: 'http://localhost:2922',
+    //baseURL: 'https://aleestar.cn/api' || 'https://62.234.142.187/api',
+    baseURL: 'http://localhost:2922',
     timeout: 50000,
     //自定义的请求头
     headers: {

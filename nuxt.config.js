@@ -30,7 +30,7 @@ module.exports = {
     'element-ui/lib/theme-chalk/index.css',
     'assets/css/main.css',
     'assets/font-awesome-4.7.0/css/font-awesome.min.css',
-    'assets/css/animate.css'
+    'assets/css/animate.css',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -40,6 +40,7 @@ module.exports = {
     '@/plugins/iview',
     '@/plugins/baidu',
     {src:'@/plugins/loading', ssr:false },
+    {src:'@/plugins/markdown', ssr:false },
   ],
   /*
   ** Nuxt.js dev-modules

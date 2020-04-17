@@ -36,7 +36,7 @@
     <!-- 文章内容 -->
     <el-row class="article-container">
         <el-col :lg="17" :xs="24" class="animated bounceInLeft">
-          <div v-html="article.content" class="content" style="line-height: 35px;"></div>
+          <div v-html="article.html" class="content markdown-body" style="line-height: 35px;"></div>
         </el-col>
 
         <el-col class="hidden-md-and-down" :lg="7" :xs="24" key="catalogue" style="padding-left:5px;">
@@ -47,7 +47,7 @@
             </el-col>
             <el-col :span="24" >
               <!-- 目录 -->
-              <Affix :offset-top="80">
+              <!-- <Affix :offset-top="80">
                 <div class="card-container animated bounceInRight">
                   <p class="card-container-title">目录</p>
                   <div class="card-container-content anchor">
@@ -69,7 +69,7 @@
                     </ul>
                   </div> 
                 </div>
-              </Affix>
+              </Affix> -->
             </el-col>
           </el-row>
         </el-col>
@@ -80,7 +80,7 @@
 
 <script>
 import { jump } from '~/api/jump'
-import '~/assets/css/article.css'//文章样式
+//import '~/assets/css/article.css'//文章样式
 import { getArticle } from '~/api/article'
 import { getSite } from '~/api/site'
 import VSiteCard from '~/components/site-card'
@@ -163,7 +163,7 @@ export default {
     },
     created(){
         this.randomSketckBg()
-        this.handleArticle()
+        //this.handleArticle()
     },
 }
 </script>

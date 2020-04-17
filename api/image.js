@@ -10,3 +10,14 @@ export const getImagePage = (pageCode, pageSize) => {
         }
     })
 }
+
+export const upload = (file) => {
+    return request({
+        url: '/upload',
+        method: 'post',
+        data: file,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
