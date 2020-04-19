@@ -1,11 +1,11 @@
 <template>
   <el-row class="list">
-    <el-col :span="24" class="hidden-md-and-down animated bounceInLeft">
+    <el-col :span="24" class="hidden-md-and-down animated fadeInUp">
         <el-row class="list-container">
             <el-col :span="24" v-if="list.length == 0" style="padding: 15px; background-color:#fff; box-shadow: 0 1px 3px rgba(26,26,26,.3); text-align:center; font-size:14px;">
                 <p>暂时没有任何内容...</p>
             </el-col>
-            <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated bounceInLeft" style="position: relative;">
+            <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated fadeInUp" style="position: relative;">
                 <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>
                     <h4 v-if="item.title.length < 28" v-text="item.title">标题</h4>
@@ -54,7 +54,7 @@
     </el-col>
 
     <!-- 分页 -->
-    <el-col :span="24" v-if="total != 0" style="text-align:center; margin-top:20px;">
+    <el-col :span="24" v-if="total != 0" class="animated fadeInUp" style="text-align:center; margin-top:20px;">
         <Page
         :total="total"
         :current="pageCode"

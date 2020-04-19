@@ -92,6 +92,7 @@ export default {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
+                document.documentElement.scrollTop = 0
             })
         },
     },

@@ -4,7 +4,10 @@
             <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
 
             <Affix :offset-top="60"> <!-- v-model="article.content" :catchData="catchData" -->
-                <v-markdown style="background-color:#fff; width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown>
+                <!-- <v-markdown style="background-color:#fff; width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown> -->
+                <no-ssr>
+                    <mavon-editor style="height: 650px;" ref="md" :toolbars="toolbars" v-model="article.content" @imgAdd="handleUploadImg"/>
+                </no-ssr>
             </Affix>
         </el-col>
         <el-col :span="6">
@@ -100,12 +103,13 @@
 </template>
 
 <script>
-import VMarkdown from '~/components/admin/markdown'
+import VMarkdown from '~/components/admin/markdown1'
 import VImageDialog from '~/components/admin/image-dialog'
 import { save, change, createAnchor } from '~/api/article'
 import { getAll as getCategoryAll } from '~/api/category'
 import { getAll as getTagAll } from '~/api/tag'
 import { getImagePage } from '~/api/image'
+import { upload } from '@/api/image'
 export default {
     layout: 'admin_template',
     head(){
@@ -133,11 +137,48 @@ export default {
     },
     data(){
         return{
+            //markdown菜单栏配置
+            toolbars: {
+                bold: true, // 粗体
+                italic: true, // 斜体
+                header: true, // 标题
+                underline: true, // 下划线
+                strikethrough: true, // 中划线
+                mark: true, // 标记
+                superscript: true, // 上角标
+                subscript: true, // 下角标
+                quote: true, // 引用
+                ol: true, // 有序列表
+                ul: true, // 无序列表
+                link: true, // 链接
+                imagelink: true, // 图片链接
+                code: true, // code
+                table: true, // 表格
+                //fullscreen: true, // 全屏编辑
+                readmodel: true, // 沉浸式阅读
+                htmlcode: true, // 展示html源码
+                help: true, // 帮助
+                /* 1.3.5 */
+                undo: true, // 上一步
+                redo: true, // 下一步
+                trash: true, // 清空
+                //save: true, // 保存（触发events中的save事件）
+                /* 1.4.2 */
+                navigation: true, // 导航目录
+                /* 2.1.8 */
+                alignleft: true, // 左对齐
+                aligncenter: true, // 居中
+                alignright: true, // 右对齐
+                /* 2.2.1 */
+                subfield: true, // 单双栏模式
+                preview: true, // 预览
+            },
             article:{
                 title: '',//文章标题
                 author: '',//作者
                 cover: '',//封面图片
-                content: '',//内容-Markdown  html格式
+                content: '',//内容-Markdown
+                html: '', //内容-html格式
                 url: '',//文章路径
                 state: '',//状态 0 回收站 1 已发布 2 草稿箱
                 source: 1,//文章来源 原创1 转载2 翻译3
@@ -177,6 +218,7 @@ export default {
                 this.$message.error('必填项不能为空')
                 return
             }
+            this.article.html = this.$refs.md.d_render
 
             if(this.article.id == null)
                 this.handleAddArticle(state)
@@ -188,7 +230,7 @@ export default {
          */
         handleAddArticle(state){
             //给内容添加锚点
-            this.article.content = createAnchor(this.article.content)
+            //this.article.content = createAnchor(this.article.content)
             save(this.article).then(res => {
                 this.afterHandleArticle(res)
             })
@@ -226,6 +268,16 @@ export default {
         handleEditorContent(data){
             this.article.content = data
         },
+
+        handleUploadImg(pos, file){
+          var formData = new FormData();
+          formData.append('file', file)
+          upload(formData).then(res => {
+            console.log(res.data.url);
+            this.$refs.md.$img2Url(pos, res.data.url)
+          })
+        },
+
         /**
          * 处理图片相关
          */

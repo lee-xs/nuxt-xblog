@@ -5,7 +5,7 @@
     </el-col>
 
     <!-- 时间线 -->
-    <el-col :span="17" style="padding-right:5px;" class="animated bounceInLeft">
+    <el-col :span="17" style="padding-right:5px;" class="animated fadeInUp">
       <div class="timeline-container" style="background-color:#fff;">
         <div style="padding:10px 10px; margin-bottom:20px; border-bottom:1px solid #cccccc;">
           <p><span style="font-size:18px; margin-right:10px;"><b>文章归档</b></span><span>继续努力！</span></p>

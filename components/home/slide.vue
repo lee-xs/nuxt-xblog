@@ -1,5 +1,5 @@
 <template>
-    <div class="slide-container animated bounceInLeft">
+    <div class="slide-container animated fadeInUp">
         <el-carousel trigger="click" height="250px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
                 <el-link :href="item.url" :underline="false" style="width: 100%; display: block;">

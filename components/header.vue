@@ -1,5 +1,5 @@
 <template>
-    <div class="header-container animated bounceInDown">
+    <div class="header-container animated fadeInDown">
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->

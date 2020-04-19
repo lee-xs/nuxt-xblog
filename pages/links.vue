@@ -3,7 +3,7 @@
     <div class="sketch">
       <div class="sketch-bg" :style="{backgroundImage:'url('+sketchBg+')'}"></div>
       <div class="gray-glass">
-        <div class="sketch-info animated bounce">
+        <div class="sketch-info animated fadeInUp">
             <div>
               <!-- 标题 -->
               <p v-text="'网站名称：' + site.siteName"></p>

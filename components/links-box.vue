@@ -1,6 +1,6 @@
 <template>
     <el-row style="background-color:#fff;">
-        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated bounceIn" style="margin:0 16.5px;" >
+        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated fadeInUp" style="margin:0 16.5px;" >
             <a :href="links.url" target="_blank">
                 <div class="our-team hvr-glow">
                     <div class="pic">

@@ -1,5 +1,5 @@
 <template>
-  <el-row class="notice animated bounceInLeft">
+  <el-row class="notice animated fadeInUp">
     <el-col>
       <i class="el-icon-bell" style="float:left;line-height: 20px;"></i>
       <el-carousel height="20px" direction="vertical" :interval="7000">

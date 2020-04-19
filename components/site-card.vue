@@ -1,5 +1,5 @@
 <template>
-    <el-row class="animated bounceInRight">
+    <el-row class="animated fadeInUp">
         <el-col :span="24" class="card-container-site">
           <p class="site-title"><b>网站概况</b></p>
           <div class="site-img">
