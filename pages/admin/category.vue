@@ -94,14 +94,14 @@ export default {
         handleAdd(){
             if(this.commonBeforeHandle()){
                 save(this.category.name).then(res => {
-                    this.commonAfterHanlde(res)
+                    this.commonAfterHandle(res)
                 })
             }
         },
         handleChange(){
             if(this.commonBeforeHandle()){
                 change(this.category).then(res => {
-                    this.commonAfterHanlde(res)
+                    this.commonAfterHandle(res)
                 })
             }
         },
@@ -120,7 +120,7 @@ export default {
             let ids = []
             ids.push(id)
             remove(ids).then(res => {
-                this.commonAfterHanlde(res)
+                this.commonAfterHandle(res)
             })
         },
         //公共处理方法
