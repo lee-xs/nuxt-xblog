@@ -1,7 +1,7 @@
 <template>
-    <div class="footer-container">
+    <div class="footer-container animated fadeInUp">
         <div class="footer-content">
-            <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 网站已运行 <span v-text="time"></span></p>
+            <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 <span class="hidden-md-and-down">网站已运行 <span v-text="time"></span></span></p>
             <p v-text="siteInfo.site.icp"></p>
         </div>
     </div>
@@ -55,9 +55,7 @@ export default {
 
 <style lang="scss">
 .footer-container{
-    position: relative;
     width: 100%;
-    top: 85px;
     text-align: center;
     line-height: 25px;
     padding: 20px;

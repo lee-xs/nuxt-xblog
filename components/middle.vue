@@ -12,8 +12,8 @@ export default {
 
 <style lang="scss" scoped>
 .middle-container{
-  position: relative;
   width: 100%;
-  top: 68px;
+  margin-top: 68px;
+  padding-bottom: 10px;
 }
 </style>

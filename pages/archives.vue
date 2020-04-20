@@ -20,7 +20,7 @@
                 <span class="tl-date" v-text="item.publishTime.substring(8,10) + '日'"></span>
                 <p class="tl-content panel padder bg-info">
                   <span class="arrow arrow-info left" aria-hidden="true"></span>
-                  <nuxt-link :to="'/article/'+item.id" v-text="item.title"></nuxt-link>
+                  <nuxt-link :to="'/'+item.id + '.html'" v-text="item.title"></nuxt-link>
                 </p>
               </div>
             </li>
