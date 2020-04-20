@@ -1,5 +1,5 @@
 <template>
-    <el-row>
+    <el-row class="animated fadeInUp">
         <el-col :span="8" >
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>

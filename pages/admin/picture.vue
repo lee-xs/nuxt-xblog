@@ -1,6 +1,6 @@
 <template>
     <el-row v-loading="loading" :gutter="20">
-        <el-col :span="4" v-for="(img,index) in list" :key="index">
+        <el-col :span="4" v-for="(img,index) in list" :key="index" class="animated fadeInUp">
             <img @click="setImageInfo(img)" :src="img.url" style="width:100%; height:200px; margin-bottom:15px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
         </el-col>
         <el-col :span="24" style="text-align:center; margin-top:20px;">

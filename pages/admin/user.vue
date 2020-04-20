@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated fadeInUp">
       <el-table v-loading="loading" :data="list" border style="width: 100%">
         <el-table-column prop="id" label="Id" width="180"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>

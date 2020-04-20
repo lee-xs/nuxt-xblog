@@ -1,6 +1,6 @@
 <template>
-    <el-row>
-        <el-col :span="8" >
+    <el-row class="animated fadeInUp">
+        <el-col :span="8">
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加分类':'修改分类'"></h3>
                 <el-form class="form" :data="menu" label-position="top" label-width="80px">

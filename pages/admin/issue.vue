@@ -1,5 +1,5 @@
 <template>
-    <el-row :gutter="10">
+    <el-row :gutter="10" class="animated fadeInUp">
         <el-col :span="18">
             <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
 

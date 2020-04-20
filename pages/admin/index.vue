@@ -1,5 +1,5 @@
 <template>
-    <el-row>
+    <el-row class="animated fadeInUp">
         <el-col :span="24">
             
         </el-col>
