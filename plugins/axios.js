@@ -11,9 +11,9 @@ export default function({ $axios, store, redirect }){
     //$axios.defaults.config = config
 
     $axios.interceptors.request.use(config => {
-        if(store.state.token != undefined){
-            config.headers['token'] = store.state.token
-        }
+        const token = (store.state.token != undefined && store.state.token != null)? store.state.token : ''
+        
+        config.headers['token'] = token
         return config
     })
 
@@ -28,7 +28,8 @@ export default function({ $axios, store, redirect }){
              * 登录失效或未登录
              */
             if(response.code = 20002) {
-                //redirect('/login')
+                store.commit('SET_TOKEN', null)
+                redirect('/login')
             }
         }
         return res

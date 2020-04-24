@@ -68,14 +68,20 @@ export default ({ app: { $request, $axios }}, inject) => {
         //#################### 分类相关 ####################
         //新增分类
         insertCategory(name){
-            return $request.post('/admin/category', name)
+            return $axios({
+                method: 'post',
+                url: '/admin/category',
+                params:{
+                    name
+                }
+            })
         },
         //删除分类
         deleteCategory(ids){
             return $request.delete('/admin/category', ids)
         },
         //更新分类
-        updateCategry(category){
+        updateCategory(category){
             return $request.put('/admin/category', category)
         },
         //查询所有分类信息
@@ -180,7 +186,7 @@ export default ({ app: { $request, $axios }}, inject) => {
         },
         //删除菜单
         deleteMenu(id){
-            return $request.put(`/admin/menu/${id}`)
+            return $request.delete(`/admin/menu/${id}`)
         },
         //更新菜单信息
         updateMenu(menu){
@@ -234,7 +240,13 @@ export default ({ app: { $request, $axios }}, inject) => {
         //#################### 标签相关 ####################
         //新增标签
         insertTag(name){
-            return $request.post('/admin/tag', name)
+            return $axios({
+                method: 'post',
+                url: '/admin/tag',
+                params:{
+                    name
+                }
+            })
         },
         //删除标签
         deleteTag(ids){

@@ -8,37 +8,8 @@ export default ({ app : { $axios }}, inject) => {
                 method,
                 url,
                 [dataKey]: data,
-                //headers
             })
         }
     })
     inject('request', requestList)
-    // inject('request',  {
-    //     get(url, params){
-    //         return $axios({
-    //             method: 'get',
-    //             url,
-    //             params,
-    //         })
-    //     },
-
-    //     post222(url, params){
-    //         return $axios({
-    //             method: 'post',
-    //             url,
-    //             params: {
-    //                 "username": "admin",
-    //                 "password": "admin123"
-    //             }
-    //         })
-    //     },
-
-    //     post(url, data){
-    //         return $axios({
-    //             method: 'post',
-    //             url,
-    //             data,
-    //         })
-    //     },
-    // })
 }

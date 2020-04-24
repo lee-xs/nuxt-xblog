@@ -6,9 +6,7 @@ export const state = () => ({
     siteInfo: {},
     compileArticle: {},
     menuList: {},
-    timer: '',
-    cookie: '11111',
-    token: '',
+    token: null,
 })
 
 export const mutations = {
@@ -21,15 +19,9 @@ export const mutations = {
     SET_MENU: (state, data) => {
         state.menuList = data
     },
-    SET_TIMER: (state, data) => {
-        state.timer = data
-    },
     SET_TOKEN: (state, token) => {
         state.token = token
-    },
-    SET_COOKIE: (state, data) => {
-        state.token = data
-    }    
+    }, 
 }
 
 export const actions = {

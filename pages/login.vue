@@ -36,15 +36,8 @@ export default {
             this.$api.login(this.username, this.password).then(res => {
                 this.loading = false
                 if(res.code == 20000){
-                    //console.log(res.data)
-                    //this.$store.commit('SET_TOKEN', res.data.token)
-                    //setToken(res.data.token)
+                    this.$store.commit('SET_TOKEN', res.data.token)
                     Cookie.set("token", res.data.token)
-                    //console.log(cookie.get("token"))
-                    
-                    //this.$store.commit('SET_TIMER', setInterval(timerAccess, 1000))
-                    //setToken(res.data.token)
-                    //this.$store.commit('SET_TOKEN', res.data.token)
                     this.$router.push('/admin')
                 }
             })
