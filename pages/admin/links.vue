@@ -105,8 +105,8 @@ export default {
             },
         }
     },
-    async asyncData(){
-        let result = await page(1, 10)
+    async asyncData({ app }){
+        let result = await app.$api.selectLinksPage(1, 10)
         return {
             list: result.data.records,//分类列表
             total: result.data.total,//分类总数
@@ -116,7 +116,7 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            page(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectLinksPage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
@@ -125,7 +125,7 @@ export default {
         //发送添加请求
         handleAdd(){
             if(this.commonBeforeHandle()){
-                add(this.links).then(res => {
+                this.$api.insertLinks(this.links).then(res => {
                     this.commonAfterHandle(res)
                 })
             }            
@@ -133,7 +133,7 @@ export default {
         //发送删除请求
         handleChange(){
             if(this.commonBeforeHandle()){
-                change(this.links).then(res => {
+                this.$api.updateLinks(this.links).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
@@ -153,13 +153,13 @@ export default {
         handleRemove(id){
             let ids = []
             ids.push(id)
-            remove(ids).then(res => {
+            this.$api.deleteLinks(ids).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //修改状态
         changeCommentState(id, state){
-            changeState(id, state).then(res => {
+            this.$api.updateLinksState(id, state).then(res => {
                 this.commonAfterHandle(res)
             })
         },

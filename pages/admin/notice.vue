@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import { page, save, remove, change, changeState } from '~/api/notice'
 export default {
     layout: 'admin_template',
     head(){
@@ -83,8 +82,8 @@ export default {
             }
         }
     },
-    async asyncData(){
-        let result = await page(1, 10)
+    async asyncData({ app }){
+        let result = await app.$api.selectNoticePage(1, 10)
         return {
             list: result.data.records,//分类列表
             total: result.data.total,//分类总数
@@ -94,7 +93,7 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            page(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectNoticePage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
@@ -103,7 +102,7 @@ export default {
         //添加
         handleAdd(){
             if(this.commonBeforeHandle()){
-                save(this.notice).then(res => {
+                this.$api.insertNotice(this.notice).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
@@ -111,20 +110,20 @@ export default {
         //修改
         handleChange(){
             if(this.commonBeforeHandle()){
-                change(this.notice).then(res => {
+                this.$api.updateNotice(this.notice).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
         },
         //修改状态
         handleChangeState(id, state){
-           changeState(id, state).then(res => {
+           this.$api.updateNoticeState(id, state).then(res => {
                this.commonAfterHandle(res)
            })
         },
         //删除
         handleRemove(id){
-            remove(id).then(res => {
+            this.$api.deleteNotice(id).then(res => {
                 this.commonAfterHandle(res)
             })
         },

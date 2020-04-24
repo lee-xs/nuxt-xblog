@@ -2,7 +2,7 @@ import request from '@/service'
 
 export const page = (pageCode, pageSize) => {
     return request({
-        url: '/log/page',
+        url: '/admin/log/page',
         method: 'get',
         params: {
             pageCode,

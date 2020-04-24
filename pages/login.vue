@@ -7,7 +7,9 @@
 </template>
 
 <script>
-import { timerAccess } from '~/api/admin'
+const Cookie = process.client? require('js-cookie') : undefined
+
+//import { timerAccess } from '~/api/admin'
 import { login } from '~/api/login'
 import { setToken } from '~/service/auth'
 export default {
@@ -31,9 +33,14 @@ export default {
                 return;
             }
 
-            login(this.username, this.password).then(res => {
+            this.$api.login(this.username, this.password).then(res => {
                 this.loading = false
                 if(res.code == 20000){
+                    //console.log(res.data)
+                    //this.$store.commit('SET_TOKEN', res.data.token)
+                    //setToken(res.data.token)
+                    Cookie.set("token", res.data.token)
+                    //console.log(cookie.get("token"))
                     
                     //this.$store.commit('SET_TIMER', setInterval(timerAccess, 1000))
                     //setToken(res.data.token)

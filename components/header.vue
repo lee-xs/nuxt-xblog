@@ -3,16 +3,16 @@
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->
-                <nuxt-link to="/" @click="this.$router.push('/home')">
-                    <el-col :span="4" :xs="5" class="logo">
+                <el-col :span="4" :xs="5">
+                    <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">
                         <img :src="siteInfo.site.logo" />
-                    </el-col>
-                </nuxt-link>
+                    </nuxt-link>
+                </el-col>
 
                 <!-- 导航 -->
                 <!-- 电脑端 menu -->
                 <el-col :lg="10" class="hidden-md-and-down">
-                    <nav>
+                    <nav style="line-height: 68px;">
                         <ul>
                             <li v-for="(item, index) in navs" :key="index" >
                                 <nuxt-link :to="{ name: item.name }">{{ item.title }}</nuxt-link>
@@ -44,13 +44,6 @@ import 'element-ui/lib/theme-chalk/display.css' //element布局隐藏css
 export default {
     data(){
         return{
-            // navs: [
-            //     {name: 'index', title: '首页' },
-            //     {name: 'archives', title: '归档' },
-            //     {name: 'message', title: '留言板' },
-            //     {name: 'links', title: '友情链接' },
-            //     {name: 'about', title: '关于' },
-            // ],
             navs: this.$store.state.menuList,
             siteInfo: this.$store.state.siteInfo,
         }
@@ -69,7 +62,6 @@ export default {
     top:0;
     .header{ 
         height: 68px;
-        line-height: 68px;
         margin: auto;
         .logo{
             color: #8590a6;

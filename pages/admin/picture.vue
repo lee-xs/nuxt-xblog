@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { getImagePage } from '~/api/image'
 export default {
     layout: 'admin_template',
     head(){
@@ -66,8 +65,8 @@ export default {
             uploadTime: '',
         }
     }),
-    async asyncData(){
-        let result = await getImagePage(1, 18)
+    async asyncData({ app }){
+        let result = await app.$api.selectImagePage(1, 18)
         return{
             list: result.data.records,
             total: result.data.total,
@@ -77,7 +76,7 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            getImagePage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectImagePage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

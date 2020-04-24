@@ -14,7 +14,6 @@
 
 <script>
 import VListTab from '~/components/admin/list-tab'
-import { getPageArticle, getDrafts, getRecycle, recycle, remove } from '~/api/article'
 export default {
     layout: 'admin_template',
     data(){
@@ -34,10 +33,10 @@ export default {
     components:{
         VListTab
     },
-    async asyncData(){
-        let articleListData = await getPageArticle(1,10)
-        let draftsListData = await getDrafts(1, 10)
-        let recycleListData = await getRecycle(1, 10)
+    async asyncData({ app }){
+        let articleListData = await app.$api.selectArticlePage(1, 10)
+        let draftsListData = await app.$api.selectDrafts(1, 10)
+        let recycleListData = await app.$api.selectRecycle(1, 10)
         return {
             //已发布的
             articleList: articleListData.data.records,
@@ -71,7 +70,7 @@ export default {
         },
         //移除文章
         moveRecycle(id){
-            recycle(id).then(res => {
+            this.$api.deleteRecycle(id).then(res => {
                 if(res.code == 20000){
                     this.$message({
                         type: 'success',
@@ -88,7 +87,7 @@ export default {
         removeArticle(id){
             let ids = []
             ids.push(id)
-            remove(ids).then(res => {
+            this.$api.deleteArticle(ids).then(res => {
                 if(res.code == 20000){
                     this.$message({
                         type: 'success',
@@ -102,7 +101,7 @@ export default {
         },
         //默认分页
         findPageArticle(){
-            getPageArticle(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectArticlePage(this.pageCode, this.pageSize).then(res => {
                 this.articleList = res.data.records
                 this.articleListTotal = res.data.total
                 this.loading = false
@@ -110,7 +109,7 @@ export default {
         },
         //草稿箱分页
         findDrafts(){
-            getDrafts(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectDrafts(this.pageCode, this.pageSize).then(res => {
                 this.draftsList = res.data.records
                 this.draftsListTotal = res.data.total
                 this.loading = false
@@ -118,7 +117,7 @@ export default {
         },
         //回收站分页
         findRecycle(){
-            getRecycle(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectRecycle(this.pageCode, this.pageSize).then(res => {
                 this.recycleList = res.data.records
                 this.recycleListTotal = res.data.total
                 this.loading = false

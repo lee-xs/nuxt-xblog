@@ -54,11 +54,11 @@ export default {
           title: `【${this.$store.state.siteInfo.site.siteName}】${this.article.title}`,
         }
     },
-    async asyncData({params}){
-        let { data } = await getArticle(params.id.substring(0, params.id.indexOf('.')))
+    async asyncData({params, app}){
+        let { data } = await app.$api.selectArticle(params.id.substring(0, params.id.indexOf('.')))
 
         //获取站点信息
-        let siteInfoData = await getSite()
+        let siteInfoData = await app.$api.selectSite()
         let siteInfo = siteInfoData.data
         return {
           article: data,

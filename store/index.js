@@ -7,8 +7,8 @@ export const state = () => ({
     compileArticle: {},
     menuList: {},
     timer: '',
-    cookie: '',
-    token: '111',
+    cookie: '11111',
+    token: '',
 })
 
 export const mutations = {
@@ -34,10 +34,11 @@ export const mutations = {
 
 export const actions = {
     //设置站点,导航菜单信息
-    async nuxtServerInit({commit, state}, {req}){
-
-        commit('SET_SITEINFO', (await getSite()).data)
-        commit('SET_MENU', (await getMenuAll()).data)
+    async nuxtServerInit({commit, state}, {req, app}){
+        const cookie = parseCookie(req.headers.cookie)
+        commit('SET_TOKEN', cookie.token)
+        commit('SET_SITEINFO', (await app.$api.selectSite()).data)
+        commit('SET_MENU', (await app.$api.selectMenuAll()).data)
     },
 }
 

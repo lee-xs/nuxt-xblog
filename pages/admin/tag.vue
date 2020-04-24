@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import { save, page, remove, change } from '~/api/tag'
 export default {
     layout: 'admin_template',
     head(){
@@ -74,8 +73,8 @@ export default {
             },
         }
     },
-    async asyncData(){
-        let result = await page(1, 10)
+    async asyncData({ app }){
+        let result = await app.$api.selectTagPage(1, 10)
         return {
             list: result.data.records,//分类列表
             total: result.data.total,//分类总数
@@ -85,7 +84,7 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            page(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectTagPage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
@@ -93,14 +92,14 @@ export default {
         },
         handleAdd(){
             if(this.commonBeforeHandle()){
-                save(this.tag.name).then(res => {
+                this.$api.insertTag(this.tag.name).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
         },
         handleChange(){
             if(this.commonBeforeHandle()){
-                change(this.tag).then(res => {
+                this.$api.updateTag(this.tag).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
@@ -119,7 +118,7 @@ export default {
         handleRemove(id){
             let ids = []
             ids.push(id)
-            remove(ids).then(res => {
+            this.$api.deleteTag(ids).then(res => {
                 this.commonAfterHandle(res)
             })
         },

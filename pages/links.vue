@@ -49,8 +49,6 @@
 <script>
 import '~/assets/css/input.scss'
 import { validateLinks } from '~/assets/js/validate'
-import { getSiteInfo } from '~/api/site'
-import { getAll, save } from '~/api/links'
 import VLinksBox from '~/components/links-box'
 export default {
   head(){
@@ -58,9 +56,9 @@ export default {
       title: `【${this.$store.state.siteInfo.site.siteName}】友情链接`,
     }
   },
-  async asyncData(){
-    let siteData = await getSiteInfo()
-    let linksListData = await getAll()
+  async asyncData({ app }){
+    let siteData = await app.$api.selectSiteInfo()
+    let linksListData = await app.$api.selectLinksAll()
     return{
       site: siteData.data,//站点信息
       linksList: linksListData.data,//友链列表
@@ -96,7 +94,7 @@ export default {
         return;
       }
       //发送添加友链请求
-      save(this.links).then(res => {
+      this.$api.insertLinks(this.links).then(res => {
         if(res.code == 20000){
           this.$message({
             type: 'success',

@@ -53,17 +53,17 @@ export default {
         VHotCard,
         VRandCard,
     },
-    async asyncData({params}) {
+    async asyncData({params, app}) {
         //获取文章列表
-        let { data } = await getPageArticleByCategory(1, 10, params.name)
+        let { data } = await app.$api.selectArticlePageByCategory(1, 10, params.name)
         //获取全部分类
-        let categoryData = await getAll()
+        let categoryData = await app.$api.selectCategoryAll()
         //获取热门文章
-        let hotData = await getHotList()
+        let hotData = await app.$api.selectHotList()
         //随机文章
-        let randData = await getRandList()
+        let randData = await app.$api.selectRandList()
         //获取通知
-        let noticeData = await getNotice()
+        let noticeData = await app.$api.selectNotice()
         return {
             title: '分类：' + params.name,
             name: params.name,//标签Id
@@ -80,7 +80,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //根据标签分页
-            getPageArticleByCategory(this.pageCode, this.pageSize, this.name).then(res => {
+            this.$api.selectArticlePageByCategory(this.pageCode, this.pageSize, this.name).then(res => {
                this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

@@ -92,8 +92,6 @@
 </template>
 
 <script>
-import { getSiteInfo, update } from '~/api/site'
-import { getImagePage } from '~/api/image'
 import VImageDialog from '~/components/admin/image-dialog'
 export default {
     layout: 'admin_template',
@@ -102,9 +100,9 @@ export default {
             title: `【${this.$store.state.siteInfo.site.siteName}】站点信息管理`,
         }
     },
-    async asyncData(){
-        let siteData = await getSiteInfo()
-        let imageData = await getImagePage(1,12)
+    async asyncData({ app }){
+        let siteData = await app.$api.selectSiteInfo()
+        let imageData = await app.$api.selectImagePage(1,12)
         return{
             site: siteData.data,
             imageList: imageData.data.records,//分页图片集合
@@ -122,14 +120,14 @@ export default {
     methods:{
         //发送获取图片列表请求
         handleImageList(){
-            getImagePage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectImagePage(this.pageCode, this.pageSize).then(res => {
                 this.imageList = res.data.records
                 this.imageTotal= res.data.total
             })
         },
         //发送保存站点信息请求
         handleSiteInfo(){
-            update(this.site).then(res => {
+            this.$api.updateSite(this.site).then(res => {
                 if(res.code == 20000){
                     this.$message({
                         type: 'success',

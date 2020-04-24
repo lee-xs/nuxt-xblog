@@ -2,13 +2,9 @@
     <el-row :gutter="10" class="animated fadeInUp">
         <el-col :span="18">
             <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
-
-            <Affix :offset-top="60"> <!-- v-model="article.content" :catchData="catchData" -->
-                <!-- <v-markdown style="background-color:#fff; width:100%;" :compileContent="article.content" @editorContent="handleEditorContent"></v-markdown> -->
-                <no-ssr>
-                    <mavon-editor style="height: 650px;" ref="md" :toolbars="toolbars" v-model="article.content" @imgAdd="handleUploadImg"/>
-                </no-ssr>
-            </Affix>
+            <no-ssr>
+                <mavon-editor style="height: 650px;" ref="md" :toolbars="toolbars" v-model="article.content" @imgAdd="handleUploadImg"/>
+            </no-ssr>
         </el-col>
         <el-col :span="6">
             <el-row>
@@ -105,11 +101,6 @@
 <script>
 import VMarkdown from '~/components/admin/markdown1'
 import VImageDialog from '~/components/admin/image-dialog'
-import { save, change, createAnchor } from '~/api/article'
-import { getAll as getCategoryAll } from '~/api/category'
-import { getAll as getTagAll } from '~/api/tag'
-import { getImagePage } from '~/api/image'
-import { upload } from '@/api/image'
 export default {
     layout: 'admin_template',
     head(){
@@ -117,10 +108,10 @@ export default {
             title: `【${this.$store.state.siteInfo.site.siteName}】发布文章`,
         }
     },
-    async asyncData(){
-        let categoryData = await getCategoryAll()
-        let tagData = await getTagAll()
-        let imageData = await getImagePage(1,12)
+    async asyncData({ app }){
+        let categoryData = await app.$api.selectCategoryAll()
+        let tagData = await app.$api.selectTagAll()
+        let imageData = await app.$api.selectImagePage(1,12)
         return {
             categoryList: categoryData.data,//全部分类
             tagList: tagData.data,//全部标签
@@ -229,9 +220,7 @@ export default {
          * 发送文章发布请求
          */
         handleAddArticle(state){
-            //给内容添加锚点
-            //this.article.content = createAnchor(this.article.content)
-            save(this.article).then(res => {
+            this.$api.insertArticle(this.article).then(res => {
                 this.afterHandleArticle(res)
             })
         },
@@ -239,9 +228,7 @@ export default {
          * 发送修改文章发布请求
          */
         handleUpdateArticle(state){
-            //给内容添加锚点
-            this.article.content = createAnchor(this.article.content)
-            change(this.article).then(res => {
+            this.$api.updateArticle(this.article).then(res => {
                 this.afterHandleArticle(res)
             })
         },
@@ -257,7 +244,7 @@ export default {
 
         //发送获取图片列表请求
         handleImageList(){
-            getImagePage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectImagePage(this.pageCode, this.pageSize).then(res => {
                 this.imageList = res.data.records
                 this.imageTotal= res.data.total
             })
@@ -272,7 +259,7 @@ export default {
         handleUploadImg(pos, file){
           var formData = new FormData();
           formData.append('file', file)
-          upload(formData).then(res => {
+          this.$api.upload(formData).then(res => {
             console.log(res.data.url);
             this.$refs.md.$img2Url(pos, res.data.url)
           })

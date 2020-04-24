@@ -10,9 +10,12 @@ if(process.server){
 
 const service = axios.create(config)
 
+
 //请求处理
 service.interceptors.request.use(
     config => {
+        console.log(state.cookie)
+        //config.headers['Token'] = state.cookie
         return config
     },
     error => {

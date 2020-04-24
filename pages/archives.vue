@@ -47,9 +47,9 @@ import '~/assets/css/archives.css'
 import VNotice from '~/components/notice'
 import VRandCard from "~/components/rand-card"
 import VTagCard from "~/components/tag-card"
-import { getNotice } from '~/api/index'
-import { getAll } from '~/api/tag'
-import { getRandList, getArchives } from "~/api/article"
+// import { getNotice } from '~/api/index'
+// import { getAll } from '~/api/tag'
+// import { getRandList, getArchives } from "~/api/article"
 export default {
   data() {
     return {};
@@ -64,15 +64,15 @@ export default {
     VRandCard,
     VTagCard,
   },
-  async asyncData() {
+  async asyncData({ app }) {
     //获取全部标签
-    let tagData = await getAll()
+    let tagData = await app.$api.selectTagAll()
     //随机文章
-    let randData = await getRandList();
+    let randData = await app.$api.selectRandList();
     //归档
-    let archivesData = await getArchives();
+    let archivesData = await app.$api.selectArchives();
     //获取通知
-    let noticeData = await getNotice()
+    let noticeData = await app.$api.selectNotice()
     return {
       randList: randData.data,
       archivesList: archivesData.data,

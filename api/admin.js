@@ -9,3 +9,10 @@ export const timerAccess = () => {
         method: 'get'
     })
 }
+
+export const removeAllRedis = () => {
+    return request({
+        url: '/admin/redis',
+        method: 'get'
+    })
+}

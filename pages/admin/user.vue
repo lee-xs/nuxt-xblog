@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { getUserPage } from '~/api/user'
  export default {
     layout: 'admin_template',
     head(){
@@ -36,8 +35,8 @@ import { getUserPage } from '~/api/user'
       pageCode: 1,
       pageSize: 10,
     }),
-    async asyncData(){
-      let result = await getUserPage(1, 10)
+    async asyncData({ app }){
+      let result = await app.$api.selectUserPage(1, 10)
       return {
         list: result.data.records,
         total: result.data.total,
@@ -47,7 +46,7 @@ import { getUserPage } from '~/api/user'
       handleCurrentChange(data){
         this.loading = true
         this.pageCode = data
-        getUserPage(this.pageCode, this.pageSize).then(res => {
+        this.$api.selectUserPage(this.pageCode, this.pageSize).then(res => {
           this.list = res.data.records
           this.total = res.data.total
           this.loading = false

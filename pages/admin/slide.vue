@@ -62,8 +62,6 @@
 
 <script>
 import VImageDialog from '~/components/admin/image-dialog'
-import { getImagePage } from '~/api/image'
-import { getSlideAll, delSlide, updateSlide, save } from '~/api/slide'
 export default {
     layout: 'admin_template',
     head(){
@@ -71,9 +69,9 @@ export default {
             title: `【${this.$store.state.siteInfo.site.siteName}】幻灯片管理`,
         }
     },
-    async asyncData(){
-        let imageData = await getImagePage(1,12)
-        let slideData = await getSlideAll()
+    async asyncData({ app }){
+        let imageData = await app.$api.selectImagePage(1,12)
+        let slideData = await app.$api.selectSlideAll()
         return {
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
@@ -98,13 +96,13 @@ export default {
     methods:{
         //发送获取幻灯片列表请求
         handleSlideList(){
-            getSlideAll().then(res => {
+            this.$api.selectSlideAll().then(res => {
                 this.slideList = res.data
             })
         },
         //发送获取图片列表请求
         handleImageList(){
-            getImagePage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectImagePage(this.pageCode, this.pageSize).then(res => {
                 this.imageList = res.data.records
                 this.imageTotal= res.data.total
             })
@@ -135,7 +133,7 @@ export default {
          */
         handleChangeSlide(){
             if(this.commonBeforeHandle()){
-                updateSlide(this.slide).then(res => {
+                this.$api.updateSlide(this.slide).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
@@ -145,7 +143,7 @@ export default {
          */
         handleAddSlide(){
             if(this.commonBeforeHandle()){
-                save(this.slide).then(res => {
+                this.$api.insertSlide(this.slide).then(res => {
                     this.commonAfterHandle(res)
                 })
             }        
@@ -154,7 +152,7 @@ export default {
          * 处理删除幻灯片 向后台发送删除请求
          */
         handleDelSlide(row){
-            delSlide(row.id).then(res => {
+            this.$api.deleteSlide(row.id).then(res => {
                 this.commonAfterHandle(res)
             })
         },

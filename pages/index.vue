@@ -34,11 +34,11 @@ import VNotice from '~/components/notice'
 import VSiteCard from '~/components/site-card'
 import VHotCard from '~/components/hot-card'
 import VTagCard from '~/components/tag-card'
-import { getPageArticle, getHotList } from '~/api/article'
-import { getNotice } from '~/api/index'
-import { getSlideAll } from '~/api/slide'
-import { getSite } from '~/api/site'
-import { getAll } from '~/api/tag'
+// import { getPageArticle, getHotList } from '~/api/article'
+// import { getNotice } from '~/api/index'
+// import { getSlideAll } from '~/api/slide'
+// import { getSite } from '~/api/site'
+// import { getAll } from '~/api/tag'
 export default {
     data(){
         return{
@@ -60,19 +60,19 @@ export default {
         VHotCard,
         VTagCard,
     }, 
-    async asyncData() {
+    async asyncData({ app }) {
         //获取文章列表
-        let { data } = await getPageArticle(1, 10)
+        let { data } = await app.$api.selectArticlePage(1, 10)
         //获取站点信息
-        let siteInfoData = await getSite()
+        let siteInfoData = await app.$api.selectSite()
         //获取全部标签
-        let tagData = await getAll()
+        let tagData = await app.$api.selectTagAll()
         //获取热门文章
-        let hotData = await getHotList()
+        let hotData = await app.$api.selectHotList()
         //获取通知
-        let noticeData = await getNotice()
+        let noticeData = await app.$api.selectNotice()
         //获取幻灯片
-        let slideData = await getSlideAll()
+        let slideData = await app.$api.selectSlideAll()
         return {
             list: data.records,//文章list
             total: data.total,//文章总数
@@ -88,7 +88,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //默认分页
-            getPageArticle(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectArticlePage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
