@@ -10,7 +10,7 @@ export default function({store, redirect, app }){
 
     app.$axios({
         method: 'get',
-        url: `${config.baseURL}/admin/isLogin`,
+        url: '/admin/isLogin',
         withCredentials: true,
         headers:{
             'token': token
