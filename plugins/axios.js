@@ -9,8 +9,6 @@ export default function({ $axios, store, redirect }){
     $axios.defaults.timeout = 5000
     //$axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
-    //$axios.defaults.config = config
-
     $axios.interceptors.request.use(config => {
         const token = (store.state.token != undefined && store.state.token != null)? store.state.token : ''
         
