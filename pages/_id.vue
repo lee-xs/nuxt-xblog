@@ -33,15 +33,49 @@
       </div>
     </div>
 
+
     <!-- 文章内容 -->
     <el-row class="article-container">
-        <el-col :span="24" class="animated fadeInUp">
+        <el-col :span="21" class="animated fadeInUp">
           <no-ssr>
             <mavon-editor style="background: none;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
           </no-ssr>
         </el-col>
+        
+        <el-col :span="3" style="padding-top: 25px;">
+          <Affix :offset-top="200">
+            <div  class="animated fadeInUp">
+              <el-row style="text-align: center;">
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
+              </el-col>
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <el-button circle><span class="iconfont">&#xe670;</span></el-button>
+              </el-col>
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
+              </el-col>
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <span class="iconfont">&#xe604;</span>
+              </el-col>
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <el-button circle><span class="iconfont">&#xe615;</span></el-button>
+              </el-col>
+              <el-col :span="24" style="margin-bottom: 10px;">
+                <el-button circle><span class="iconfont">&#xe600;</span></el-button>
+              </el-col>
+              <el-col :span="24">
+                <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
+              </el-col>
+            </el-row>
+           </div>
+          </Affix>
+        </el-col>
     </el-row>
 
+
+   
+    
   </div>
 </template>
 
@@ -78,6 +112,10 @@ export default {
         this.sketchBg = 'http://qiniu.aleestar.cn/sketchBg0' + rand+'.jpg'
       },
       imageClick(){
+        
+      },
+      //点赞
+      handleLikes(){
         
       }
     },
@@ -189,7 +227,7 @@ export default {
         }
     }
     .article-container{
-        width: 800px;
+        width: 850px;
        
         font-size: 15px;
         background: none;

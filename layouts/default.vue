@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import VHeader from '~/components/header'
-import VFooter from '~/components/footer'
-import VMiddle from '~/components/middle'
+import VHeader from '~/components/home/header'
+import VFooter from '~/components/home/footer'
+import VMiddle from '~/components/home/middle'
 export default {
   components:{
     VHeader,

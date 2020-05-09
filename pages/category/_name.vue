@@ -25,10 +25,10 @@
 
 <script>
 import VArticleList from '~/components/home/article-list'
-import VNotice from '~/components/notice'
-import VCategoryCard from '~/components/category-card'
-import VHotCard from '~/components/hot-card'
-import VRandCard from '~/components/rand-card'
+import VNotice from '~/components/home/notice'
+import VCategoryCard from '~/components/home/category-card'
+import VHotCard from '~/components/home/hot-card'
+import VRandCard from '~/components/home/rand-card'
 import { getNotice } from '~/api/index'
 import { getPageArticleByCategory, getHotList, getRandList } from '~/api/article'
 import { getAll } from '~/api/category'

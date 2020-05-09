@@ -1,3 +1,4 @@
+@import './iconfont.scss';
 /*==================== 全局样式配置 ====================*/
 
 .page-enter-active, .page-leave-active {
@@ -47,3 +48,4 @@ body{
 body .el-table th.gutter{
     display: table-cell!important;
 }
+

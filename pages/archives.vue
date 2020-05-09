@@ -44,12 +44,9 @@
 
 <script>
 import '~/assets/css/archives.css'
-import VNotice from '~/components/notice'
-import VRandCard from "~/components/rand-card"
-import VTagCard from "~/components/tag-card"
-// import { getNotice } from '~/api/index'
-// import { getAll } from '~/api/tag'
-// import { getRandList, getArchives } from "~/api/article"
+import VNotice from '~/components/home/notice'
+import VRandCard from "~/components/home/rand-card"
+import VTagCard from "~/components/home/tag-card"
 export default {
   data() {
     return {};

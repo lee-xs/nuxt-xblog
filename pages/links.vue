@@ -49,7 +49,7 @@
 <script>
 import '~/assets/css/input.scss'
 import { validateLinks } from '~/assets/js/validate'
-import VLinksBox from '~/components/links-box'
+import VLinksBox from '~/components/home/links-box'
 export default {
   head(){
     return{

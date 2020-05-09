@@ -30,15 +30,10 @@
 <script>
 import VSlide from '~/components/home/slide'
 import VArticleList from '~/components/home/article-list'
-import VNotice from '~/components/notice'
-import VSiteCard from '~/components/site-card'
-import VHotCard from '~/components/hot-card'
-import VTagCard from '~/components/tag-card'
-// import { getPageArticle, getHotList } from '~/api/article'
-// import { getNotice } from '~/api/index'
-// import { getSlideAll } from '~/api/slide'
-// import { getSite } from '~/api/site'
-// import { getAll } from '~/api/tag'
+import VNotice from '~/components/home/notice'
+import VSiteCard from '~/components/home/site-card'
+import VHotCard from '~/components/home/hot-card'
+import VTagCard from '~/components/home/tag-card'
 export default {
     data(){
         return{
@@ -61,6 +56,18 @@ export default {
         VTagCard,
     }, 
     async asyncData({ app }) {
+        // let ipRes = await app.$axios({
+        //     method: 'get',
+        //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
+        //     changeOrigin: true,
+        //     withCredentials: true,
+        // })
+        // var ipJson = ipRes.substring(19, ipRes.length - 1)
+        // console.log(ipJson)
+        // let ip = JSON.parse(ipJson).cip
+        // console.log(ip)
+        //console.log(returnCitySN('cip'))
+
         //获取文章列表
         let { data } = await app.$api.selectArticlePage(1, 10)
         //获取站点信息
