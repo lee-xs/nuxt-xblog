@@ -26,7 +26,7 @@
                 <span v-text="article.comments"></span><span>&nbsp;Comment</span>
               </P>
               <Tag v-for="(item,index) in article.tag" :key="index" :color="tagsColor[index%10]">
-                <span v-text="item"></span>
+                <nuxt-link :to="`/tag/${item}`" :style="{'color': tagsColor[index%10]}"><span v-text="item"></span></nuxt-link>
               </Tag>
             </div>
         </div>
@@ -73,9 +73,6 @@
         </el-col>
     </el-row>
 
-
-   
-    
   </div>
 </template>
 
