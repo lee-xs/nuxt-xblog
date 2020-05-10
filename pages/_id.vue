@@ -222,7 +222,7 @@ export default {
         .gray-glass{
             .sketch-info{
                 margin:80px auto;
-                width: 800px;
+                width: 850px;
             }
         }
     }
