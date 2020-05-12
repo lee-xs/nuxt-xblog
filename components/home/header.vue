@@ -54,7 +54,7 @@ export default {
 <style lang="scss" scoped>
 .header-container{
     background: #fff;
-    box-shadow: 0 1px 3px rgba(26,26,26,.2);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
     width: 100%;
     height: 68px;
     position: fixed;

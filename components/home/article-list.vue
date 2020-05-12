@@ -88,7 +88,7 @@ export default {
         line-height: 25px;
         border-bottom: 1px solid #dcdee6;
         background: #fff;
-        box-shadow: 0 1px 3px rgba(26,26,26,.3);
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
         h4{
             color:#606266;
             font-size: 15px;

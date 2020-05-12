@@ -120,7 +120,7 @@ export default {
     overflow:hidden;
     position: relative;
     .sketch-bg{
-        box-shadow: 0 1px 5px rgba(0,0,0,.3);
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -158,7 +158,7 @@ export default {
 .links-list-container{
   width: 1000px;
   margin: auto;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
 //======================================
 @media (max-width:768px) {

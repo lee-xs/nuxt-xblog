@@ -1,6 +1,6 @@
 <template>
     <el-row id="container">
-        <el-col :span="24" style="height: 600px; padding: 20px; margin-bottom:30px; background: white; border: 1px solid #ccc; border-radius: 2px;">
+        <el-col :span="24" style="height: 600px; padding: 20px; margin-bottom:30px; background: white; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); border-radius: 2px;">
             <iframe id="iframe" allowfullscreen="true" :src="iframeUrl"></iframe>
         </el-col>
         <el-col>
