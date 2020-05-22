@@ -5,7 +5,12 @@
         <div class="card-container-content">
             <el-row>
                 <el-col :span="24" v-for="(item,index) in hotList" :key="index">
-                    <el-row :gutter="10" class="content">
+                    <nuxt-link :to="'/' + item.id + '.html'" class="content-title">
+                        <p><span v-text="item.title.substring(0,25) + '...'"></span></p>
+                    </nuxt-link>
+                    <p style="color: #969696; margin-bottom: 8px;"><span v-text="'阅读 ' + item.views"></span><span style="float:right;" v-text="item.publishTime.substring(5,10)"></span></p>
+                    
+                    <!-- <el-row :gutter="10" class="content">
                         <el-col :span="8">
                             <nuxt-link :to="'/' + item.id + '.html'">
                                 <div class="content-img-frame"><img :src="item.cover" class="content-img"/></div>
@@ -16,13 +21,13 @@
                                 <p v-text="item.title.substring(0,21)"></p>
                             </nuxt-link>
                             <p>
-                                <!-- <span><i class="el-icon-chat-square">&nbsp;<span class="list-tag" v-text="item.comments"></span></i></span>
+                                <span><i class="el-icon-chat-square">&nbsp;<span class="list-tag" v-text="item.comments"></span></i></span>
                                 <span><i class="el-icon-star-off">&nbsp;<span class="list-tag" v-text="item.likes">0</span></i></span>
-                                <span><i class="el-icon-view">&nbsp;<span class="list-tag"  v-text="item.views">0</span></i></span> -->
+                                <span><i class="el-icon-view">&nbsp;<span class="list-tag"  v-text="item.views">0</span></i></span>
                                 <span style="float:right;"><span v-text="item.publishTime.substring(0,10)"></span></span>
                             </p>
                         </el-col>
-                    </el-row>
+                    </el-row> -->
                 </el-col>
             </el-row>
         </div> 

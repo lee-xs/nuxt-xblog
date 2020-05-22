@@ -59,10 +59,10 @@
                 <span class="iconfont">&#xe604;</span>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe615;</span></el-button>
+                <el-button circle @click="handleShare()"><span class="iconfont">&#xe600;</span></el-button>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe600;</span></el-button>
+                <el-button circle><span class="iconfont">&#xe615;</span></el-button>
               </el-col>
               <el-col :span="24">
                 <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
@@ -100,7 +100,6 @@ export default {
       return{
         sketchBg: '',
         tagsColor: ["primary","success","error","warning","magenta","orange","green","cyan","blue","purple"],
-        catalogue: [],
       }
     },
     methods: {
@@ -114,6 +113,13 @@ export default {
       //点赞
       handleLikes(){
         
+      },
+      //处理分享
+      handleShare(){
+        if(process.browser){
+          //分享到qq好友
+          window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + window.location.href + '&sharesource=qzone&title=' + this.article.title + '&pics=' + this.$store.state.siteInfo.site.logo +'&summary=记录知识记录美');
+        }
       }
     },
     created(){
