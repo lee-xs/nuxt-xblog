@@ -36,13 +36,13 @@
 
     <!-- 文章内容 -->
     <el-row class="article-container">
-        <el-col :span="21" class="animated fadeInUp">
+        <el-col :span="24" :md="21" class="animated fadeInUp">
           <no-ssr>
             <mavon-editor style="background: none;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
           </no-ssr>
         </el-col>
         
-        <el-col :span="3" style="padding-top: 25px;">
+        <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
           <Affix :offset-top="200">
             <div  class="animated fadeInUp">
               <el-row style="text-align: center;">
