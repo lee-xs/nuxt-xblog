@@ -71,7 +71,6 @@
            </div>
           </Affix>
 
-          <!-- <div class="qrcode" v-show="false" ref="qrCodeUrl" /> -->
           <el-dialog title="分享" :visible.sync="qrCodeVisible" width="300px" center>
             <div class="qrcode" ref="qrCodeUrl" />
           </el-dialog>
