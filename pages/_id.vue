@@ -47,7 +47,9 @@
             <div  class="animated fadeInUp">
               <el-row style="text-align: center;">
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
+                <el-badge :value="likes">
+                  <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
+                </el-badge>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
                 <el-button @click="addFavo()" circle><span class="iconfont">&#xe670;</span></el-button>
@@ -91,13 +93,17 @@ export default {
         }
     },
     async asyncData({params, app}){
-        let { data } = await app.$api.selectArticle(params.id.substring(0, params.id.indexOf('.')))
-
+        const id = params.id.substring(0, params.id.indexOf('.'))
+        let { data } = await app.$api.selectArticle(id)
+        //获取文章点赞数
+        let likesData = await app.$api.selectLikes(id)
+        let likes = likesData.data
         //获取站点信息
         let siteInfoData = await app.$api.selectSite()
         let siteInfo = siteInfoData.data
         return {
           article: data,
+          likes,
           siteInfo,
         }
     },
@@ -118,7 +124,15 @@ export default {
       },
       //点赞
       handleLikes(){
-        
+        this.$api.addLikes(this.article.id).then(res => {
+          if(res.code == 20000){
+            this.$message({
+              type: 'success',
+              message: res.message
+            })
+            this.likes += 1
+          }
+        })
       },
       //处理分享
       handleShare(){

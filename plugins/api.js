@@ -15,6 +15,10 @@ export default ({ app: { $request, $axios }}, inject) => {
         insertArticle(article){
             return $request.post('/admin/article', article)
         },
+        //点赞
+        addLikes(articleId){
+            return $request.post(`/article/likes/${articleId}`)
+        },
         //移除到回收站
         deleteRecycle(id){
             return $request.delete(`/admin/article/recycle/${id}`)
@@ -63,7 +67,11 @@ export default ({ app: { $request, $axios }}, inject) => {
         selectArchives(){
             return $request.get('/article/archives')
         },
-        
+        //查看文章点赞数
+        selectLikes(articleId){
+            return $request.get(`/article/likes/${articleId}`)
+        },
+                
 
         //#################### 分类相关 ####################
         //新增分类

@@ -4,8 +4,8 @@ import { Message } from 'element-ui'
 const cookie = process.client? require('js-cookie') : undefined
 
 export default function({ $axios, store, redirect }){
-    //$axios.defaults.baseURL = 'http://127.0.0.1:2922'
-    $axios.defaults.baseURL = 'https://aleestar.cn/api'
+    $axios.defaults.baseURL = 'http://127.0.0.1:2922'
+    //$axios.defaults.baseURL = 'https://aleestar.cn/api'
     $axios.defaults.timeout = 5000
     //$axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
@@ -23,10 +23,11 @@ export default function({ $axios, store, redirect }){
                 type: 'error',
                 message: res.message
             })
+
             /**
              * 登录失效或未登录
              */
-            if(response.code = 20002) {
+            if(res.code == 20002) {
                 store.commit('SET_TOKEN', null)
                 redirect('/login')
             }
