@@ -85,7 +85,7 @@
         </el-form>
 
         <!-- 图片列表 -->
-        <el-dialog title="图集" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true' width="80%">
+        <el-dialog style="width: 80%; height: 80%; margin: auto;" title="图集" :visible.sync="dialogImage" :fullscreen="true" :append-to-body='true'>
             <v-image-dialog @handleCurrentChange="handleCurrentChange" @handleImageUrl="handleImageUrl" :imageTotal="imageTotal" :imageList="imageList" :pageCode="pageCode"></v-image-dialog>
         </el-dialog>
     </div>
