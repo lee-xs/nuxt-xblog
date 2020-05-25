@@ -50,7 +50,7 @@
                 <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe670;</span></el-button>
+                <el-button @click="addFavo()" circle><span class="iconfont">&#xe670;</span></el-button>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
                 <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
@@ -59,10 +59,10 @@
                 <span class="iconfont">&#xe604;</span>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle @click="handleShare()"><span class="iconfont">&#xe600;</span></el-button>
+                <el-button @click="handleShare()" circle><span class="iconfont">&#xe600;</span></el-button>
               </el-col>
               <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe615;</span></el-button>
+                <el-button @click="createQrCode()" circle><span class="iconfont">&#xe615;</span></el-button>
               </el-col>
               <el-col :span="24">
                 <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
@@ -70,6 +70,11 @@
             </el-row>
            </div>
           </Affix>
+
+          <!-- <div class="qrcode" v-show="false" ref="qrCodeUrl" /> -->
+          <el-dialog title="分享" :visible.sync="qrCodeVisible" width="300px" center>
+            <div class="qrcode" ref="qrCodeUrl" />
+          </el-dialog>
         </el-col>
     </el-row>
 
@@ -77,6 +82,7 @@
 </template>
 
 <script>
+const QRCode = process.browser? require('qrcodejs2') : null
 import { getArticle } from '~/api/article'
 import { getSite } from '~/api/site'
 export default {
@@ -100,6 +106,7 @@ export default {
       return{
         sketchBg: '',
         tagsColor: ["primary","success","error","warning","magenta","orange","green","cyan","blue","purple"],
+        qrCodeVisible: false,
       }
     },
     methods: {
@@ -120,15 +127,42 @@ export default {
           //分享到qq好友
           window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + window.location.href + '&sharesource=qzone&title=' + this.article.title + '&pics=' + this.$store.state.siteInfo.site.logo +'&summary=记录知识记录美');
         }
+      },
+      //生成页面分享二维码
+      createQrCode(){
+        this.qrCodeVisible = true
+        if(this.$refs.qrCodeUrl == undefined){
+          this.$nextTick(() => {
+            const qrcode = new QRCode(this.$refs.qrCodeUrl, {
+              text: window.location.href,
+              width: 250,
+              height: 250,
+              colorDark: '#000000',
+              colorLight: '#ffffff',
+              correctLevel: QRCode.CorrectLevel.H
+            })
+          })
+        }
       }
     },
     created(){
-        this.randomSketckBg()
+      this.randomSketckBg()
     },
 }
 </script>
 
 <style lang="scss" scoped>
+.qrcode{
+    display: inline-block;
+    img {
+        width: 132px;
+        height: 132px;
+        background-color: #fff; //设置白色背景色
+        padding: 6px; // 利用padding的特性，挤出白边
+        box-sizing: border-box;
+    }
+}
+
 *{
   border: none !important;
 }

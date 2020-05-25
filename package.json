@@ -28,6 +28,7 @@
     "nprogress": "^0.2.0",
     "nuxt": "^2.12.2",
     "postcss-loader": "^3.0.0",
+    "qrcodejs2": "0.0.2",
     "style-loader": "^1.2.1",
     "vuetify": "^2.2.25",
     "vuex-persistedstate": "^3.0.1",
