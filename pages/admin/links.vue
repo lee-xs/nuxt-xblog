@@ -125,7 +125,7 @@ export default {
         //发送添加请求
         handleAdd(){
             if(this.commonBeforeHandle()){
-                this.$api.insertLinks(this.links).then(res => {
+                this.$api.insertAddLinks(this.links).then(res => {
                     this.commonAfterHandle(res)
                 })
             }            
