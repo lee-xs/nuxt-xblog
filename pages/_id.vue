@@ -73,7 +73,7 @@
            </div>
           </Affix>
 
-          <el-dialog title="分享" :visible.sync="qrCodeVisible" width="300px" center>
+          <el-dialog style="margin-top: 100px;" title="分享" :visible.sync="qrCodeVisible" width="300px" center :append-to-body='true'>
             <div class="qrcode" ref="qrCodeUrl" />
           </el-dialog>
         </el-col>
