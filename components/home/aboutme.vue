@@ -3,7 +3,7 @@
         <p class="card-container-title"><b>关于本站</b></p>
         <div>
             <img :src="siteInfo.admin.avatar" style="width: 100%; height: 200px;"/>
-            <el-row style="text-align: center; padding-bottom: 5px;">
+            <el-row style="text-align: center; padding:8px 0 13px 0;">
                 <el-col :span="6">
                     <el-popover
                         placement="top-start"
