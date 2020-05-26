@@ -227,6 +227,11 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.get('/site/info')
         },
 
+        //#################### 管理员相关 ####################
+        updateAdmin(admin){
+            return $request.put('/admin', admin)
+        },
+
         //#################### 幻灯片相关 ####################
         //新增幻灯片
         insertSlide(slide){

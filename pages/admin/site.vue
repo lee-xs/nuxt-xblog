@@ -58,29 +58,35 @@
                 <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;">选择</el-button>
                 <img :src="site.wechatCode" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
+
+            <div style="margin-top:30px; width: 500px; margin: auto;">
+                <el-button type="primary" plain style="width:100%" @click="handleChangeSiteInfo()">保存站点信息</el-button>
+            </div>
+        </el-form>
         
+        <el-form class="form" :model="admin" label-position="top" label-width="80px" style="margin:0 auto;">
             <!-- 站长信息 -->
             <el-divider><h3>站长信息</h3></el-divider>
             <el-form-item label="用户名：">
-                <el-input v-model="site.admin.username"></el-input>
+                <el-input v-model="admin.username"></el-input>
             </el-form-item>
             <el-form-item label="昵称：">
-                <el-input v-model="site.admin.nickname"></el-input>
+                <el-input v-model="admin.nickname"></el-input>
             </el-form-item>
             <el-form-item label="新密码：">
-                <el-input v-model="site.admin.password"></el-input>
+                <el-input v-model="admin.password"></el-input>
             </el-form-item>
             <el-form-item label="邮箱：">
-                <el-input v-model="site.admin.email"></el-input>
+                <el-input v-model="admin.email"></el-input>
             </el-form-item>
             <el-form-item label="头像：">
-                <el-input v-model="site.admin.avatar" style="width:80%;"></el-input>
+                <el-input v-model="admin.avatar" style="width:80%;"></el-input>
                 <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;">选择</el-button>
-                <img :src="site.admin.avatar" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
+                <img :src="admin.avatar" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
 
             <div style="margin-top:30px; width: 500px; margin: auto;">
-                <el-button type="primary" plain style="width:100%" @click="handleSiteInfo()">保存</el-button>
+                <el-button type="primary" plain style="width:100%" @click="handleChangeAdmin()">保存管理员信息</el-button>
             </div>
         </el-form>
 
@@ -104,7 +110,8 @@ export default {
         let siteData = await app.$api.selectSiteInfo()
         let imageData = await app.$api.selectImagePage(1,12)
         return{
-            site: siteData.data,
+            site: siteData.data.site,
+            admin: siteData.data.admin,
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
         }
@@ -126,14 +133,15 @@ export default {
             })
         },
         //发送保存站点信息请求
-        handleSiteInfo(){
+        handleChangeSiteInfo(){
             this.$api.updateSite(this.site).then(res => {
-                if(res.code == 20000){
-                    this.$message({
-                        type: 'success',
-                        message: res.message
-                    })
-                }
+                this.commonAfterHandle(res)
+            })
+        },
+        //发送保存管理员信息
+        handleChangeAdmin(){
+            this.$api.updateAdmin(this.admin).then(res => {
+                this.commonAfterHandle(res)
             })
         },
         handleLogoImage(){
@@ -175,6 +183,15 @@ export default {
             }
             this.changeImageType = ''
             this.dialogImage = false
+        },
+        //公共后置处理方法
+        commonAfterHandle(res){
+            if(res.code == 20000){
+                this.$message({
+                    type: 'success',
+                    message: res.message
+                })
+            }
         }
     },
     components:{

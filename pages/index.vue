@@ -15,13 +15,15 @@
 
         <!-- crad -->
         <el-col :span="7" :xs="24" class="hidden-md-and-down right">
-             <!-- 站点信息 -->
-            <v-site-card :siteInfo="siteInfo"></v-site-card>
+            <!-- 站点信息 -->
+            <v-aboutme :siteInfo="siteInfo"></v-aboutme>
              <!-- 热门文章 -->
             <v-hot-card :hotList="hotList"></v-hot-card>
-            <Affix :offset-top="80">
-                <!-- 标签列表 -->
-                <v-tag-card :tagList="tagList"></v-tag-card>
+            <!-- 标签列表 -->
+            <v-tag-card :tagList="tagList"></v-tag-card>
+            <Affix :offset-top="83">
+                 <!-- 站点信息 -->
+                <v-site-card :siteInfo="siteInfo"></v-site-card>
             </Affix>
         </el-col>
     </el-row>
@@ -31,6 +33,7 @@
 import VSlide from '~/components/home/slide'
 import VArticleList from '~/components/home/article-list'
 import VNotice from '~/components/home/notice'
+import VAboutme from '~/components/home/aboutme.vue'
 import VSiteCard from '~/components/home/site-card'
 import VHotCard from '~/components/home/hot-card'
 import VTagCard from '~/components/home/tag-card'
@@ -51,6 +54,7 @@ export default {
         VSlide,
         VNotice,
         VArticleList,
+        VAboutme,
         VSiteCard,
         VHotCard,
         VTagCard,

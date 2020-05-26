@@ -1,6 +1,6 @@
 <template>
-    <div class="footer-container animated fadeInUp">
-        <div class="footer-content">
+    <div id="footer-container" class="animated fadeInUp">
+        <div id="footer-content">
             <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 <span class="hidden-md-and-down">网站已运行 <span v-text="time"></span></span></p>
             <p v-text="siteInfo.site.icp"></p>
         </div>
@@ -54,14 +54,15 @@ export default {
 </script>
 
 <style lang="scss">
-.footer-container{
+#footer-container{
     width: 100%;
     text-align: center;
     line-height: 25px;
     padding: 20px;
     background: #555555;
-    .footer-content{
-        color: #F0F8FF;
+    #footer-content{
+        font-size: 13px;
+        color: #EBEBEB;
     }
 }
 </style>
