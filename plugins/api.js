@@ -110,6 +110,9 @@ export default ({ app: { $request, $axios }}, inject) => {
         upload(file){
             return $request.post('/upload', file, {'Content-Type': 'multipart/form-data'})
         },
+        deleteImage(id){
+            return $request.delete(`/admin/image/${id}`)
+        },
 
         //#################### 通知相关 ####################
         //新增通知

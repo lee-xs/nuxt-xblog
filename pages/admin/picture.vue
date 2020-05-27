@@ -25,7 +25,7 @@
                             <el-input v-model="image.url" :disabled="true"></el-input>
                         </el-form-item>
                         <el-form-item label="PATH">
-                            <el-input v-model="image.path"></el-input>
+                            <el-input v-model="image.path" :disabled="true"></el-input>
                         </el-form-item>
                         <el-form-item label="存储方式">
                             <el-input v-model="image.sign" :disabled="true"></el-input>
@@ -34,8 +34,8 @@
                             <el-input v-model="image.uploadTime" :disabled="true"></el-input>
                         </el-form-item>
                         <div style="margin-top:20px; float: right;">
-                            <el-button type="danger">删除</el-button>
-                            <el-button type="primary">修改</el-button>
+                            <el-button @click="handleRemove()" type="danger">删除</el-button>
+                            <!-- <el-button type="primary">修改</el-button> -->
                         </div> 
                     </el-form>
                 </el-col>
@@ -85,6 +85,20 @@ export default {
         setImageInfo(data){
             this.image = data
             this.visible = true
+        },
+        //删除图片
+        handleRemove(){
+            this.$api.deleteImage(this.image.id).then(res => {
+                if(res.code == 20000){
+                    this.$message({
+                        type: 'success',
+                        message: res.message
+                    })
+                }
+                this.visible = false
+                this.image.id = this.image.url = this.image.path = this.image.sign = this.image.uploadTime = ''
+                this.handleCurrentChange(this.pageCode)
+            })
         }
     }
 }

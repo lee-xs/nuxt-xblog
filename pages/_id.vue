@@ -36,47 +36,47 @@
 
     <!-- 文章内容 -->
     <el-row class="article-container" style="z-index: 1;">
-        <el-col :span="24" :md="21">
-          <no-ssr>
-            <mavon-editor style="background: none;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
-          </no-ssr>
-        </el-col>
-        
-        <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
-          <Affix :offset-top="200">
-            <div>
-              <el-row style="text-align: center;">
-              <el-col :span="24" style="margin-bottom: 10px;">
-                <el-badge :value="likes">
-                  <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
-                </el-badge>
-              </el-col>
-              <!-- <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe670;</span></el-button>
-              </el-col> -->
-              <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
-              </el-col>
-              <el-col :span="24" style="margin-bottom: 10px;">
-                <span class="iconfont">&#xe604;</span>
-              </el-col>
-              <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button @click="handleShare()" circle><span class="iconfont">&#xe600;</span></el-button>
-              </el-col>
-              <el-col :span="24" style="margin-bottom: 10px;">
-                <el-button @click="createQrCode()" circle><span class="iconfont">&#xe615;</span></el-button>
-              </el-col>
-              <!-- <el-col :span="24">
-                <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
-              </el-col> -->
-            </el-row>
-           </div>
-          </Affix>
+      <el-col :span="24" :md="21">
+        <no-ssr>
+          <mavon-editor style="background: none;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
+        </no-ssr>
+      </el-col>
+      
+      <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
+        <Affix :offset-top="200">
+          <div>
+            <el-row style="text-align: center;">
+            <el-col :span="24" style="margin-bottom: 10px;">
+              <el-badge :value="likes">
+                <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
+              </el-badge>
+            </el-col>
+            <!-- <el-col :span="24" style="margin-bottom: 10px;">
+              <el-button circle><span class="iconfont">&#xe670;</span></el-button>
+            </el-col> -->
+            <el-col :span="24" style="margin-bottom: 10px;">
+              <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
+            </el-col>
+            <el-col :span="24" style="margin-bottom: 10px;">
+              <span class="iconfont">&#xe604;</span>
+            </el-col>
+            <el-col :span="24" style="margin-bottom: 10px;">
+              <el-button @click="handleShare()" circle><span class="iconfont">&#xe600;</span></el-button>
+            </el-col>
+            <el-col :span="24" style="margin-bottom: 10px;">
+              <el-button @click="createQrCode()" circle><span class="iconfont">&#xe615;</span></el-button>
+            </el-col>
+            <!-- <el-col :span="24">
+              <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
+            </el-col> -->
+          </el-row>
+          </div>
+        </Affix>
 
-          <el-dialog style="margin-top: 100px;" title="分享" :visible.sync="qrCodeVisible" width="300px" center :append-to-body='true'>
-            <div class="qrcode" ref="qrCodeUrl" />
-          </el-dialog>
-        </el-col>
+        <el-dialog style="margin-top: 100px;" title="分享" :visible.sync="qrCodeVisible" width="300px" center :append-to-body='true'>
+          <div class="qrcode" ref="qrCodeUrl" />
+        </el-dialog>
+      </el-col>
     </el-row>
 
   </div>
