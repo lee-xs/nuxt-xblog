@@ -9,6 +9,16 @@ export default ({ app: { $request, $axios }}, inject) => {
         deleteRedisAll(){
             return $request.get('/admin/redis')
         },
+        //推送链接至百度收录
+        baiduInclude(url){
+            return $axios({
+                url: '/admin/baidu',
+                method: 'post',
+                params: {
+                    url
+                }
+            })
+        },
 
         //#################### 文章相关 ####################
         //发布文章

@@ -2,6 +2,9 @@
     <el-row class="animated fadeInUp">
         <el-col :span="24">
             <el-button  @click="handleRemoveAllRedis()">一键清理redis缓存</el-button>
+
+            <el-input type="textarea" :rows="5" placeholder="请输入推送链接" v-model="baiduIncludeUrl"></el-input>
+            <el-button  @click="handleBaiduInclude()">百度主动推送</el-button>
         </el-col>
 
         <el-col :span="24">
@@ -42,6 +45,7 @@ export default {
         loading: false,
         pageCode: 1,
         pageSize: 10,
+        baiduIncludeUrl: ''
     }),
     async asyncData({ app }){
         let logData = await app.$api.selectLogPage(1, 10)
@@ -70,11 +74,23 @@ export default {
                     })
                 }
             })
-        }
+        },
+        //处理百度推送
+        handleBaiduInclude(){
+            this.$api.baiduInclude(this.baiduIncludeUrl).then(res => {
+               this.$message({
+                   type: 'info',
+                   message: res.data
+               })
+               this.baiduIncludeUrl = ''
+            })
+        },
     }
 }
 </script>
 
 <style>
-
+.el-textarea .el-textarea__inner{
+  resize: none;
+}
 </style>
