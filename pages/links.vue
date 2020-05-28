@@ -6,10 +6,10 @@
         <div class="sketch-info animated fadeInUp">
             <div>
               <!-- 标题 -->
-              <p v-text="'网站名称：' + site.siteName"></p>
-              <p v-text="'网站logo：' + site.logo"></p>
-              <p v-text="'网站地址：' + site.siteUrl"></p>
-              <p v-text="'联系邮箱：' + site.admin.email"></p>
+              <p v-text="'网站名称：' + $store.state.siteInfo.site.siteName"></p>
+              <p v-text="'网站logo：' + $store.state.siteInfo.site.logo"></p>
+              <p v-text="'网站地址：' + $store.state.siteInfo.site.siteUrl"></p>
+              <p v-text="'联系邮箱：' + $store.state.siteInfo.admin.email"></p>
               <p>注意：申请友链时请将本站设为贵站的友链</p>
               <!-- 申请友情链接 -->
               <el-form>
@@ -57,10 +57,8 @@ export default {
     }
   },
   async asyncData({ app }){
-    let siteData = await app.$api.selectSiteInfo()
     let linksListData = await app.$api.selectLinksAll()
     return{
-      site: siteData.data,//站点信息
       linksList: linksListData.data,//友链列表
     }
   },
