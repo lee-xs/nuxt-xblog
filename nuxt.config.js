@@ -11,6 +11,9 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       //{ 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
+      { itemprop:"name", content:"Aleestar'Blog"},
+      { itemprop:"image", content:"http://qiniu.aleestar.cn/logo.jpg" },
+      { name:"description", itemprop:"description", content:"一觉醒来，诸事完美，继续努力呀!" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
