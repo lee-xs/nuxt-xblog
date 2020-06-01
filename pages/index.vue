@@ -47,7 +47,7 @@ export default {
     },
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】首页`,
+            title: `【${this.$store.state.siteInfo.site.siteName}】一觉醒来，诸事完美`,
         }
     },
     components:{
