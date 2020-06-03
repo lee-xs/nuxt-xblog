@@ -38,8 +38,31 @@
     <el-row class="article-container" style="z-index: 1;">
       <el-col :span="24" :md="21">
         <no-ssr>
-          <mavon-editor style="background: none;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
+          <mavon-editor style="backgournd:none; border-radius: 0; padding: 20px 20px 5px 20px;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
         </no-ssr>
+
+        <div>
+          <el-row style="background: #fff; text-align: center; padding: 10px; line-height: 25px; margin-top: 20px;">
+            <el-col :span="12">
+              <nuxt-link v-if="previous != null" :to="'/' + previous.id + '.html'" style="color: #515A3E;">
+                <p><i class="iconfont" style="margin-right: 5px; font-size: 14px;">&#xe618;</i>上一篇</p>
+                <p v-text="previous.title.length > 25? previous.title.substring(0,25) + '...' : previous.title"></p>
+              </nuxt-link>
+              <div v-else>
+                <p style="margin-top: 13px;">没有更多了</p>
+              </div>
+            </el-col>
+            <el-col :span="12">
+              <nuxt-link v-if="next != null" :to="'/' + next.id + '.html'" style="color: #515A3E;">
+                <p>下一篇<i class="iconfont" style="margin-left: 5px; font-size: 14px;">&#xe605;</i></p>
+                <p v-text="next.title.length > 25? next.title.substring(0,25) + '...' : next.title"></p>
+              </nuxt-link>
+              <div v-else>
+                <p style="margin-top: 13px;">没有更多了</p>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
       </el-col>
       
       <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
@@ -54,16 +77,16 @@
             <!-- <el-col :span="24" style="margin-bottom: 10px;">
               <el-button circle><span class="iconfont">&#xe670;</span></el-button>
             </el-col> -->
-            <el-col :span="24" style="margin-bottom: 10px;">
+            <el-col :span="24" style="margin-bottom: 3px;">
               <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
             </el-col>
-            <el-col :span="24" style="margin-bottom: 10px;">
+            <el-col :span="24" style="margin-bottom: 3px;">
               <span class="iconfont">&#xe604;</span>
             </el-col>
             <el-col :span="24" style="margin-bottom: 10px;">
               <el-button @click="handleShare()" circle><span class="iconfont">&#xe600;</span></el-button>
             </el-col>
-            <el-col :span="24" style="margin-bottom: 10px;">
+            <el-col :span="24" style="margin-bottom: 3px;">
               <el-button @click="createQrCode()" circle><span class="iconfont">&#xe615;</span></el-button>
             </el-col>
             <!-- <el-col :span="24">
@@ -79,6 +102,7 @@
       </el-col>
     </el-row>
 
+    <Back-top :bottom="100"></Back-top>
   </div>
 </template>
 
@@ -94,7 +118,8 @@ export default {
     },
     async asyncData({params, app}){
         const id = params.id.substring(0, params.id.indexOf('.'))
-        let { data } = await app.$api.selectArticle(id)
+        let articleData = await app.$api.selectArticle(id)
+
         //获取文章点赞数
         let likesData = await app.$api.selectLikes(id)
         let likes = likesData.data
@@ -102,7 +127,9 @@ export default {
         let siteInfoData = await app.$api.selectSite()
         let siteInfo = siteInfoData.data
         return {
-          article: data,
+          article: articleData.data.article,
+          previous: articleData.data.previous,
+          next: articleData.data.next,
           likes,
           siteInfo,
         }
