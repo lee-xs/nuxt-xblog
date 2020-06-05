@@ -7,6 +7,7 @@ export const state = () => ({
     compileArticle: {},
     menuList: {},
     token: null,
+    ipAddress: null,
 })
 
 export const mutations = {
@@ -19,14 +20,29 @@ export const mutations = {
     SET_MENU: (state, data) => {
         state.menuList = data
     },
-    SET_TOKEN: (state, token) => {
-        state.token = token
-    }, 
+    SET_TOKEN: (state, data) => {
+        state.token = data
+    },
+    SET_IPADDRESS: (state, data) => {
+        state.ipAddress = data
+    }
 }
 
 export const actions = {
     //设置站点,导航菜单信息
     async nuxtServerInit({commit, state}, {req, app}){
+        let ipRes = await app.$axios({
+            method: 'get',
+            url: 'http://pv.sohu.com/cityjson?ie=utf-8',
+            changeOrigin: true,
+            withCredentials: true,
+        })
+        var ipJson = ipRes.substring(19, ipRes.length - 1)
+        let ip = JSON.parse(ipJson).cip
+        //设置访问ip
+        commit('SET_IPADDRESS', ip)
+        
+        
         const cookie = parseCookie(req.headers.cookie)
         commit('SET_TOKEN', cookie.token)
         commit('SET_SITEINFO', (await app.$api.selectSite()).data)

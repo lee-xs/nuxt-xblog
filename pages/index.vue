@@ -70,7 +70,6 @@ export default {
         // console.log(ipJson)
         // let ip = JSON.parse(ipJson).cip
         // console.log(ip)
-        //console.log(returnCitySN('cip'))
 
         //获取文章列表
         let { data } = await app.$api.selectArticlePage(1, 10)

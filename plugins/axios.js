@@ -13,6 +13,7 @@ export default function({ $axios, store, redirect }){
         const token = (store.state.token != undefined && store.state.token != null)? store.state.token : ''
         
         config.headers['token'] = token
+        config.headers['ipAddress'] = store.state.ipAddress
         return config
     })
 
