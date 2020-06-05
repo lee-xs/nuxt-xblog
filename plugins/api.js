@@ -1,6 +1,3 @@
-import { upload } from "../api/image"
-import { login } from "../api/login"
-
 export default ({ app: { $request, $axios }}, inject) => {
     inject('api', {
         
@@ -19,7 +16,7 @@ export default ({ app: { $request, $axios }}, inject) => {
                 }
             })
         },
-
+ 
         //#################### 文章相关 ####################
         //发布文章
         insertArticle(article){
