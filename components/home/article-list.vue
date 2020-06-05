@@ -11,16 +11,19 @@
                     <h4 v-if="item.title.length < 28" v-text="item.title">标题</h4>
                     <h4 v-else v-text="item.title.substring(0,28)+'...'">标题</h4>
                 </nuxt-link>
-                <div class="list-con">
+                <div class="list-con" style="margin-bottom: 1px;">
                     <p class="details">
                         <span v-text="item.author"></span>&nbsp;/&nbsp;
                         <nuxt-link :to="'/category/' + item.category">
                             <span v-text="item.category"></span>
                         </nuxt-link>&nbsp;/&nbsp;
                         <span v-text="item.publishTime.substring(0,10)"></span>
-                        <i class="el-icon-view">&nbsp;<span class="list-tag"  v-text="item.views">0</span></i>
+                        <i class="iconfont" style="font-size: 13px;">&#xe60e;&nbsp;<span class="list-tag"  v-text="item.views">0</span></i>
+                        <i class="iconfont" style="font-size: 13px;">&#xe7cd;&nbsp;<span class="list-tag" v-text="item.likes">0</span></i>
+                        <i class="iconfont" style="font-size: 13px;">&#xe745;&nbsp;<span class="list-tag" v-text="item.comments">0</span></i>
+                        <!-- <i class="el-icon-view">&nbsp;<span class="list-tag"  v-text="item.views">0</span></i>
                         <i class="el-icon-star-off">&nbsp;<span class="list-tag" v-text="item.likes">0</span></i>
-                        <i class="el-icon-chat-square">&nbsp;<span class="list-tag" v-text="item.comments">0</span></i>
+                        <i class="el-icon-chat-square">&nbsp;<span class="list-tag" v-text="item.comments">0</span></i> -->
                     </p>
                 </div>
                 <nuxt-link :to="'/'+item.id + '.html'">
