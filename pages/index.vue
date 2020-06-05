@@ -59,17 +59,16 @@ export default {
         VHotCard,
         VTagCard,
     }, 
-    async asyncData({ app }) {
-        // let ipRes = await app.$axios({
-        //     method: 'get',
-        //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-        //     changeOrigin: true,
-        //     withCredentials: true,
-        // })
-        // var ipJson = ipRes.substring(19, ipRes.length - 1)
-        // console.log(ipJson)
-        // let ip = JSON.parse(ipJson).cip
-        // console.log(ip)
+    async asyncData({ app, store }) {
+        let ipRes = await app.$axios({
+            method: 'get',
+            url: 'http://pv.sohu.com/cityjson?ie=utf-8',
+            changeOrigin: true,
+            withCredentials: true,
+        })
+        var ipJson = ipRes.substring(19, ipRes.length - 1)
+        let ip = JSON.parse(ipJson).cip
+        store.commit('SET_IPADDRESS', ip)
 
         //获取文章列表
         let { data } = await app.$api.selectArticlePage(1, 10)

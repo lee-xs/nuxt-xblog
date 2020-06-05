@@ -31,16 +31,16 @@ export const mutations = {
 export const actions = {
     //设置站点,导航菜单信息
     async nuxtServerInit({commit, state}, {req, app}){
-        let ipRes = await app.$axios({
-            method: 'get',
-            url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-            changeOrigin: true,
-            withCredentials: true,
-        })
-        var ipJson = ipRes.substring(19, ipRes.length - 1)
-        let ip = JSON.parse(ipJson).cip
-        //设置访问ip
-        commit('SET_IPADDRESS', ip)
+        // let ipRes = await app.$axios({
+        //     method: 'get',
+        //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
+        //     changeOrigin: true,
+        //     withCredentials: true,
+        // })
+        // var ipJson = ipRes.substring(19, ipRes.length - 1)
+        // let ip = JSON.parse(ipJson).cip
+        // //设置访问ip
+        // commit('SET_IPADDRESS', ip)
         
         
         const cookie = parseCookie(req.headers.cookie)
