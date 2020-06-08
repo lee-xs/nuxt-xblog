@@ -65,10 +65,10 @@ export default {
         changeOrigin: true,
         withCredentials: true,
     }).then(res => {
-       var ipJson = res.substring(19, res.length - 1)
-        let ip = JSON.parse(ipJson).cip
-        this.$store.commit('SET_IPADDRESS', ip)
-        console.log(ip)
+      var ipJson = res.substring(19, res.length - 1)
+      let ip = JSON.parse(ipJson).cip
+      this.$store.commit('SET_IPADDRESS', ip)
+      this.$api.visit().then(res => {})
     })
   }
 }

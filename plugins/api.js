@@ -16,6 +16,9 @@ export default ({ app: { $request, $axios }}, inject) => {
                 }
             })
         },
+        visit(){
+            return $request.post('/user/visit')
+        },
  
         //#################### 文章相关 ####################
         //发布文章
