@@ -13,14 +13,14 @@ module.exports = {
       //{ 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
       { itemprop:"name", content:"Aleestar'Blog"},
       { itemprop:"image", content:"http://qiniu.aleestar.cn/logo.jpg" },
-      { name:"description", itemprop:"description", content:"一觉醒来，诸事完美，继续努力呀!" }
+      { name:"description", itemprop:"description", content:"一觉醒来，诸事完美，继续努力呀!" },
+      { 'http-equiv':"Content-Security-Policy", content: "upgrade-insecure-requests"}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
       { src: 'https://hm.baidu.com/hm.js?86a28727a22fc484486d01e00c8e3776' },
-      //{ src: 'http://pv.sohu.com/cityjson?ie=utf-8' }
     ]
   },
   /*
