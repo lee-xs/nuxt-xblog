@@ -19,7 +19,7 @@ export default function({ $axios, store, redirect }){
 
     $axios.interceptors.response.use(response => { 
         const res = response.data
-        if(res.code != 20000){
+        if(res.code == 20001){
             Message({
                 type: 'error',
                 message: res.message

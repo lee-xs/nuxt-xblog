@@ -34,9 +34,22 @@ export default ({ app: { $request, $axios }}, inject) => {
         //点赞
         addLikes(articleId, ipAddress){
             return $axios({
-                url: `/article/likes/${articleId}`,
+                url: `/article/likes`,
                 method: 'post',
                 params: {
+                    articleId,
+                    ipAddress,
+                }
+            })
+        },
+        //查看
+        addViews(articleId, articleTitle, ipAddress){
+            return $axios({
+                url: '/article/views',
+                method: 'post',
+                params: {
+                    articleId,
+                    articleTitle,
                     ipAddress
                 }
             })
@@ -58,8 +71,8 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.get('/article/page', {pageCode, pageSize})
         },
         //查询文章信息
-        selectArticle(id, ipAddress){
-            return $request.get(`/article/${id}`, {ipAddress})
+        selectArticle(id){
+            return $request.get(`/article/${id}`)
         },
         //根据标签查询文章列表
         selectArticlePageByTag(pageCode, pageSize, tagName){

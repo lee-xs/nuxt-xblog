@@ -16,20 +16,28 @@ export default {
     VMiddle,
     VFooter,
   },
-  
   head(){
     return {
-      script: [
-        { 
-          type: 'text/javascript',
-          src: 'http://pv.sohu.com/cityjson?ie=utf-8'
-        }
-      ]
+      // script: [
+      //   { 
+      //     type: 'text/javascript',
+      //     src: 'http://pv.sohu.com/cityjson?ie=utf-8'
+      //   }
+      // ]
     }
   },
+  data: () => ({
+    ipAddress: ''
+  }),
   mounted(){
-    //发送访问网站的请求
-    this.$api.visit(returnCitySN.cip).then(res => {})
+    this.$axios({
+      method: 'get',
+      url: 'http://ip-api.com/json/?lang=zh-CN',
+    }).then(res => {
+      this.ipAddress = res.query
+      //发送访问网站的请求
+      this.$api.visit(this.ipAddress).then(res => {})
+    })
   },
 }
 </script>

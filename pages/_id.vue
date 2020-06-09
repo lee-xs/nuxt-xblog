@@ -118,7 +118,7 @@ export default {
     },
     async asyncData({params, app}){
         const id = params.id.substring(0, params.id.indexOf('.'))
-        let articleData = await app.$api.selectArticle(id, returnCitySN.cip)
+        let articleData = await app.$api.selectArticle(id)
 
         //获取文章点赞数
         let likesData = await app.$api.selectLikes(id)
@@ -188,6 +188,12 @@ export default {
     created(){
       this.randomSketckBg()
     },
+    mounted(){
+      //首次访问增加访问记录
+      this.$api.addViews(this.article.id, this.article.title, this.ipAddress).then(res => {
+
+      })
+    }
 }
 </script>
 
