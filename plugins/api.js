@@ -16,8 +16,14 @@ export default ({ app: { $request, $axios }}, inject) => {
                 }
             })
         },
-        visit(){
-            return $request.post('/user/visit')
+        visit(ipAddress){
+            return $axios({
+                url: '/user/visit',
+                method: 'post',
+                params: {
+                    ipAddress
+                }
+            })
         },
  
         //#################### 文章相关 ####################
@@ -26,8 +32,14 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.post('/admin/article', article)
         },
         //点赞
-        addLikes(articleId){
-            return $request.post(`/article/likes/${articleId}`)
+        addLikes(articleId, ipAddress){
+            return $axios({
+                url: `/article/likes/${articleId}`,
+                method: 'post',
+                params: {
+                    ipAddress
+                }
+            })
         },
         //移除到回收站
         deleteRecycle(id){
@@ -46,8 +58,8 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.get('/article/page', {pageCode, pageSize})
         },
         //查询文章信息
-        selectArticle(id){
-            return $request.get(`/article/${id}`)
+        selectArticle(id, ipAddress){
+            return $request.get(`/article/${id}`, {ipAddress})
         },
         //根据标签查询文章列表
         selectArticlePageByTag(pageCode, pageSize, tagName){

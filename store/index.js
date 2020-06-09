@@ -1,7 +1,3 @@
-import { getSite } from '~/api/site'
-import { getMenuAll } from '~/api/menu'
-import { setToken, getToken } from '~/service/auth'
-
 export const state = () => ({
     siteInfo: {},
     compileArticle: {},
@@ -30,19 +26,7 @@ export const mutations = {
 
 export const actions = {
     //设置站点,导航菜单信息
-    async nuxtServerInit({commit, state}, {req, app}){
-        // let ipRes = await app.$axios({
-        //     method: 'get',
-        //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-        //     changeOrigin: true,
-        //     withCredentials: true,
-        // })
-        // var ipJson = ipRes.substring(19, ipRes.length - 1)
-        // let ip = JSON.parse(ipJson).cip
-        // //设置访问ip
-        // commit('SET_IPADDRESS', ip)
-        
-        
+    async nuxtServerInit({commit}, {req, app}){      
         const cookie = parseCookie(req.headers.cookie)
         commit('SET_TOKEN', cookie.token)
         commit('SET_SITEINFO', (await app.$api.selectSite()).data)

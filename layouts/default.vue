@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-const jsonp = require('jsonp')
 import VHeader from '~/components/home/header'
 import VFooter from '~/components/home/footer'
 import VMiddle from '~/components/home/middle'
@@ -18,59 +16,21 @@ export default {
     VMiddle,
     VFooter,
   },
-  mounted(){
-    // this.$api.sohuIp().then(res => {
-    //   console.log(res)
-    // })
-
-
-    // this.$axios({
-    //     method: 'get',
-    //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-    //     changeOrigin: true,
-    //     withCredentials: true,
-    // }).then(res => {
-    //    var ipJson = res.substring(19, res.length - 1)
-    //     let ip = JSON.parse(ipJson).cip
-    //     this.$store.commit('SET_IPADDRESS', ip)
-    //     console.log(this.$store.state.ipAddress)
-    // })
-
-   
-
-    // var ipJson = ipRes.substring(19, ipRes.length - 1)
-    // let ip = JSON.parse(ipJson).cip
-    // store.commit('SET_IPADDRESS', ip)
-    
-
   
-    // var ipJson = ipRes.substring(19, ipRes.length - 1)
-    // let ip = JSON.parse(ipJson).cip
-    // console.log(ip)
-    // store.commit('SET_IPADDRESS', ip)
+  head(){
+    return {
+      script: [
+        { 
+          type: 'text/javascript',
+          src: 'http://pv.sohu.com/cityjson?ie=utf-8'
+        }
+      ]
+    }
   },
-  created(){
-    // this.$axios({
-    //   method: 'get',
-    //   url: 'http://api.k780.com/?app=ip.local&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json',
-    //   changeOrigin: true,
-    //   withCredentials: true,
-    // }).then(res => {
-    //   console.log(res)
-    // })
-
-    this.$axios({
-        method: 'get',
-        url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-        changeOrigin: true,
-        withCredentials: true,
-    }).then(res => {
-      var ipJson = res.substring(19, res.length - 1)
-      let ip = JSON.parse(ipJson).cip
-      this.$store.commit('SET_IPADDRESS', ip)
-      this.$api.visit().then(res => {})
-    })
-  }
+  mounted(){
+    //发送访问网站的请求
+    this.$api.visit(returnCitySN.cip).then(res => {})
+  },
 }
 </script>
 

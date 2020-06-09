@@ -9,9 +9,6 @@
 <script>
 const Cookie = process.client? require('js-cookie') : undefined
 
-//import { timerAccess } from '~/api/admin'
-import { login } from '~/api/login'
-import { setToken } from '~/service/auth'
 export default {
     layout: 'blank_template',
     head(){

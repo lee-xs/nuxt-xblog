@@ -118,7 +118,7 @@ export default {
     },
     async asyncData({params, app}){
         const id = params.id.substring(0, params.id.indexOf('.'))
-        let articleData = await app.$api.selectArticle(id)
+        let articleData = await app.$api.selectArticle(id, returnCitySN.cip)
 
         //获取文章点赞数
         let likesData = await app.$api.selectLikes(id)
@@ -151,7 +151,7 @@ export default {
       },
       //点赞
       handleLikes(){
-        this.$api.addLikes(this.article.id).then(res => {
+        this.$api.addLikes(this.article.id, returnCitySN.cip).then(res => {
           if(res.code == 20000){
             this.$message({
               type: 'success',

@@ -17,7 +17,12 @@
 
 <script>
 export default {
-    layout: 'blank_template'
+    layout: 'blank_template',
+    head(){
+        return{
+            title: `【${this.$store.state.siteInfo.site.siteName}】错误页面`,
+        }
+    },
 }
 </script>
 
