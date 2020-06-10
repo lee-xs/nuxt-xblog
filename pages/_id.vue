@@ -139,6 +139,7 @@ export default {
         sketchBg: '',
         tagsColor: ["primary","success","error","warning","magenta","orange","green","cyan","blue","purple"],
         qrCodeVisible: false,
+        ipAddress: '',
       }
     },
     methods: {
@@ -151,7 +152,7 @@ export default {
       },
       //点赞
       handleLikes(){
-        this.$api.addLikes(this.article.id, returnCitySN.cip).then(res => {
+        this.$api.addLikes(this.article.id, this.ipAddress).then(res => {
           if(res.code == 20000){
             this.$message({
               type: 'success',
@@ -190,8 +191,15 @@ export default {
     },
     mounted(){
       //首次访问增加访问记录
-      this.$api.addViews(this.article.id, this.article.title, this.ipAddress).then(res => {
+      this.$axios({
+        method: 'get',
+        //url: 'http://ip-api.com/json/?lang=zh-CN',
+        url: 'https://api.ip138.com/query/?token=416f448c2932a7e2562bab97559de3d8',
+      }).then(res => {
+        this.ipAddress = res.query
+        this.$api.addViews(this.article.id, this.article.title, this.ipAddress).then(res => {
 
+        })
       })
     }
 }
