@@ -153,7 +153,7 @@ export default {
               type: 'success',
               message: res.message
             })
-            this.likes += 1
+            this.article.likes += 1
           }
         })
       },
