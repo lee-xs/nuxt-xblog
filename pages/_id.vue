@@ -191,12 +191,9 @@ export default {
     },
     mounted(){
       //首次访问增加访问记录
-      this.$axios({
-        method: 'get',
-        //url: 'http://ip-api.com/json/?lang=zh-CN',
-        url: 'https://api.ip138.com/query/?token=416f448c2932a7e2562bab97559de3d8',
-      }).then(res => {
-        this.ipAddress = res.query
+      jsonp('https://apis.map.qq.com/ws/location/v1/ip?output=jsonp&key=A4BBZ-67HC6-Z6RSV-EPT44-5WE4F-XFFEP', null, (err, data) => {
+        //发送访问网站的请求
+        this.ipAddress = data.result.ip
         this.$api.addViews(this.article.id, this.article.title, this.ipAddress).then(res => {
 
         })
