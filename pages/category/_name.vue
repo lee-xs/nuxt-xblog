@@ -11,6 +11,8 @@
 
         <!-- crad -->
         <el-col :span="7" :xs="24" class="hidden-md-and-down" style="padding-left:5px;">
+            <!-- 搜索 -->
+            <v-search-input @search="handleSearch"></v-search-input>
             <!-- 随机文章 -->
             <v-rand-card :randList="randList"></v-rand-card>
             <!-- 全部分类 -->
@@ -26,12 +28,10 @@
 <script>
 import VArticleList from '~/components/home/article-list'
 import VNotice from '~/components/home/notice'
+import VSearchInput from "~/components/home/search-input"
 import VCategoryCard from '~/components/home/category-card'
 import VHotCard from '~/components/home/hot-card'
 import VRandCard from '~/components/home/rand-card'
-import { getNotice } from '~/api/index'
-import { getPageArticleByCategory, getHotList, getRandList } from '~/api/article'
-import { getAll } from '~/api/category'
 export default {
     data(){
         return{
@@ -49,6 +49,7 @@ export default {
     components:{
         VNotice,
         VArticleList,
+        VSearchInput,
         VCategoryCard,
         VHotCard,
         VRandCard,
@@ -86,6 +87,9 @@ export default {
                 this.loading = false
             })
         },
+        handleSearch(data){
+            this.$router.push(`/search/${data}`)
+        }
     },
 }  
 </script>

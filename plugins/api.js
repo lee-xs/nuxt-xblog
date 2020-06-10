@@ -106,6 +106,10 @@ export default ({ app: { $request, $axios }}, inject) => {
         selectLikes(articleId){
             return $request.get(`/article/likes/${articleId}`)
         },
+        //文章搜索
+        selectSearch(pageCode, pageSize, search){
+            return $request.get('/article/search', {pageCode, pageSize, search})
+        },
                 
 
         //#################### 分类相关 ####################

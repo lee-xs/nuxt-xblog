@@ -2,9 +2,10 @@
   <el-row class="list">
     <el-col :span="24" class="hidden-md-and-down animated fadeInUp">
         <el-row class="list-container">
-            <el-col :span="24" v-if="list.length == 0" style="padding: 15px; background-color:#fff; box-shadow: 0 1px 3px rgba(26,26,26,.3); text-align:center; font-size:14px;">
-                <p>暂时没有任何内容...</p>
+            <el-col :span="24" v-if="list.length == 0" style="padding: 20px; background-color:#fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); text-align:center; font-size:14px;">
+                <p>暂无相关内容...</p>
             </el-col>
+
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated fadeInUp" style="position: relative;">
                 <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>

@@ -3,7 +3,7 @@
     <el-col>
       <!-- <i class="el-icon-bell" style="float:left;line-height: 20px;"></i> -->
       <i class="iconfont" style="float:left; line-height: 20px; font-size: 13px; margin-right: 10px;">&#xe65f;</i>
-      <el-carousel height="20px" direction="vertical" :interval="7000">
+      <el-carousel height="20px" direction="vertical" indicator-position="none" :interval="7000">
         <el-carousel-item v-for="(item,index) in noticeList" :key="index">
           <h3 class="medium" v-text="item.content"></h3>
         </el-carousel-item>

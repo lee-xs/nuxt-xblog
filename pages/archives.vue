@@ -32,9 +32,13 @@
       </div>
     </el-col>
 
-    <!-- 随机文章卡片 -->
+    
     <el-col :span="7" style="padding-left:5px;">
+      <!-- 搜索 -->
+      <v-search-input @search="handleSearch"></v-search-input>
+      <!-- 随机文章卡片 -->
       <v-rand-card :randList="randList"></v-rand-card>
+      <!-- 标签卡片 -->
       <Affix :offset-top="80">
         <v-tag-card :tagList="tagList"></v-tag-card>
       </Affix>
@@ -45,6 +49,7 @@
 <script>
 import '~/assets/css/archives.css'
 import VNotice from '~/components/home/notice'
+import VSearchInput from "~/components/home/search-input"
 import VRandCard from "~/components/home/rand-card"
 import VTagCard from "~/components/home/tag-card"
 export default {
@@ -58,6 +63,7 @@ export default {
   },
   components: {
     VNotice,
+    VSearchInput,
     VRandCard,
     VTagCard,
   },
@@ -77,6 +83,11 @@ export default {
       noticeList: noticeData.data,//通知列表
     };
   },
+  methods: {
+    handleSearch(data){
+      this.$router.push(`/search/${data}`)
+    }
+  }
 };
 </script>
 

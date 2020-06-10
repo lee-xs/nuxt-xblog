@@ -17,9 +17,9 @@
                             <li v-for="(item, index) in navs" :key="index" >
                                 <nuxt-link :to="{ name: item.name }">{{ item.title }}</nuxt-link>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <i class="el-icon-search"></i>
-                            </li>
+                            </li> -->
                         </ul> 
                     </nav>
                 </el-col>

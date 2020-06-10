@@ -17,6 +17,8 @@
         <el-col :span="7" :xs="24" class="hidden-md-and-down right">
             <!-- 站点信息 -->
             <v-aboutme :siteInfo="siteInfo"></v-aboutme>
+            <!-- 搜索 -->
+            <v-search-input @search="handleSearch"></v-search-input>
              <!-- 热门文章 -->
             <v-hot-card :hotList="hotList"></v-hot-card>
             <!-- 标签列表 -->
@@ -34,6 +36,7 @@ import VSlide from '~/components/home/slide'
 import VArticleList from '~/components/home/article-list'
 import VNotice from '~/components/home/notice'
 import VAboutme from '~/components/home/aboutme.vue'
+import VSearchInput from "~/components/home/search-input"
 import VSiteCard from '~/components/home/site-card'
 import VHotCard from '~/components/home/hot-card'
 import VTagCard from '~/components/home/tag-card'
@@ -55,24 +58,12 @@ export default {
         VNotice,
         VArticleList,
         VAboutme,
+        VSearchInput,
         VSiteCard,
         VHotCard,
         VTagCard,
     }, 
-    async asyncData({ app, store }) {
-        // let ipRes = await app.$axios({
-        //     method: 'get',
-        //     url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-        //     changeOrigin: true,
-        //     withCredentials: true,
-        // })
-        // var ipJson = ipRes.substring(19, ipRes.length - 1)
-        // let ip = JSON.parse(ipJson).cip
-        // store.commit('SET_IPADDRESS', ip)
-        // console.log(store.state.ipAddress)
-
-        
-
+    async asyncData({ app, store }) {     
         //获取文章列表
         let { data } = await app.$api.selectArticlePage(1, 10)
         //获取站点信息
@@ -107,6 +98,9 @@ export default {
                 document.documentElement.scrollTop = 0
             })
         },
+        handleSearch(data){
+            this.$router.push(`/search/${data}`)
+        }
     },
 }  
 </script>
