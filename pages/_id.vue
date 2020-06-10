@@ -70,7 +70,7 @@
           <div>
             <el-row style="text-align: center;">
             <el-col :span="24" style="margin-bottom: 10px;">
-              <el-badge :value="likes">
+              <el-badge :value="article.likes">
                 <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
               </el-badge>
             </el-col>
@@ -119,9 +119,6 @@ export default {
         const id = params.id.substring(0, params.id.indexOf('.'))
         let articleData = await app.$api.selectArticle(id)
 
-        //获取文章点赞数
-        let likesData = await app.$api.selectLikes(id)
-        let likes = likesData.data
         //获取站点信息
         let siteInfoData = await app.$api.selectSite()
         let siteInfo = siteInfoData.data
@@ -129,7 +126,6 @@ export default {
           article: articleData.data.article,
           previous: articleData.data.previous,
           next: articleData.data.next,
-          likes,
           siteInfo,
         }
     },
