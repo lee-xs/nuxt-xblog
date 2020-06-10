@@ -21,15 +21,16 @@ export const validateLinks = (links) => {
     }
 
     //验证url logo格式
-    const regex = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
-    if(!regex.test(links.url)){
-        Message.error("网站url格式错误");
-        return false;
-    }
-    if(!regex.test(links.logo)){
-        Message.error("网站logo格式错误");
-        return false;
-    }
+    // const regex = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*$/
+    // if(!regex.test(links.url)){
+    //     Message.error("网站url格式错误");
+    //     return false;
+    // }
+    // if(!regex.test(links.logo)){
+    //     Message.error("网站logo格式错误");
+    //     return false;
+    // }
+    
     //验证邮箱格式
     const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
     if(!emailRegex.test(links.email)){

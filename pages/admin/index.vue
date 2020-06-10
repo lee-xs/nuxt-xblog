@@ -13,7 +13,8 @@
                 <el-table-column align="center" prop="userId" label="用户ID" width="100"></el-table-column>
                 <el-table-column align="center" prop="" label="用户过程数据">
                     <template slot-scope="scope">
-                        <span v-text="`{'id':${scope.row.user.id}, 'username':${scope.row.user.username}, 'ip':${scope.row.user.ip}}`"></span>
+                        <span v-text="`{ username:${scope.row.user.username}, ip:${scope.row.user.ip} }`"></span>
+                        <!-- <span v-text="scope.row.user"></span> -->
                     </template>
                 </el-table-column>
                 <el-table-column align="center" prop="title" label="类别" width="150"></el-table-column>

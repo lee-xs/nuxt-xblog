@@ -24,14 +24,19 @@ export default function({ $axios, store, redirect }){
                 type: 'error',
                 message: res.message
             })
-
-            /**
-             * 登录失效或未登录
-             */
-            if(res.code == 20002) {
-                store.commit('SET_TOKEN', null)
-                redirect('/login')
-            }
+        }
+        
+        /**
+         * 登录失效或未登录
+         */
+        if(res.code == 20002) {
+            Message({
+                type: 'error',
+                message: res.message
+            })
+            
+            store.commit('SET_TOKEN', null)
+            redirect('/login')
         }
         return res
     })

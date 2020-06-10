@@ -168,7 +168,6 @@ export default {
             if(this.links.name == '' ||
                 this.links.url == '' ||
                 this.links.logo == '' ||
-                this.links.email == '' ||
                 this.links.state == ''){
                     this.$message.error('必填项不能为空')
                 return false
