@@ -102,7 +102,7 @@
       </el-col>
     </el-row>
 
-    <Back-top :bottom="100"></Back-top>
+    <Back-top :bottom="25"></Back-top>
   </div>
 </template>
 
@@ -219,6 +219,9 @@ export default {
 /deep/ .scroll-style{
   background: none !important;
   padding: 0 !important;
+}
+/deep/ .ivu-back-top-inner{
+    background: rgba(0, 153, 229, .7);
 }
 //=================================
 .sketch,.sketch-bg,.gray-glass{

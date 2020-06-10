@@ -28,6 +28,8 @@
                 <v-site-card :siteInfo="siteInfo"></v-site-card>
             </Affix>
         </el-col>
+
+        <Back-top :bottom="25"></Back-top>
     </el-row>
 </template>
 
@@ -112,6 +114,9 @@ export default {
     .right{
         padding-left: 5px;
     }
+}
+/deep/ .ivu-back-top-inner{
+    background: rgba(0, 153, 229, .7);
 }
 @media (max-width:768px) {
     .index-container{
