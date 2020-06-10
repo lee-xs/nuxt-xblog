@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import jsonp from 'jsonp'
 const QRCode = process.browser? require('qrcodejs2') : null
 import { getArticle } from '~/api/article'
 import { getSite } from '~/api/site'
