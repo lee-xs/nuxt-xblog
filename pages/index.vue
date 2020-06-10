@@ -7,7 +7,7 @@
         <!-- list -->
         <el-col :span="17" :xs="24" class="left">
             <!-- 幻灯片 -->
-            <v-slide v-if="pageCode == 1" :slideList="slideList"></v-slide>
+            <v-slide :slideList="slideList"></v-slide>
 
             <!-- 文章list -->
             <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
