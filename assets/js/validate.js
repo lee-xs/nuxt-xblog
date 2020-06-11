@@ -1,4 +1,6 @@
 import { Message } from 'element-ui'
+
+const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
 /**
  * 验证值是否为空
  */
@@ -32,13 +34,20 @@ export const validateLinks = (links) => {
     // }
     
     //验证邮箱格式
-    const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+    
     if(!emailRegex.test(links.email)){
         Message.error("邮箱格式错误");
         return false;
     }
     return true
 }
-  
+
+export const validateEmail = (email) => {
+    if(!emailRegex.test(email)){
+        Message.error("邮箱格式错误");
+        return false;
+    }
+    return true
+}
 
 

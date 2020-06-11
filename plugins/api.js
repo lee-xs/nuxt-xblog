@@ -325,5 +325,9 @@ export default ({ app: { $request, $axios }}, inject) => {
         selectUserPage(pageCode, pageSize){
             return $request.get('/user/page', {pageCode, pageSize})
         },
+        //订阅网站
+        subscribe(ipAddress, email){
+            return $request.put(`/user/subscribe/${ipAddress}/email/${email}`)
+        }
     })
 }

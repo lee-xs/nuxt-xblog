@@ -86,8 +86,11 @@
             <el-col :span="24" style="margin-bottom: 10px;">
               <el-button @click="handleShare()" circle><span class="iconfont">&#xe600;</span></el-button>
             </el-col>
-            <el-col :span="24" style="margin-bottom: 3px;">
+            <el-col :span="24" style="margin-bottom: 10px;">
               <el-button @click="createQrCode()" circle><span class="iconfont">&#xe615;</span></el-button>
+            </el-col>
+            <el-col :span="24" style="margin-bottom: 3px;">
+              <el-button @click="subscribeVisible = true" circle><span class="iconfont">&#xe7b9;</span></el-button>
             </el-col>
             <!-- <el-col :span="24">
               <el-button circle><span class="iconfont">&#xe61f;</span></el-button>
@@ -99,6 +102,11 @@
         <el-dialog style="margin-top: 100px;" title="分享" :visible.sync="qrCodeVisible" width="300px" center :append-to-body='true'>
           <div class="qrcode" ref="qrCodeUrl" />
         </el-dialog>
+
+        <el-dialog style="margin-top: 100px;" title="订阅网站" :visible.sync="subscribeVisible" width="300px" center :append-to-body='true'>
+          <el-input v-model="email" placeholder="请输入订阅邮箱"></el-input>
+          <el-button style="width: 100%; margin-top: 30px;" type="primary" @click="handleSubscribe()">订阅</el-button>
+        </el-dialog>
       </el-col>
     </el-row>
 
@@ -109,6 +117,7 @@
 <script>
 import jsonp from 'jsonp'
 const QRCode = process.browser? require('qrcodejs2') : null
+import { validateEmail } from '~/assets/js/validate'
 export default {
     head(){
         return{
@@ -134,6 +143,8 @@ export default {
         sketchBg: '',
         tagsColor: ["primary","success","error","warning","magenta","orange","green","cyan","blue","purple"],
         qrCodeVisible: false,
+        subscribeVisible: false,
+        email: '',
         ipAddress: '',
       }
     },
@@ -179,6 +190,23 @@ export default {
             })
           })
         }
+      },
+      //订阅网站
+      handleSubscribe(){
+        //验证友情链接的信息格式
+        if(!validateEmail(this.email)){
+          return;
+        }
+
+        this.$api.subscribe(this.ipAddress, this.email).then(res => {
+          if(res.code == 20000){
+            this.$message({
+              type: 'success',
+              message: res.message
+            })
+          }
+          this.subscribeVisible = false
+        })
       }
     },
     created(){
