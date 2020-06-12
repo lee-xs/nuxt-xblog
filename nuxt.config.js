@@ -14,6 +14,7 @@ module.exports = {
       { itemprop:"name", content:"Aleestar'Blog"},
       { itemprop:"image", content:"http://qiniu.aleestar.cn/logo.jpg" },
       { name:"description", itemprop:"description", content:"一觉醒来，诸事完美，继续努力呀!" },
+      { name:"baidu_union_verify", content:"2385b7b0e375df395d056152b0d59454" },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
