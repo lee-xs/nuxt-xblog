@@ -34,7 +34,6 @@ export default {
     //  // url: 'https://api.ip138.com/query/?token=416f448c2932a7e2562bab97559de3d8',
     // }).then(res => {
     //   //发送访问网站的请求
-    //   console.log(res)
     //   this.$api.visit(res.query).then(res => {})
     // })
     jsonp('https://apis.map.qq.com/ws/location/v1/ip?output=jsonp&key=A4BBZ-67HC6-Z6RSV-EPT44-5WE4F-XFFEP', null, (err, data) => {
