@@ -79,7 +79,7 @@ import VLinksBox from '~/components/home/links-box'
 export default {
   head(){
     return{
-      title: `【${this.$store.state.siteInfo.site.siteName}】友情链接`,
+      title: `${this.$store.state.siteInfo.site.siteName} ♥ 友情链接`,
     }
   },
   async asyncData({ app }){

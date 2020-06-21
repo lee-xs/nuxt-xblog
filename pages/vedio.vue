@@ -21,6 +21,11 @@
 
 <script>
 export default {
+    head(){
+        return{
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ 免费看剧`,
+        }
+    },
     data: () => ({
         prefixUrl: 'https://8090.ylybz.cn/jiexi2019/?url=',
         vedioUrl: '',

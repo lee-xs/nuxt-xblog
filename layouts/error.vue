@@ -20,7 +20,7 @@ export default {
     layout: 'blank_template',
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】错误页面`,
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ 错误页面`,
         }
     },
 }

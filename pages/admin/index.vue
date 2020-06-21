@@ -39,7 +39,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】后台管理首页`,
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ 后台管理首页`,
         }
     },
     data: () => ({

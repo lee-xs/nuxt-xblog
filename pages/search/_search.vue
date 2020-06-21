@@ -40,7 +40,7 @@ export default {
     },
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】${this.title}`,
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ ${this.title}`,
         }
     },
     components:{
@@ -88,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
 .index-container{
-    margin: 0 auto;
+    margin: 0 auto 20px;
     overflow: hidden;
     .list-container{
         background: #fff;

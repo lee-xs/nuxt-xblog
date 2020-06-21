@@ -46,7 +46,7 @@ export default {
     },
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】${this.title}`,
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ ${this.title}`,
         }
     },
     components:{

@@ -12,7 +12,7 @@
 export default {
   head(){
     return{
-      title: `【${this.$store.state.siteInfo.site.siteName}】留言板`,
+      title: `${this.$store.state.siteInfo.site.siteName} ♥ 留言板`,
     }
   }
 }

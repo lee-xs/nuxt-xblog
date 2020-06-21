@@ -58,7 +58,7 @@ export default {
   },
   head() {
     return {
-      title: `【${this.$store.state.siteInfo.site.siteName}】归档`,
+      title: `${this.$store.state.siteInfo.site.siteName} ♥ 归档`,
     };
   },
   components: {

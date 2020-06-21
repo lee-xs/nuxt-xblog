@@ -66,7 +66,7 @@ export default {
     layout: 'admin_template',
     head(){
         return{
-            title: `【${this.$store.state.siteInfo.site.siteName}】幻灯片管理`,
+            title: `${this.$store.state.siteInfo.site.siteName} ♥ 幻灯片管理`,
         }
     },
     async asyncData({ app }){
