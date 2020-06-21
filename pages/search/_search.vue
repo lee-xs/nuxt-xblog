@@ -88,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
 .index-container{
-    margin: 0 auto 20px;
+    margin: 0 auto 10px;
     overflow: hidden;
     .list-container{
         background: #fff;
@@ -149,8 +149,7 @@ export default {
 }
 @media (min-width:1200px) {
     .index-container{
-        width: 1010px;
-        padding: 0 5px;
+        width: 1020px;
         .list{
             padding-right:5px;
         }
