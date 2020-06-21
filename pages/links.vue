@@ -11,8 +11,11 @@
               <p v-text="'网站地址：' + $store.state.siteInfo.site.siteUrl"></p>
               <p v-text="'联系邮箱：' + $store.state.siteInfo.admin.email"></p>
               <p>注意：申请友链时请将本站设为贵站的友链</p>
+              <el-button @click="drawer = true" style="width: 400px; margin-top: 10px;  background-color: rgba(254,219,207,0)">填写友链信息</el-button>
+
+
               <!-- 申请友情链接 -->
-              <el-form>
+              <!-- <el-form>
                 <el-form-item class="input_wrap">
                   <input class="input" placeholder="键入网站名称"  autocomplete="off" v-model="links.name"/>
                   <div class="after"></div>
@@ -33,7 +36,7 @@
                   <el-button class="input-btn" @click="handleReset()">重置</el-button>
                   <el-button class="input-btn" @click="handleSubmit()">提交</el-button>
                 </el-form-item>
-              </el-form>
+              </el-form> -->
             </div>
         </div>
       </div>
@@ -43,6 +46,29 @@
     <el-row class="links-list-container">
         <v-links-box :linksList="linksList"></v-links-box>
     </el-row>
+
+    
+
+    <el-drawer
+      :visible.sync="drawer">
+      <el-form id="form" :label-position="labelPosition" label-width="100px" :model="links">
+        <h1 style="margin-bottom: 20px;">友链提交</h1>
+        <el-form-item label="网站名称">
+          <el-input autocomplete="off" v-model="links.name"/>
+        </el-form-item>
+        <el-form-item label="网站LOGO">
+          <el-input autocomplete="off" v-model="links.logo"/>
+        </el-form-item>
+        <el-form-item label="网站URL">
+          <el-input autocomplete="off" v-model="links.url"/>
+        </el-form-item>
+        <el-form-item label="联系邮箱">
+          <el-input autocomplete="off"  v-model="links.email"/>
+        </el-form-item>
+        <el-button style="width:48%;" @click="handleReset()" plain>重置</el-button>
+        <el-button style="width:48%;" @click="handleSubmit()" type="primary" plain>提交</el-button>
+      </el-form>
+    </el-drawer>
   </div>
 </template>
 
@@ -71,6 +97,8 @@ export default {
         url: '',
         email: '',
       },
+      labelPosition: 'left',
+      drawer: false
     }
   },
   components:{
@@ -158,6 +186,15 @@ export default {
   margin: auto;
   //box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
+
+#form{
+  padding: 20px;
+}
+
+//去掉抽屉的框
+/deep/ :focus{
+  outline:0;
+}
 //======================================
 @media (max-width:768px) {
     .sketch,.sketch-bg,.gray-glass{
@@ -183,7 +220,7 @@ export default {
 }
 @media (min-width: 1200px) {
     .sketch,.sketch-bg,.gray-glass{
-        height:500px;
+        height:360px;
     }
     .sketch{
       .sketch-bg{
@@ -196,7 +233,7 @@ export default {
         .gray-glass{
             .sketch-info{
                 margin:60px auto;
-                width: 1020px;
+                width: 400px;
                 font-size: 17px;
             }
         }
