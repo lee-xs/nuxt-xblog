@@ -6,7 +6,7 @@
             <el-row>
                 <el-col :span="24" v-for="(item,index) in hotList" :key="index">
                     <nuxt-link :to="'/' + item.id + '.html'" class="content-title">
-                        <p><span v-text="item.title.substring(0,25) + '...'"></span></p>
+                        <p><span v-text="item.title"></span></p>
                     </nuxt-link>
                     <p style="color: #969696; margin-bottom: 8px;"><span v-text="'阅读 ' + item.views"></span><span style="float:right;" v-text="item.publishTime.substring(5,10)"></span></p>
                     

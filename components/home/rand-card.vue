@@ -6,7 +6,7 @@
             <el-row>
                 <el-col :span="24" v-for="(item,index) in randList" :key="index">
                     <nuxt-link :to="'/' + item.id + '.html'" class="content-title">
-                        <p v-text="item.title.substring(0, 25) + '...'"></p>
+                        <p v-text="item.title"></p>
                     </nuxt-link>
                     <p style="color: #969696; margin-bottom: 8px;"><span v-text="'阅读 ' + item.views"></span><span style="float:right;" v-text="item.publishTime.substring(5,10)"></span></p>
                     <!-- <el-row :gutter="10" class="content">
