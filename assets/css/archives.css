@@ -1,6 +1,6 @@
 .archives-container {
     width: 1010px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     overflow: hidden;
     padding:0 10px;
 }

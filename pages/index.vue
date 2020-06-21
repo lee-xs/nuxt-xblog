@@ -109,7 +109,7 @@ export default {
 
 <style lang="scss" scoped>
 .index-container{
-    margin: 0 auto;
+    margin: 0 auto 20px;
     overflow: hidden;  
     .right{
         padding-left: 5px;

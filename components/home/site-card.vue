@@ -44,7 +44,7 @@ export default {
     font-size: 13px;
     background: #fff;
     width: 100%;
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    //box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
     margin-bottom: 10px;
 }
 .site-title{
