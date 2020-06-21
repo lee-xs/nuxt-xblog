@@ -1,6 +1,6 @@
 <template>
     <div class="card-container animated fadeInUp">
-        <p class="card-container-title"><b>关于本站</b></p>
+        <p class="card-container-title">关于本站</p>
         <div>
             <img :src="siteInfo.admin.avatar" style="width: 100%; height: 200px;"/>
             <el-row style="text-align: center; padding:8px 0 13px 0;">

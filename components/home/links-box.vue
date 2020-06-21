@@ -1,6 +1,6 @@
 <template>
-    <el-row style="background-color:#fff;">
-        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated fadeInUp" style="margin:0 16.5px;" >
+    <el-row>
+        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated fadeInUp"  style="margin:0 17px;" >
             <a :href="links.url" target="_blank">
                 <div class="our-team hvr-glow">
                     <div class="pic">
@@ -32,6 +32,7 @@ export default {
     overflow: hidden;
     position: relative;
     border: 1px solid #dee1e6;
+    background-color:#FFFFFF;
     border-radius: 10%;
 }
 

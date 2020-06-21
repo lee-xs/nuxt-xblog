@@ -1,7 +1,7 @@
 <template>
   <el-row class="animated fadeInUp">
       <el-col :span="24" class="card-container" key="hot">
-        <p class="card-container-title"><b>热门文章</b></p>
+        <p class="card-container-title">热门文章</p>
         <div class="card-container-content">
             <el-row>
                 <el-col :span="24" v-for="(item,index) in hotList" :key="index">

@@ -1,7 +1,7 @@
 <template>
   <el-row class="animated fadeInUp">
       <el-col :span="24" class="card-container">
-        <p class="card-container-title"><b>全部分类</b></p>
+        <p class="card-container-title">全部分类</p>
         <div class="card-container-content">
           <Tag style="margin-bottom: 6px;" v-for="(item,index) in categoryList" :key="index" :color="color[index%17]">
             <nuxt-link :to="'/category/' + item.name">

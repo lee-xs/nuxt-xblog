@@ -112,7 +112,7 @@ export default {
     margin: 0 auto 20px;
     overflow: hidden;  
     .right{
-        padding-left: 5px;
+        padding-left: 7px;
     }
 }
 /deep/ .ivu-back-top-inner{
@@ -125,10 +125,9 @@ export default {
 }
 @media (min-width:1200px) {
     .index-container{
-        width: 1010px;
-        padding:0 10px;
+        width: 1020px;
         .left{
-            padding-right: 5px;
+            padding-right: 7px;
         }
     }
 }

@@ -98,8 +98,7 @@ export default {
 @media (min-width:1200px) {
     .header-container{
         .header{
-            width: 1000px;
-            padding:0 5px;
+            width: 1020px;
         }
     }   
 }

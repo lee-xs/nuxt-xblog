@@ -154,9 +154,9 @@ export default {
   }
 }
 .links-list-container{
-  width: 1000px;
+  width: 1020px;
   margin: auto;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+  //box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
 //======================================
 @media (max-width:768px) {
@@ -196,7 +196,7 @@ export default {
         .gray-glass{
             .sketch-info{
                 margin:60px auto;
-                width: 1000px;
+                width: 1020px;
                 font-size: 17px;
             }
         }

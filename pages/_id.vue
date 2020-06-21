@@ -283,7 +283,7 @@ export default {
 //=================================
 
 .article-container{ 
-    margin:0 auto;
+    margin:0 auto 20px;
 }
 @media (max-width:768px) {
     .sketch,.sketch-bg,.gray-glass{

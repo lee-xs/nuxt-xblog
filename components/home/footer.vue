@@ -59,10 +59,11 @@ export default {
     text-align: center;
     line-height: 25px;
     padding: 20px;
-    background: #555555;
+    //background: #555555;
+    background: #FFFFFF;
     #footer-content{
         font-size: 13px;
-        color: #EBEBEB;
+        color: #999999;
     }
 }
 </style>

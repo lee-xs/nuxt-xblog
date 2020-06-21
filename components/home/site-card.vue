@@ -1,7 +1,7 @@
 <template>
     <el-row class="animated fadeInUp">
         <el-col :span="24" class="card-container-site">
-          <p class="site-title"><b>网站概况</b></p>
+          <p class="site-title">网站概况</p>
           <div class="site-img">
             <img :src="siteInfo.site.face" />
           </div>
@@ -9,23 +9,23 @@
            <tbody>
               <tr>
                 <td>文章总数：</td>
-                <td v-text="siteInfo.articleCount">0</td>
+                <td v-text="siteInfo.articleCount + ' 篇'">0</td>
               </tr>
               <tr class="gray">
                 <td>留言数量：</td>
-                <td>0</td>
+                <td>0 条</td>
               </tr>
               <tr>
                 <td>友情链接：</td>
-                <td v-text="siteInfo.linksCount">0</td>
+                <td v-text="siteInfo.linksCount + ' 个'">0</td>
               </tr>
               <tr class="gray">
                 <td>浏览总量：</td>
-                <td v-text="siteInfo.visitCount">0</td>
+                <td v-text="siteInfo.visitCount + ' 次'">0</td>
               </tr>
               <tr>
                 <td>访客数量：</td>
-                <td v-text="siteInfo.userCount">0</td>
+                <td v-text="siteInfo.userCount + ' 人'">0</td>
               </tr>
            </tbody>
           </table>
@@ -63,6 +63,7 @@ export default {
     .site-details{
         width: 100%;
         border-collapse:collapse;
+        font-size: 12px;
         td{
             border:1px solid #EDEDED;
             text-align: center;

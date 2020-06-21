@@ -41,7 +41,8 @@
 }
 
 body{
-    background-image: url('https://upyun.aleestar.cn/brickwall20200413020627.png');
+    /* background-image: url('https://upyun.aleestar.cn/brickwall20200413020627.png'); */
+    background-image: url('https://upyun.aleestar.cn/body20200621075102.png');
 }
 
 /*解决element-ui的table表格控件表头与内容列不对齐问题*/

@@ -38,7 +38,7 @@ export default {
 }
 @media (min-width:1200px) {
     .slide-container{
-        margin-bottom:10px; 
+        margin-bottom:14px; 
     }
 }
 </style>
