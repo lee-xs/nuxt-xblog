@@ -84,7 +84,8 @@ export default {
 
 .our-team .pic img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    //height: auto;
     border-radius: 50%;
     transform: scale(1);
     transition: all 0.9s ease 0s;
