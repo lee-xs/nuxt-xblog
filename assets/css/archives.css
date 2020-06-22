@@ -14,11 +14,11 @@
     margin-left: 20px;
     text-align: center;
     border-radius: 15px;
-    background-color: #CD3333;
+    /* background-color: #CD3333; */
+    border: 1px solid #e2dede;
 }
 .tl-year-month{
     padding: 5px 0;
-    color: #fff;
 }
 .tl-wrap {
     display: block;
@@ -26,7 +26,7 @@
     margin-left: 6em;
     border-color: #dee5e7;
     border-style: solid;
-    border-width: 0 0 0 4px;
+    border-width: 0 0 0 2px;
 }
 .tl-wrap::before{
     position: relative;
@@ -34,7 +34,7 @@
     float: left;
     width: 10px;
     height: 10px;
-    margin-left: -27px;
+    margin-left: -26px;
     background: #edf1f2;
     border-color: inherit;
     border-style: solid;
@@ -66,7 +66,7 @@
     padding-bottom: 10px;
 }
 .tl-content a{
-    color:#fff;
+    color: #515151;
     font-size: 13px;
     padding:0 15px;
     }
@@ -88,7 +88,7 @@
     margin-top: -9px;
     border-right-color: rgba(0,0,0,.1);
     border-left-width: 0;
-    border-right-color: #23b7e5;
+    border-right-color: #E9E9E9;
 }
 .arrow, .arrow:after {
     position: absolute;
@@ -106,14 +106,15 @@
     margin-left: 40px;
     text-align: center;
     border-radius: 15px;
-    border: 1px solid #9C9C9C;
+    border: 1px solid #e2dede;
 }
 
 /*颜色*/
 .b-info {
-    border-color: #8B8386;
+    border-color: #e2dede;
 }
 .bg-info {
-    color: #dcf2f8;
-    background-color: #23b7e5;
+    /* color: #dcf2f8; */
+    /* background-color: #23b7e5; */
+    border: 1px solid #e2dede;
 } 
