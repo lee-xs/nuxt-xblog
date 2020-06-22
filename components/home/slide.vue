@@ -1,9 +1,9 @@
 <template>
     <div class="slide-container animated fadeInUp">
-        <el-carousel trigger="click" height="250px" :interval="6000">
+        <el-carousel trigger="click" height="315px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
                 <el-link :href="item.url" :underline="false" style="width: 100%; display: block;">
-                    <div style="width: 100%; height: 250px;">
+                    <div style="width: 100%; height: 315px;">
                         <img :src="item.cover">
                         <div v-text="item.title" class="title"></div>
                     </div>
