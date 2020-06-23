@@ -1,6 +1,6 @@
 <template>
-    <el-row>
-        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated fadeInUp"  style="margin:0 17px;" >
+    <el-row style="padding-bottom: 20px;">
+        <el-col :span="4" v-for="(links, index) in linksList" :key="index" class="animated fadeInUp" style="margin:0 17px;" >
             <a :href="links.url" target="_blank">
                 <div class="our-team hvr-glow">
                     <div class="pic">
@@ -26,7 +26,7 @@ export default {
 .our-team {
     width: 100%;
     height: 180px;
-    margin: 20px auto;
+    margin: 20px auto 0;
     padding-top: 20px;
     text-align: center;
     overflow: hidden;
