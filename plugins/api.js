@@ -287,6 +287,14 @@ export default ({ app: { $request, $axios }}, inject) => {
         updateSlide(slide){
             return $request.put('/admin/slide', slide)
         },
+        //修改幻灯片排序上升
+        updateSlideSortUp(id, sort){
+            return $request.put(`/admin/slide/sort/up/${id}/${sort}`)
+        },
+        //修改幻灯片排序下降
+        updateSlideSortNext(id, sort){
+            return $request.put(`/admin/slide/sort/next/${id}/${sort}`)
+        },
         //查询全部幻灯片
         selectSlideAll(){
             return $request.get('/slide')

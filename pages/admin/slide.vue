@@ -1,6 +1,6 @@
 <template>
     <el-row class="animated fadeInUp">
-        <el-col :span="8" >
+        <el-col :span="7" >
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>
                 <el-form class="form" :data="slide" label-position="top" label-width="80px">
@@ -10,16 +10,16 @@
                     <el-form-item label="标题">
                         <el-input v-model="slide.title"></el-input>
                     </el-form-item>
-                    <el-form-item label="链接地址">
+                    <el-form-item label="外部链接">
                         <el-input v-model="slide.url"></el-input>
+                    </el-form-item>
+                    <el-form-item label="文章ID">
+                        <el-input v-model="slide.articleId"></el-input>
                     </el-form-item>
                     <el-form-item label="图片链接">
                         <el-input v-model="slide.cover" style="width:80%;"></el-input>
-                        <el-button type="primary" plain @click="dialogImage = true" style="width:18%;">选择</el-button>
+                        <el-button type="primary" plain @click="dialogImage = true" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                     </el-form-item>
-                    <el-form-item label="排序">
-                        <el-input v-model="slide.sort"></el-input>
-                    </el-form-item>    
                     <div style="margin-top:20px;">
                         <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAddSlide()">添加</el-button>
                         <div v-else>
@@ -30,7 +30,7 @@
                 </el-form>
             </div>
         </el-col>
-        <el-col :span="16">
+        <el-col :span="17">
             <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>首页幻灯片</h3>
                 <el-table :data="slideList" style="width: 100%">
@@ -41,8 +41,15 @@
                             <img style="width:60px; height:50px;" :src="scope.row.cover" />
                         </template>
                     </el-table-column>
-                    <el-table-column align="center" prop="sort" label="排序" width="80px"></el-table-column>
-                    <el-table-column align="center" label="操作" width="180px">
+                    <el-table-column align="center" prop="url" label="外部链接"></el-table-column>
+                    <el-table-column align="center" prop="articleId" label="文章ID" width="65"></el-table-column>
+                    <el-table-column align="center" label="排序" width="95">
+                        <template slot-scope="scope">
+                            <el-button type="primary" plain circle size="mini" @click="handleSortUp(scope.row)"><i class="el-icon-arrow-up"></i></el-button>
+                            <el-button type="danger" plain circle size="mini" @click="handleSortNext(scope.row)"><i class="el-icon-arrow-down"></i></el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" label="操作" width="150">
                         <template slot-scope="scope">
                             <el-button type="primary" plain size="mini" @click="setSlideInfo(scope.row)">修改</el-button>
                             <el-button type="danger" plain size="mini" @click="handleDelSlide(scope.row)">删除</el-button>
@@ -86,10 +93,10 @@ export default {
             addOrChange: true, //默认为添加幻灯片
             slide:{
                 id: '',
-                title:'',
+                title: '',
                 url: '',
+                articleId: '',
                 cover: '',
-                sort: '',
             },
         }
     },
@@ -159,19 +166,31 @@ export default {
         //返回至添加幻灯片
         goback(){
             this.addOrChange = true
-            this.slide.title = this.slide.url = this.slide.cover = this.slide.sort = this.slide.id = ''
+            this.slide.id = this.slide.title = this.slide.url = this.slide.articleId = this.slide.cover = ''
         },
-        //公共处理方法
+        //处理排序上升
+        handleSortUp(data){
+            this.$api.updateSlideSortUp(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //处理排序下降
+        handleSortNext(data){
+            this.$api.updateSlideSortNext(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //公共前置处理方法
         commonBeforeHandle(){
-            if(this.slide.title == '' ||
-                this.slide.url == '' ||
-                this.slide.cover == '' ||
-                this.slide.sort == ''){
+            if((this.slide.url == '' && this.slide.articleId == '') || 
+                this.slide.title == '' ||
+                this.slide.cover == ''){
                     this.$message.error("参数不能留空")
                 return false
             }
             return true
         },
+        //公共后置处理方法
         commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({

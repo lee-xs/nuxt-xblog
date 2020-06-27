@@ -2,12 +2,18 @@
     <div class="slide-container animated fadeInUp">
         <el-carousel trigger="click" height="315px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
-                <el-link :href="item.url" :underline="false" style="width: 100%; display: block;">
+                <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 315px;">
                         <img :src="item.cover">
                         <div v-text="item.title" class="title"></div>
                     </div>
                 </el-link>
+                <nuxt-link v-else :to="'/'+item.id + '.html'" style="width: 100%; display: block;">
+                    <div style="width: 100%; height: 315px;">
+                        <img :src="item.cover">
+                        <div v-text="item.title" class="title"></div>
+                    </div>
+                </nuxt-link>
             </el-carousel-item>
         </el-carousel>
     </div>
