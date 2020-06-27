@@ -1,6 +1,6 @@
 <template>
     <el-row class="animated fadeInUp">
-        <el-col :span="7" >
+        <el-col :span="6" >
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加幻灯片':'修改幻灯片'"></h3>
                 <el-form class="form" :data="slide" label-position="top" label-width="80px">
@@ -17,8 +17,8 @@
                         <el-input v-model="slide.articleId"></el-input>
                     </el-form-item>
                     <el-form-item label="图片链接">
-                        <el-input v-model="slide.cover" style="width:80%;"></el-input>
-                        <el-button type="primary" plain @click="dialogImage = true" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                        <el-input v-model="slide.cover" style="width:78%;"></el-input>
+                        <el-button type="primary" plain @click="dialogImage = true" style="width:20%;"><i class="el-icon-picture"></i></el-button>
                     </el-form-item>
                     <div style="margin-top:20px;">
                         <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAddSlide()">添加</el-button>
@@ -30,7 +30,7 @@
                 </el-form>
             </div>
         </el-col>
-        <el-col :span="17">
+        <el-col :span="18">
             <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>首页幻灯片</h3>
                 <el-table :data="slideList" style="width: 100%">

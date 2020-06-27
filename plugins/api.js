@@ -200,6 +200,14 @@ export default ({ app: { $request, $axios }}, inject) => {
         updateLinksState(id, state){
             return $request.put(`/admin/links/state/${id}/${state}`)
         },
+        //修改友链排序上升
+        updateLinksSortUp(id, sort){
+            return $request.put(`/admin/links/sort/up/${id}/${sort}`)
+        },
+        //修改友链排序下降
+        updateLinksSortNext(id, sort){
+            return $request.put(`/admin/links/sort/next/${id}/${sort}`)
+        },
         //查询全部友联
         selectLinksAll(){
             return $request.get('/links')

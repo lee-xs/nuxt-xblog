@@ -1,6 +1,6 @@
 <template>
     <el-row class="animated fadeInUp">
-        <el-col :span="7" >
+        <el-col :span="6" >
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加分类':'修改分类'"></h3>
                 <el-form class="form" :data="links" label-position="top" label-width="80px">
@@ -18,10 +18,7 @@
                     </el-form-item>    
                     <el-form-item label="联系邮箱">
                         <el-input v-model="links.email"></el-input>
-                    </el-form-item>
-                    <el-form-item label="排序">
-                        <el-input v-model="links.sort"></el-input>
-                    </el-form-item>    
+                    </el-form-item>   
                     <el-form-item label="状态">
                         <el-select style="width:100%;" v-model="links.state">
                             <el-option label="展示" :value="1"></el-option>
@@ -39,26 +36,31 @@
             </div>
         </el-col>
 
-        <el-col :span="17">
+        <el-col :span="18">
             <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>分类列表</h3>
                 <el-table v-loading="loading" :data="list" style="width: 100%">
-                    <el-table-column prop="id" label="ID" width="50"></el-table-column>
-                    <el-table-column prop="name" label="友链名称" width="100"></el-table-column>
-                    <el-table-column prop="url" label="网站URL"></el-table-column>
-                    <el-table-column prop="" label="网站LOGO" width="100">
+                    <el-table-column align="center" prop="id" label="ID" width="50"></el-table-column>
+                    <el-table-column align="center" prop="name" label="友链名称" width="100"></el-table-column>
+                    <el-table-column align="center" prop="url" label="网站URL"></el-table-column>
+                    <el-table-column align="center" prop="" label="网站LOGO" width="100">
                         <template slot-scope="scope">
                             <img :src="scope.row.logo" style="width: 50px; height: 50px;">
                         </template>
                     </el-table-column>
-                    <el-table-column prop="sort" label="排序" width="50"></el-table-column>
-                    <el-table-column prop="email" label="联系邮箱"></el-table-column>
-                    <el-table-column prop="" label="状态" width="60">
+                    <el-table-column align="center" prop="email" label="联系邮箱"></el-table-column>
+                    <el-table-column align="center" prop="" label="状态" width="60">
                         <template slot-scope="scope">
                             <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.state" @change="changeCommentState(scope.row.id, scope.row.state)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="150">
+                    <el-table-column align="center" label="排序" width="95">
+                        <template slot-scope="scope">
+                            <el-button type="primary" plain circle size="mini" @click="handleSortUp(scope.row)"><i class="el-icon-arrow-up"></i></el-button>
+                            <el-button type="danger" plain circle size="mini" @click="handleSortNext(scope.row)"><i class="el-icon-arrow-down"></i></el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" label="操作" width="150">
                         <template slot-scope="scope">
                             <el-button type="primary" @click="setChangeInfo(scope.row)" plain size="mini">修改</el-button>
                             <el-button type="danger" @click="handleRemove(scope.row.id)" plain size="mini" >删除</el-button>
@@ -100,7 +102,6 @@ export default {
                 url: '',
                 logo: '',
                 email: '',
-                sort: '',
                 state: 1,
             },
         }
@@ -141,7 +142,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = this.links.sort = ''
+            this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = ''
             this.links.state = 1
         },
         //填充修改信息
@@ -163,17 +164,30 @@ export default {
                 this.commonAfterHandle(res)
             })
         },
-        //公共处理方法
+        //处理排序上升
+        handleSortUp(data){
+            this.$api.updateLinksSortUp(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //处理排序下降
+        handleSortNext(data){
+            this.$api.updateLinksSortNext(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //公共前置处理方法
         commonBeforeHandle(){
             if(this.links.name == '' ||
                 this.links.url == '' ||
                 this.links.logo == '' ||
-                this.links.state == ''){
+                this.links.state == null){
                     this.$message.error('必填项不能为空')
                 return false
             }
             return true
         },
+        //公共后置处理方法
         commonAfterHandle(res){
             if(res.code == 20000){
                 this.$message({
