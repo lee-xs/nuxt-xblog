@@ -2,6 +2,7 @@
     <div id="footer-container" class="animated fadeInUp">
         <div id="footer-content">
             <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 <span class="hidden-md-and-down">网站已运行 <span v-text="time"></span></span></p>
+            <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" id="upyun">本网站由 <img src="https://upyun.aleestar.cn/upyun_logo.png"/> 提供CDN加速/云存储服务</a>
             <p v-text="siteInfo.site.icp"></p>
         </div>
     </div>
@@ -64,6 +65,16 @@ export default {
     #footer-content{
         font-size: 13px;
         color: #999999;
+        #upyun{
+            color: #999999;
+            img{
+                filter:brightness(55%); 
+                width: 50px; 
+                height: 100%; 
+                display: inline-block; 
+                vertical-align: middle;
+            }
+        }
     }
 }
 </style>
