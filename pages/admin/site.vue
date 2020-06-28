@@ -16,12 +16,12 @@
             </el-form-item>
             <el-form-item label="Logo：">
                 <el-input v-model="site.logo" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleLogoImage()" style="width:18%;">选择</el-button>
+                <el-button type="primary" plain @click="handleLogoImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.logo" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>
             <el-form-item label="脸面：">
                 <el-input v-model="site.face" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleFaceImage()" style="width:18%;">选择</el-button>
+                <el-button type="primary" plain @click="handleFaceImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.face" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>   
             <el-form-item label="关于站点：">
@@ -50,12 +50,12 @@
             </el-form-item> 
             <el-form-item label="qqCode：">
                 <el-input v-model="site.qqCode" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleQqCodeImage()" style="width:18%;">选择</el-button>
+                <el-button type="primary" plain @click="handleQqCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.qqCode" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>
             <el-form-item label="wechatCode：">
                 <el-input v-model="site.wechatCode" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;">选择</el-button>
+                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.wechatCode" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
 
@@ -81,7 +81,7 @@
             </el-form-item>
             <el-form-item label="头像：">
                 <el-input v-model="admin.avatar" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;">选择</el-button>
+                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="admin.avatar" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
 
