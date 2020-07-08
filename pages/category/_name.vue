@@ -5,12 +5,12 @@
         </el-col>
 
         <!-- list -->
-        <el-col :span="17" :xs="24">
+        <el-col :span="17" :xs="24" id="left">
             <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
         </el-col>
 
         <!-- crad -->
-        <el-col :span="7" :xs="24" class="hidden-md-and-down" style="padding-left:5px;">
+        <el-col :span="7" :xs="24" class="hidden-md-and-down" id="right">
             <!-- 搜索 -->
             <v-search-input @search="handleSearch"></v-search-input>
             <!-- 随机文章 -->
@@ -98,85 +98,21 @@ export default {
 .index-container{
     margin: 0 auto 10px;
     overflow: hidden;
-    .list-container{
-        background: #fff;
-        box-shadow: 0 1px 3px rgba(26,26,26,.3);
-        .list-card{
-            font-size: 13px;
-            line-height: 25px;
-            border-bottom: 1px solid #dcdee6;
-            h4{
-                color:#606266;
-                font-size: 15px;
-            }
-            .list-img{
-                overflow: hidden;
-                img{ 
-                    width: 100%;
-                    height: 100%;
-                    cursor: pointer;
-                    transition: ease-in-out .5s;
-                    &:hover{
-                        transform: scale(1.15);
-                    }
-                }
-            }
-            .list-con{
-                 color:#606266;
-                .details>i{
-                    
-                    float: right;
-                }
-                .list-tag{
-                    margin-right:10px;
-                    font-size: 13px;
-                }
-            }
-        }
-    }
 }
 @media (max-width:768px) {
     .index-container{
         width: 100%;
-        .list-container{
-            .list-card{
-                height: 138px;
-                padding: 8px;
-                .list-img{
-                    width: 120px;
-                    height: 120px;
-                    float: left;
-                    margin-right: 15px;
-                }  
-                .list-con{
-                    width: 100%;
-                } 
-            }
-        }
+        
     }
 }
 @media (min-width:1200px) {
     .index-container{
         width: 1020px;
-        .list{
-            padding-right:5px;
+        #left{
+            padding-right: 7px;
         }
-        .list-container{
-            .list-card{
-                height: 180px;
-                padding: 15px;
-                .list-img{
-                    width: 200px;
-                    height: 150px;
-                    float: left;
-                    margin-right: 15px;
-                }
-                .list-con{
-                    .details>i{
-                        line-height: 25px;
-                    }
-                }
-            }
+        #right{
+            padding-left: 7px;
         }
     }
 }

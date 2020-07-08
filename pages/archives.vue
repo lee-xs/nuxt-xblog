@@ -33,7 +33,7 @@
     </el-col>
 
     
-    <el-col :span="7" style="padding-left:5px;">
+    <el-col :span="7" style="padding-left:7px;">
       <!-- 搜索 -->
       <v-search-input @search="handleSearch"></v-search-input>
       <!-- 随机文章卡片 -->
