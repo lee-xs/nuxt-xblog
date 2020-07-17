@@ -48,6 +48,9 @@ export default {
             siteInfo: this.$store.state.siteInfo,
         }
     },
+    mounted(){
+        
+    }
 }
 </script>
 
