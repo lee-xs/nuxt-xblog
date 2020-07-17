@@ -90,7 +90,9 @@ export default {
     .list-card{
         font-size: 13px;
         line-height: 25px;
-        border-bottom: 1px solid #E9E9E9;
+        //border-bottom: 1px solid #E9E9E9;
+        border: 1px solid #FFF;
+        border-bottom-color: #E9E9E9;
         background: #fff;
         //box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
         h4{
@@ -147,6 +149,7 @@ export default {
     .list-card{
         height: 180px;
         padding: 15px;
+        transition: all .3s linear;
         .list-img{
             width: 200px;
             height: 150px;
@@ -158,6 +161,10 @@ export default {
                 line-height: 25px;
             }
         }
+    }
+    .list-card:hover{
+        transition: all .3s linear;
+        border: 1px solid red;
     }
 }
 }
