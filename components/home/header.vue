@@ -16,7 +16,7 @@
                         <ul>
                             <li v-for="(item, index) in navs" :key="index" >
                                 <nuxt-link v-if="item.indexes != ''" :to="{ name: item.indexes }">{{ item.title }}</nuxt-link>
-                                <a v-else :href="item.url">{{ item.title }}</a>
+                                <a v-else :href="item.url" target="_blank">{{ item.title }}</a>
                             </li>
                             <!-- <li>
                                 <i class="el-icon-search"></i>
@@ -31,7 +31,7 @@
                         <el-dropdown-menu >
                             <el-dropdown-item v-for="(item, index) in navs" :key="index">
                                 <nuxt-link v-if="item.indexes != ''" style="color: #8590a6;" :to="{ name: item.indexes }">{{ item.title }}</nuxt-link>
-                                <a v-else :href="item.url">{{ item.title }}</a>
+                                <a v-else :href="item.url" target="_blank">{{ item.title }}</a>
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
