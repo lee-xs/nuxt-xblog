@@ -11,11 +11,12 @@
 
                 <!-- 导航 -->
                 <!-- 电脑端 menu -->
-                <el-col :lg="10" class="hidden-md-and-down">
+                <el-col :lg="20" class="hidden-md-and-down">
                     <nav style="line-height: 68px;">
                         <ul>
                             <li v-for="(item, index) in navs" :key="index" >
-                                <nuxt-link :to="{ name: item.name }">{{ item.title }}</nuxt-link>
+                                <nuxt-link v-if="item.indexes != ''" :to="{ name: item.indexes }">{{ item.title }}</nuxt-link>
+                                <a v-else :href="item.url">{{ item.title }}</a>
                             </li>
                             <!-- <li>
                                 <i class="el-icon-search"></i>
@@ -29,7 +30,8 @@
                         <i class="el-icon-menu"></i>
                         <el-dropdown-menu >
                             <el-dropdown-item v-for="(item, index) in navs" :key="index">
-                                <nuxt-link style="color: #8590a6;" :to="{ name: item.name }">{{ item.title }}</nuxt-link>
+                                <nuxt-link v-if="item.indexes != ''" style="color: #8590a6;" :to="{ name: item.indexes }">{{ item.title }}</nuxt-link>
+                                <a v-else :href="item.url">{{ item.title }}</a>
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>

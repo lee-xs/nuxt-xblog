@@ -254,6 +254,14 @@ export default ({ app: { $request, $axios }}, inject) => {
         updateMenuState(id, state){
             return $request.put(`/admin/menu/state/${id}/${state}`)
         },
+        //修改目录排序上升
+        updateMenuSortUp(id, sort){
+            return $request.put(`/admin/menu/sort/up/${id}/${sort}`)
+        },
+        //修改目录排序下降
+        updateMenuSortNext(id, sort){
+            return $request.put(`/admin/menu/sort/next/${id}/${sort}`)
+        },
         //查询全部菜单
         selectMenuAll(){
             return $request.get('/menu')

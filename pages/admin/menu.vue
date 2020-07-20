@@ -8,14 +8,14 @@
                         <el-input v-model="menu.id" :disabled="true"></el-input>
                     </el-form-item>
                     <el-form-item label="索引值">
-                        <el-input v-model="menu.name"></el-input>
+                        <el-input v-model="menu.indexes"></el-input>
+                    </el-form-item>
+                    <el-form-item label="外部URL">
+                        <el-input v-model="menu.url"></el-input>
                     </el-form-item>
                     <el-form-item label="导航名">
                         <el-input v-model="menu.title"></el-input>
-                    </el-form-item>    
-                    <el-form-item label="权重">
-                        <el-input v-model="menu.weight"></el-input>
-                    </el-form-item>    
+                    </el-form-item>      
                     <el-form-item label="状态">
                         <el-select style="width:100%;" v-model="menu.state">
                             <el-option label="展示" :value="1"></el-option>
@@ -37,16 +37,22 @@
             <div class="slide-box" style="margin-left:5px; background-color:#fff;">
                 <h3>分类列表</h3>
                 <el-table v-loading="loading" :data="list" style="width: 100%">
-                    <el-table-column prop="id" label="ID"></el-table-column>
-                    <el-table-column prop="name" label="索引值" ></el-table-column>
-                    <el-table-column prop="title" label="导航名"></el-table-column>
-                    <el-table-column prop="weight" label="权重"></el-table-column>
-                    <el-table-column prop="" label="状态">
+                    <el-table-column prop="id" label="ID" align="center"></el-table-column>
+                    <el-table-column prop="indexes" label="索引值" align="center"></el-table-column>
+                    <el-table-column prop="url" label="外部URL" align="center"></el-table-column>
+                    <el-table-column prop="title" label="导航名" align="center"></el-table-column>
+                    <el-table-column prop="sort" label="排序" align="center" width="95">
+                        <template slot-scope="scope">
+                            <el-button type="primary" plain circle size="mini" @click="handleSortUp(scope.row)"><i class="el-icon-arrow-up"></i></el-button>
+                            <el-button type="danger" plain circle size="mini" @click="handleSortNext(scope.row)"><i class="el-icon-arrow-down"></i></el-button>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="" label="状态" align="center">
                         <template slot-scope="scope">
                             <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.state" @change="handleState(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="180px">
+                    <el-table-column label="操作" width="180px" align="center">
                         <template slot-scope="scope">
                             <el-button type="primary" @click="setChangeInfo(scope.row)" plain size="mini">修改</el-button>
                             <el-button :disabled="scope.row.count > 0" @click="handleRemove(scope.row.id)" type="danger" plain size="mini" >删除</el-button>
@@ -83,9 +89,10 @@ export default {
             addOrChange: true, //默认为添加
             menu:{
                 id: '',
-                name:'',
+                indexes:'',
+                url: '',
                 title: '',
-                weight: '',
+                sort: '',
                 state: 1,
             },
         }
@@ -124,7 +131,7 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.menu.name = this.menu.title = this.menu.weight = this.menu.id = ''
+            this.menu.indexes = this.menu.url = this.menu.title = this.menu.sort = this.menu.id = ''
             this.menu.state = 1
         },
         //修改分类
@@ -146,9 +153,21 @@ export default {
                 this.commonAfterHandle(res)
             })
         },
+        //处理排序上升
+        handleSortUp(data){
+            this.$api.updateMenuSortUp(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
+        //处理排序下降
+        handleSortNext(data){
+            this.$api.updateMenuSortNext(data.id, data.sort).then(res => {
+                this.commonAfterHandle(res)
+            })
+        },
         //公共处理方法
         commonBeforeHandle(){
-            if(this.menu.name == '' ||
+            if((this.menu.indexes == '' && this.menu.url == '') ||
                 this.menu.title == '' ||
                 this.menu.weight == ''){
                      this.$message.error('必填项不能为空')
