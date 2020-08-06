@@ -5,7 +5,7 @@ const cookie = process.client? require('js-cookie') : undefined
 
 export default function({ $axios, store, redirect }){
     //$axios.defaults.baseURL = 'http://127.0.0.1:2922'
-    $axios.defaults.baseURL = 'https://aleestar.cn/api'
+    $axios.defaults.baseURL = 'https://blog.aleestar.cn/api'
     $axios.defaults.timeout = 30000
     //$axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 
