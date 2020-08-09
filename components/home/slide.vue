@@ -90,6 +90,9 @@ export default {
     .slide-container{
         margin-bottom:14px;
         height: 315px;
+        img{
+            height: 315px;
+        }
     }
 }
 @media (max-width:768px) {
