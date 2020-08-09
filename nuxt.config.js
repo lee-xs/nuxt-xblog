@@ -35,6 +35,7 @@ module.exports = {
     'assets/css/main.css',
     'assets/font-awesome-4.7.0/css/font-awesome.min.css',
     'assets/css/animate.css',
+    'swiper/css/swiper.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -48,6 +49,7 @@ module.exports = {
     '@/plugins/api',
     {src:'@/plugins/loading', ssr:false },
     {src:'@/plugins/markdown', ssr:false },
+    {src:'@/plugins/vue-swiper', ssr: false },
   ],
   /*
   ** Nuxt.js dev-modules
