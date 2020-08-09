@@ -32,9 +32,6 @@ import VSearchInput from "~/components/home/search-input"
 import VTagCard from '~/components/home/tag-card'
 import VHotCard from '~/components/home/hot-card'
 import VRandCard from '~/components/home/rand-card'
-import { getNotice } from '~/api/index'
-import { getPageArticleByTag, getHotList, getRandList } from '~/api/article'
-import { getAll } from '~/api/tag'
 export default {
     data(){
         return{

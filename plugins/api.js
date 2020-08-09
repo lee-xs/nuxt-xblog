@@ -147,7 +147,14 @@ export default ({ app: { $request, $axios }}, inject) => {
         },
         //上传图片
         upload(file){
-            return $request.post('/upload', file, {'Content-Type': 'multipart/form-data'})
+            return $axios({
+                url: '/upload',
+                method: 'post',
+                data: file,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
         },
         deleteImage(id){
             return $request.delete(`/admin/image/${id}`)

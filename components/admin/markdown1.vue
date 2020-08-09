@@ -7,7 +7,6 @@
 </template>
 <script>
 import config from "@/service/config";
-import { upload } from '@/api/image'
 export default {
     data() {
         return {
@@ -54,7 +53,7 @@ export default {
         handleUploadImg(pos, file){
           var formData = new FormData();
           formData.append('file', file)
-          upload(formData).then(res => {
+          this.$api.upload(formData).then(res => {
             console.log(res.data.url);
             this.$refs.md.$img2Url(pos, res.data.url)
           })

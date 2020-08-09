@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { add, page, remove, change, changeState } from '~/api/links'
 export default {
     layout: 'admin_template',
     head(){
