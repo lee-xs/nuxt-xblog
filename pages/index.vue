@@ -23,7 +23,7 @@
             <v-hot-card :hotList="hotList"></v-hot-card>
             <!-- 标签列表 -->
             <v-tag-card :tagList="tagList"></v-tag-card>
-            <Affix :offset-top="93">
+            <Affix :offset-top="80">
                  <!-- 站点信息 -->
                 <v-site-card :siteInfo="siteInfo"></v-site-card>
             </Affix>

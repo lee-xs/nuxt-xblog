@@ -35,7 +35,7 @@
         </el-row>
     </el-col>
 
-    <el-col :span="24" class="hidden-lg-only animated fadeInUp">
+    <el-col :span="24" class="hidden-sm-and-up animated fadeInUp">
         <el-row class="list-container">
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card">
                 <nuxt-link :to="'/' + item.id + '.html'">

@@ -25,7 +25,7 @@
                     </nav>
                 </el-col>
                 <!-- 手机端 menu -->
-                <el-col :span="2" class="hidden-lg-only">
+                <el-col :span="2" class="hidden-sm-and-up">
                     <el-dropdown trigger="click">
                         <i class="el-icon-menu"></i>
                         <el-dropdown-menu >
@@ -91,7 +91,7 @@ export default {
                 }
             }
         }
-        .hidden-lg-only{
+        .hidden-sm-and-up{
             float: right;
             .el-icon-menu{
                 line-height: 68px;
