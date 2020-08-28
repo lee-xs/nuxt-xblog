@@ -3,19 +3,16 @@
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->
-                <el-col :span="9" :xs="5">
+                <el-col :span="9" :xs="22">
                     <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">
                         <img :src="siteInfo.site.logo" />
                     </nuxt-link>
 
-                    <div class="hidden-md-and-down" id="weather-v2-plugin-simple"></div> 
+                    <div id="weather-v2-plugin-simple"></div> 
                 </el-col>
 
                 <!-- 导航 -->
                 <!-- 电脑端 menu -->
-                <!-- <el-col :lg="5" class="hidden-md-and-down">
-                   
-                </el-col> -->
                 <el-col :lg="15" class="hidden-md-and-down">
                    <nav style="line-height: 68px;">
                         <ul>
