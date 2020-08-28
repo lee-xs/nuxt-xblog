@@ -16,7 +16,7 @@
             <!-- 随机文章卡片 -->
             <v-rand-card :randList="randList"></v-rand-card>
             <!-- 标签卡片 -->
-            <Affix :offset-top="80">
+            <Affix :offset-top="15">
                 <v-tag-card :tagList="tagList"></v-tag-card>
             </Affix>
         </el-col>

@@ -17,7 +17,7 @@
             <v-rand-card :randList="randList"></v-rand-card>
             <!-- 标签列表 -->
             <v-tag-card :tagList="tagList"></v-tag-card>
-            <Affix :offset-top="80">
+            <Affix :offset-top="15">
                 <!-- 热门文章 -->
                 <v-hot-card :hotList="hotList"></v-hot-card>
             </Affix>

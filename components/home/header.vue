@@ -1,5 +1,5 @@
 <template>
-    <div class="header-container animated fadeInDown">
+    <div id="header" class="header-container animated fadeInDown">
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->
@@ -52,8 +52,9 @@ export default {
             siteInfo: this.$store.state.siteInfo,
         }
     },
-    created(){
-        if(process.browser){
+    methods: {
+        //获取实时天气
+        handleWeather(){
             window.WIDGET =  {  
                                 CONFIG: {
                                     "modules": "01234",
@@ -75,7 +76,7 @@ export default {
                                     "horizontal": "center",
                                     "key": "yT7CRRl3Hy"
                                 }
-                             };
+                            };
             (function (d) {
                 var c = d.createElement('link')
                 c.rel = 'stylesheet'
@@ -86,7 +87,42 @@ export default {
                 sn.parentNode.insertBefore(c, sn)
                 sn.parentNode.insertBefore(s, sn)
             })(document);
-
+        },
+        //header下拉上滑特效
+        handleHeaderSpecial(){
+            var agent = navigator.userAgent;
+            var header = document.getElementById('header')
+            if (/.*Firefox.*/.test(agent)) {
+                document.addEventListener("DOMMouseScroll", function(e) {
+                    e = e || window.event;
+                    var detail = e.detail;
+                    if (detail > 0) {
+                        header.style.display = 'block';
+                    } else {
+                        header.style.display = 'none';
+                    }
+                });
+            } else {
+                document.onmousewheel = function(e) {
+                    e = e || window.event;
+                    var wheelDelta = e.wheelDelta;
+                    if (wheelDelta > 0) {
+                        header.style.top = '0px';
+                        // header.style.display = 'block';
+                        header.style.opacity = '1';
+                    } else {
+                        header.style.top = '-68px';
+                        header.style.opacity = '0';
+                        // header.style.display = 'none';
+                    }
+                }
+            }
+        }
+    },
+    created(){
+        if(process.browser){
+            this.handleWeather();
+            this.handleHeaderSpecial();
         }
     }
 }
@@ -98,6 +134,8 @@ export default {
     float: right;
 }
 .header-container{
+    transition-property:top,opacity;
+    transition-duration: 1s ;
     background: #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
     width: 100%;
