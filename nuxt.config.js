@@ -21,7 +21,6 @@ module.exports = {
     ],
     script: [
       { src: 'https://hm.baidu.com/hm.js?86a28727a22fc484486d01e00c8e3776' },
-      { src: 'https://apip.weatherdt.com/simple/static/js/weather-simple-common.js?v=2.0' },
     ]
   },
   /*
