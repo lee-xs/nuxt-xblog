@@ -3,16 +3,21 @@
         <div class="header">
             <el-row style="height:68px;">
                 <!-- logo -->
-                <el-col :span="4" :xs="5">
+                <el-col :span="9" :xs="5">
                     <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">
                         <img :src="siteInfo.site.logo" />
                     </nuxt-link>
+
+                    <div class="hidden-md-and-down" id="weather-v2-plugin-simple"></div> 
                 </el-col>
 
                 <!-- 导航 -->
                 <!-- 电脑端 menu -->
-                <el-col :lg="20" class="hidden-md-and-down">
-                    <nav style="line-height: 68px;">
+                <!-- <el-col :lg="5" class="hidden-md-and-down">
+                   
+                </el-col> -->
+                <el-col :lg="15" class="hidden-md-and-down">
+                   <nav style="line-height: 68px;">
                         <ul>
                             <li v-for="(item, index) in navs" :key="index" >
                                 <nuxt-link v-if="item.indexes != ''" :to="{ name: item.indexes }">{{ item.title }}</nuxt-link>
@@ -50,13 +55,51 @@ export default {
             siteInfo: this.$store.state.siteInfo,
         }
     },
-    mounted(){
-        
+    created(){
+        if(process.browser){
+            window.WIDGET =  {  
+                                CONFIG: {
+                                    "modules": "01234",
+                                    "background": 4,
+                                    "backgroundColor": "FFFFFF",
+                                    "tmpColor": "000000",
+                                    "tmpSize": "16",
+                                    "cityColor": "000000",
+                                    "citySize": "16",
+                                    "aqiSize": "16",
+                                    "weatherIconSize": 24,
+                                    "alertIconSize": 18,
+                                    "padding": "22px 10px 10px 10px",
+                                    "shadow": "1",
+                                    "language": "auto",
+                                    "borderRadius": 5,
+                                    "fixed": "false",
+                                    "vertical": "middle",
+                                    "horizontal": "center",
+                                    "key": "yT7CRRl3Hy"
+                                }
+                             };
+            (function (d) {
+                var c = d.createElement('link')
+                c.rel = 'stylesheet'
+                c.href = 'https://apip.weatherdt.com/simple/static/css/weather-simple.css?v=2.0'
+                var s = d.createElement('script')
+                s.src = 'https://apip.weatherdt.com/simple/static/js/weather-simple.js?v=2.0'
+                var sn = d.getElementsByTagName('script')[0]
+                sn.parentNode.insertBefore(c, sn)
+                sn.parentNode.insertBefore(s, sn)
+            })(document);
+
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+/deep/ #weather-v2-plugin-simple{
+    width: 200px;
+    float: right;
+}
 .header-container{
     background: #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
@@ -76,7 +119,6 @@ export default {
             }
         }
         .hidden-md-and-down{
-            float: right;
             font-size: 15px;
             nav{
                 ul{
@@ -92,7 +134,6 @@ export default {
             }
         }
         .hidden-sm-and-up{
-            float: right;
             .el-icon-menu{
                 line-height: 68px;
                 font-size: 30px;
@@ -118,4 +159,7 @@ export default {
     }
 }
 </style>
+
+
+
 
