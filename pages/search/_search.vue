@@ -83,6 +83,9 @@ export default {
             this.$router.push(`/search/${data}`)
         }
     },
+    created(){
+        this.$store.state.header.style.top = '0px';
+    }
 }  
 </script>
 

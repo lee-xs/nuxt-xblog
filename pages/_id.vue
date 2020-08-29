@@ -210,7 +210,8 @@ export default {
       }
     },
     created(){
-      this.randomSketckBg()
+      this.$store.state.header.style.top = '0px';
+      this.randomSketckBg();
     },
     mounted(){
       //首次访问增加访问记录

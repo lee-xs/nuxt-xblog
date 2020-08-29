@@ -90,8 +90,10 @@ export default {
         },
         //header下拉上滑特效
         handleHeaderSpecial(){
+            const that = this;
             var agent = navigator.userAgent;
             var header = document.getElementById('header')
+            that.$store.commit('SET_HEADER', header)
             if (/.*Firefox.*/.test(agent)) {
                 document.addEventListener("DOMMouseScroll", function(e) {
                     e = e || window.event;

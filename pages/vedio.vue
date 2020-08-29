@@ -70,6 +70,9 @@ export default {
             this.iframeUrl = this.prefixUrl + this.vedioUrl
         },
 
+    },
+    created(){
+        this.$store.state.header.style.top = '0px';
     }
 }
 </script>

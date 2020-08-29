@@ -4,6 +4,7 @@ export const state = () => ({
     menuList: {},
     token: null,
     ipAddress: null,
+    header: null,
 })
 
 export const mutations = {
@@ -21,6 +22,9 @@ export const mutations = {
     },
     SET_IPADDRESS: (state, data) => {
         state.ipAddress = data
+    },
+    SET_HEADER: (state, data) => {
+        state.header = data
     }
 }
 

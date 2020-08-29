@@ -132,6 +132,7 @@ export default {
     }
   },
   created(){
+    this.$store.state.header.style.top = '0px';
     this.randomSketckBg()
   },
 }
