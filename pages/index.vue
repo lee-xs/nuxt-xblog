@@ -104,6 +104,9 @@ export default {
             this.$router.push(`/search/${data}`)
         }
     },
+    mounted(){
+        this.$store.state.header.style.top = '0px';
+    }
 }  
 </script>
 

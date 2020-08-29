@@ -210,10 +210,10 @@ export default {
       }
     },
     created(){
-      this.$store.state.header.style.top = '0px';
       this.randomSketckBg();
     },
     mounted(){
+      this.$store.state.header.style.top = '0px';
       //首次访问增加访问记录
       jsonp('https://apis.map.qq.com/ws/location/v1/ip?output=jsonp&key=A4BBZ-67HC6-Z6RSV-EPT44-5WE4F-XFFEP', null, (err, data) => {
         //发送访问网站的请求
