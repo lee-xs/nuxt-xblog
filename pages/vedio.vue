@@ -71,9 +71,6 @@ export default {
         },
 
     },
-    mounted(){
-        this.$store.state.header.style.top = '0px';
-    }
 }
 </script>
 
