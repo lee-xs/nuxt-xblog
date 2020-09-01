@@ -31,8 +31,9 @@
     "postcss-loader": "^3.0.0",
     "qrcodejs2": "0.0.2",
     "style-loader": "^1.2.1",
-    "vue-awesome-swiper": "^4.1.1",
     "swiper": "^5.2.0",
+    "valine": "^1.4.14",
+    "vue-awesome-swiper": "^4.1.1",
     "vuetify": "^2.2.25",
     "vuex-persistedstate": "^3.0.1",
     "wangeditor": "^3.1.1"

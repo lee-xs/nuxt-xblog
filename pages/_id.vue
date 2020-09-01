@@ -38,11 +38,11 @@
     <el-row class="article-container" style="z-index: 1;">
       <el-col :span="24" :md="21">
         <no-ssr>
-          <mavon-editor style="backgournd:none; border-radius: 0; padding: 20px 20px 5px 20px;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
+          <mavon-editor style="backgournd:none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; padding: 20px 20px 5px 20px;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
         </no-ssr>
 
         <div>
-          <el-row style="background: #fff; text-align: center; padding: 10px; line-height: 25px; margin-top: 20px;">
+          <el-row style="background: #fff; text-align: center; padding: 10px; line-height: 25px; margin-top: 10px; border-radius: 5px;">
             <el-col :span="12">
               <nuxt-link v-if="previous != null" :to="'/' + previous.id + '.html'" style="color: #515A3E;">
                 <p><i class="iconfont" style="margin-right: 5px; font-size: 14px;">&#xe618;</i>上一篇</p>
@@ -63,6 +63,14 @@
             </el-col>
           </el-row>
         </div>
+
+        <!-- <div style="background-color: #ffffff; margin-top: 20px;">
+          <ClientOnly>
+            <Vssue title="文章评论"/>
+          </ClientOnly>
+        </div> -->
+
+        <div style="background-color: #fff; margin-top:10px; padding:10px; border-radius:5px;" id="comment"></div>
       </el-col>
       
       <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
@@ -116,6 +124,7 @@
 
 <script>
 import jsonp from 'jsonp'
+const Valine = process.browser? require('valine') : null
 const QRCode = process.browser? require('qrcodejs2') : null
 import { validateEmail } from '~/assets/js/validate'
 export default {
@@ -222,11 +231,28 @@ export default {
 
         })
       })
+
+      //添加评论
+      if(Valine != null){
+        new Valine({
+          el: '#comment',
+          appId: 'OkGJkNV0NdThq8zYrwpLghgS-gzGzoHsz',
+          appKey: '5E1jEggFxdxshNMUPd9p1VGx',
+          visitor: true, // 阅读量统计
+          placeholder: '留下宝贵的发言呀',
+          avatar: 'retro',
+          recordIP: true, //保留评论者IP,
+          enableQQ: true,
+        })
+      }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+*{
+  border: none !important;
+}
 .qrcode{
     display: inline-block;
     img {
@@ -237,16 +263,16 @@ export default {
         box-sizing: border-box;
     }
 }
-
-*{
-  border: none !important;
-}
 /deep/ .scroll-style{
   background: none !important;
   padding: 0 !important;
 }
 /deep/ .ivu-back-top-inner{
     background: rgba(0, 153, 229, .7);
+}
+//隐藏valine底部信息
+/deep/ .vpower{
+  display: none;
 }
 //=================================
 .sketch,.sketch-bg,.gray-glass{

@@ -77,6 +77,9 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-    }
+    },
+    transpile: [
+      '(@vssue|vssue)\/((?!\/node_modules\/).)*\.js$',
+    ],
   }
 }
