@@ -127,6 +127,7 @@ import jsonp from 'jsonp'
 const Valine = process.browser? require('valine') : null
 const QRCode = process.browser? require('qrcodejs2') : null
 import { validateEmail } from '~/assets/js/validate'
+import emojiMap from '~/assets/js/emoji.json'
 export default {
     head(){
         return{
@@ -238,11 +239,13 @@ export default {
           el: '#comment',
           appId: 'OkGJkNV0NdThq8zYrwpLghgS-gzGzoHsz',
           appKey: '5E1jEggFxdxshNMUPd9p1VGx',
+          requiredFields: ['nick','mail','link'],
           visitor: true, // 阅读量统计
-          placeholder: '留下宝贵的发言呀',
+          placeholder: '你想说点什么呢，赶快写下来吧！',
           avatar: 'retro',
           recordIP: true, //保留评论者IP,
           enableQQ: true,
+          emojiMaps: emojiMap
         })
       }
     }
