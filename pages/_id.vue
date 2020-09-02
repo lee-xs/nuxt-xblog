@@ -64,13 +64,7 @@
           </el-row>
         </div>
 
-        <!-- <div style="background-color: #ffffff; margin-top: 20px;">
-          <ClientOnly>
-            <Vssue title="文章评论"/>
-          </ClientOnly>
-        </div> -->
-
-        <div style="background-color: #fff; margin-top:10px; padding:10px; border-radius:5px;" id="comment"></div>
+        <Comment class="animated fadeInUp"/>
       </el-col>
       
       <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
@@ -124,15 +118,17 @@
 
 <script>
 import jsonp from 'jsonp'
-const Valine = process.browser? require('valine') : null
 const QRCode = process.browser? require('qrcodejs2') : null
 import { validateEmail } from '~/assets/js/validate'
-import emojiMap from '~/assets/js/emoji.json'
+import Comment from '~/components/home/comment'
 export default {
     head(){
         return{
           title: `${this.$store.state.siteInfo.site.siteName} ♥ ${this.article.title}`,
         }
+    },
+    components: {
+      Comment
     },
     async asyncData({params, app}){
         const id = params.id.substring(0, params.id.indexOf('.'))
@@ -156,6 +152,7 @@ export default {
         subscribeVisible: false,
         email: '',
         ipAddress: '',
+        valine: '',
       }
     },
     methods: {
@@ -232,22 +229,6 @@ export default {
 
         })
       })
-
-      //添加评论
-      if(Valine != null){
-        new Valine({
-          el: '#comment',
-          appId: 'OkGJkNV0NdThq8zYrwpLghgS-gzGzoHsz',
-          appKey: '5E1jEggFxdxshNMUPd9p1VGx',
-          requiredFields: ['nick','mail','link'],
-          visitor: true, // 阅读量统计
-          placeholder: '你想说点什么呢，赶快写下来吧！',
-          avatar: 'retro',
-          recordIP: true, //保留评论者IP,
-          enableQQ: true,
-          emojiMaps: emojiMap
-        })
-      }
     }
 }
 </script>
@@ -272,10 +253,6 @@ export default {
 }
 /deep/ .ivu-back-top-inner{
     background: rgba(0, 153, 229, .7);
-}
-//隐藏valine底部信息
-/deep/ .vpower{
-  display: none;
 }
 //=================================
 .sketch,.sketch-bg,.gray-glass{
