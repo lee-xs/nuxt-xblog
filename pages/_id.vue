@@ -152,7 +152,6 @@ export default {
         subscribeVisible: false,
         email: '',
         ipAddress: '',
-        valine: '',
       }
     },
     methods: {

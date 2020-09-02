@@ -9,7 +9,7 @@ export default {
         if(process.browser){
             const Valine = require('valine');
             this.$nextTick(() => {
-                this.valine = new Valine({
+                new Valine({
                     el: '#comment',
                     appId: 'OkGJkNV0NdThq8zYrwpLghgS-gzGzoHsz',
                     appKey: '5E1jEggFxdxshNMUPd9p1VGx',
