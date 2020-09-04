@@ -119,6 +119,14 @@ export default {
                     }
                 }
             }
+            //滑动到顶部
+            window.addEventListener("scroll", function(event){
+                var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                if(scrollTop <= 68){
+                    header.style.top = '0px';
+                    header.style.opacity = '1';
+                }
+            })
         }
     },
     created(){
