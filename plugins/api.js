@@ -75,8 +75,8 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.get(`/article/${id}`)
         },
         //根据标签查询文章列表
-        selectArticlePageByTag(pageCode, pageSize, tagName){
-            return $request.get('/article/tag', {pageCode, pageSize, tagName})
+        selectArticlePageByTag(pageCode, pageSize, name){
+            return $request.get('/article/tag', {pageCode, pageSize, name})
         },
         //根据分类查询文章列表
         selectArticlePageByCategory(pageCode, pageSize, name){
