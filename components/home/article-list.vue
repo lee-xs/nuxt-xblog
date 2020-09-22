@@ -9,8 +9,8 @@
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated fadeInUp" style="position: relative;">
                 <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>
-                    <h4 v-if="item.title.length < 28" v-text="item.title">标题</h4>
-                    <h4 v-else v-text="item.title.substring(0,28)+'...'">标题</h4>
+                    <h4 v-if="item.title.length < 28"><span v-text="item.title"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
+                    <h4 v-else><span v-text="item.title.substring(0,28)+'...'"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                 </nuxt-link>
                 <div class="list-con" style="margin-bottom: 1px;">
                     <p class="details">
@@ -40,8 +40,8 @@
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card">
                 <nuxt-link :to="'/' + item.id + '.html'">
                     <div class="list-img"><img :src="item.cover"/></div>
-                    <h4 v-if="item.title.length > 16" v-text="item.title.substring(0,16) + '...'">标题</h4>
-                    <h4 v-else v-text="item.title">标题</h4>
+                    <h4 v-if="item.title.length > 16"><span v-text="item.title.substring(0,16) + '...'"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
+                    <h4 v-else><span v-text="item.title"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                 </nuxt-link>
                 <div class="list-con">
                     <p class="details">
@@ -86,6 +86,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.is-top{
+    vertical-align:text-top; 
+    margin-left: 5px;
+}
 .list-container{
     .list-card{
         font-size: 13px;
