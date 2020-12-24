@@ -64,7 +64,7 @@
           </el-row>
         </div>
 
-        <Comment class="animated fadeInUp"/>
+        <Comment class="animated fadeInUp" @handleComments="handleComments"/>
       </el-col>
       
       <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
@@ -213,6 +213,10 @@ export default {
           }
           this.subscribeVisible = false
         })
+      },
+      //更新评论量
+      handleComments(){
+        this.$api.updateComments(this.article.id).then(res => {})
       }
     },
     created(){

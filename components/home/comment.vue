@@ -8,6 +8,7 @@ export default {
     created(){
         if(process.browser){
             const Valine = require('valine');
+            const that = this
             this.$nextTick(() => {
                 new Valine({
                     el: '#comment',
@@ -22,9 +23,17 @@ export default {
                     enableQQ: true,
                     emojiMaps: emojiMap
                 })
+
+
+                document.getElementsByClassName("vbtn")[0].addEventListener("click", function(){
+                    if(!document.getElementById("veditor").value || !document.querySelector('input[type=email]').value || !document.querySelector('input[name=nick]').value || document.getElementsByClassName("status-bar")[0].innerText == "操作频繁，请稍候再试..."){
+                        return;
+                    }
+                    that.$emit('handleComments')
+                })
             })
         }
-    }
+    },
 }
 </script>
 

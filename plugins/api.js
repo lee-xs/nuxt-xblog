@@ -54,6 +54,9 @@ export default ({ app: { $request, $axios }}, inject) => {
                 }
             })
         },
+        updateComments(id){
+            return $request.put(`/article/comments/${id}`)
+        },
         //移除到回收站
         deleteRecycle(id){
             return $request.delete(`/admin/article/recycle/${id}`)
