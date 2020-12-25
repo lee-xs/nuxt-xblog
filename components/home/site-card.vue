@@ -18,7 +18,7 @@
               </tr>
               <tr class="gray">
                 <td>留言数量：</td>
-                <td>0 条</td>
+                <td v-text="siteInfo.commentsCount + ' 条'">0</td>
               </tr>
               <tr>
                 <td>友情链接：</td>
