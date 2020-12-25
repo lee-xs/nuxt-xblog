@@ -132,7 +132,6 @@ export default {
                 .image-slot{
                     width: 100%;
                     height: 100%;
-                    vertical-align: middle;
                     display: flex;
                     align-items: center;
                     background-color: #fefac7;
