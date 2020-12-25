@@ -8,7 +8,14 @@
 
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card animated fadeInUp" style="position: relative;">
                 <nuxt-link :to="'/' + item.id + '.html'">
-                    <div class="list-img"><img :src="item.cover"/></div>
+                    <div class="list-img">
+                        <!-- <img :src="item.cover"/> -->
+                        <el-image class="el-image" :src="item.cover">
+                            <div slot="placeholder" class="image-slot">
+                                <img :src="loadingImg" class="loading-img">
+                            </div>
+                        </el-image>
+                    </div>
                     <h4 v-if="item.title.length < 28"><span v-text="item.title"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                     <h4 v-else><span v-text="item.title.substring(0,28)+'...'"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                 </nuxt-link>
@@ -39,7 +46,14 @@
         <el-row class="list-container">
             <el-col :span="24" v-for="(item,index) in list" :key="item.id + '' + index" class="list-card">
                 <nuxt-link :to="'/' + item.id + '.html'">
-                    <div class="list-img"><img :src="item.cover"/></div>
+                    <div class="list-img">
+                        <!-- <img :src="item.cover"/> -->
+                        <el-image class="el-image" :src="item.cover">
+                            <div slot="placeholder" class="image-slot">
+                                <img :src="loadingImg" class="loading-img">
+                            </div>
+                        </el-image>
+                    </div>
                     <h4 v-if="item.title.length > 16"><span v-text="item.title.substring(0,16) + '...'"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                     <h4 v-else><span v-text="item.title"></span><el-tag type="danger" effect="dark" size="mini" class="is-top" v-if="item.isTop == 1">置顶</el-tag></h4>
                 </nuxt-link>
@@ -69,11 +83,13 @@
 </template>
 
 <script>
+import { stripe } from 'static/loading.json'
 export default {
   data(){
       return{
           pageCode: 1,
           pageSize: 10,
+          loadingImg: stripe
       }
   },
   props:['list', 'total'],
@@ -105,13 +121,24 @@ export default {
         }
         .list-img{
             overflow: hidden;
-            img{ 
+            .el-image{ 
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
                 transition: ease-in-out .5s;
                 &:hover{
                     transform: scale(1.15);
+                }
+                .image-slot{
+                    width: 100%;
+                    height: 100%;
+                    vertical-align: middle;
+                    display: flex;
+                    align-items: center;
+                    background-color: #fefac7;
+                }
+                .loading-img{
+                    margin: auto;
                 }
             }
         }

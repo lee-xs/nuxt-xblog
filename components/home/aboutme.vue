@@ -2,7 +2,12 @@
     <div class="card-container animated fadeInUp">
         <p class="card-container-title">关于本站</p>
         <div>
-            <img :src="siteInfo.admin.avatar" style="width: 100%; height: 200px;"/>
+            <!-- <img :src="siteInfo.admin.avatar" style="width: 100%; height: 200px;"/> -->
+            <el-image class="el-image" :src="siteInfo.admin.avatar">
+                <div slot="placeholder" class="image-slot">
+                    <img :src="loadingImg" class="loading-img">
+                </div>
+            </el-image>
             <el-row style="text-align: center; padding:8px 0 13px 0;">
                 <el-col :span="6">
                     <el-popover
@@ -35,8 +40,14 @@
 </template>
 
 <script>
+import { stripe } from 'static/loading.json'
 export default {
-    props: ['siteInfo']
+    props: ['siteInfo'],
+    data(){
+        return{
+            loadingImg: stripe
+        }
+    }
 }
 </script>
 

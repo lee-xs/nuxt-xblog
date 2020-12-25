@@ -4,7 +4,12 @@
             <a :href="links.url" target="_blank">
                 <div class="our-team hvr-glow">
                     <div class="pic">
-                        <img :src="links.logo">
+                        <!-- <img :src="links.logo"> -->
+                        <el-image class="el-image" :src="links.logo">
+                            <div slot="placeholder" class="image-slot">
+                                <img :src="loadingImg" class="loading-img">
+                            </div>
+                        </el-image>
                     </div>
                     <div class="team-content">
                     <h3 class="title" v-text="links.name"></h3>
@@ -16,8 +21,14 @@
 </template>
 
 <script>
+import { lavalamp } from 'static/loading.json'
 export default {
-    props:['linksList']
+    props:['linksList'],
+    data(){
+        return{
+            loadingImg: lavalamp
+        }
+    }
 }
 </script>
 
@@ -82,7 +93,7 @@ export default {
     z-index: -1;
 }
 
-.our-team .pic img {
+.our-team .pic .el-image {
     width: 100%;
     height: 100%;
     //height: auto;
@@ -91,7 +102,16 @@ export default {
     transition: all 0.9s ease 0s;
 }
 
-.our-team:hover .pic img {
+.our-team .pic .el-image .image-slot{
+    background-color: #fcd9e0;
+}
+
+.our-team .pic .el-image .image-slot .loading-img{
+    width: 100%;
+    height: 100%;
+}
+
+.our-team:hover .pic .el-image {
     box-shadow: 0 0 0 14px #f7f5ec;
     transform: scale(0.7);
 }

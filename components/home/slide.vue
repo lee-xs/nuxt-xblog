@@ -21,13 +21,23 @@
                 <div class="swiper-slide" v-for="(item,index) in slideList" :key="index">
                     <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
-                            <img :src="item.cover">
+                            <!-- <img :src="item.cover"> -->
+                            <el-image class="el-image" :src="item.cover">
+                                <div slot="placeholder" class="image-slot">
+                                    <img :src="loadingImg" class="loading-img">
+                                </div>
+                            </el-image>
                             <div v-text="item.title" class="title"></div>
                         </div>
                     </el-link>
                     <nuxt-link v-else :to="'/'+item.articleId + '.html'" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
-                            <img :src="item.cover">
+                            <!-- <img :src="item.cover"> -->
+                            <el-image class="el-image" :src="item.cover">
+                                <div slot="placeholder" class="image-slot">
+                                    <img :src="loadingImg" class="loading-img">
+                                </div>
+                            </el-image>
                             <div v-text="item.title" class="title"></div>
                         </div>
                     </nuxt-link>
@@ -39,9 +49,11 @@
 </template>
 
 <script>
+import { stripe } from 'static/loading.json'
 export default {
     props:['slideList'],
     data: () => ({
+        loadingImg: stripe,
         swiperOption: {
             loop: true,
             //滚动切换的步数
@@ -68,9 +80,19 @@ export default {
 .slide-container{
     box-shadow: 0 1px 3px rgba(26,26,26,.3);
     overflow: hidden;
-    img{
+    .el-image{
         width: 100%;
         height: 100%;
+        .image-slot{
+            width: 100%;
+            height: 100%;
+            background-color: #fefac7;
+            display: flex;
+            align-items: center;
+            .loading-img{
+                margin: auto;
+            }
+        }
     }
     .title{
         background-color: #c40000; 
@@ -90,7 +112,7 @@ export default {
     .slide-container{
         margin-bottom:14px;
         height: 315px;
-        img{
+        .el-image{
             height: 315px;
         }
     }
@@ -98,7 +120,7 @@ export default {
 @media (max-width:768px) {
     .slide-container{
         height: 240px;
-        img{
+        .el-image{
             height: 240px;
         }
     }

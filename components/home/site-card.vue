@@ -3,7 +3,12 @@
         <el-col :span="24" class="card-container-site">
           <p class="site-title">网站概况</p>
           <div class="site-img">
-            <img :src="siteInfo.site.face" />
+            <!-- <img :src="siteInfo.site.face" /> -->
+            <el-image class="el-image" :src="siteInfo.admin.avatar">
+                <div slot="placeholder" class="image-slot">
+                    <img :src="loadingImg" class="loading-img">
+                </div>
+            </el-image>
           </div>
           <table class="site-details">
            <tbody>
@@ -34,8 +39,14 @@
 </template>
 
 <script>
+import { stripe } from 'static/loading.json'
 export default {
-  props:['siteInfo']
+  props:['siteInfo'],
+  data(){
+    return{
+      loadingImg: stripe
+    }
+  }
 };
 </script>
 
@@ -55,9 +66,19 @@ export default {
     .site-img{
         width: 100%;
         height: 200px;
-        img{
-            width: 100%;
-            height: 200px;
+        .el-image{
+          width: 100%;
+          height: 100%;
+          .image-slot{
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              background-color: #fefac7;
+              .loading-img{
+                  margin: auto;
+              }
+          }
         }
     }
     .site-details{
