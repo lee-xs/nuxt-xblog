@@ -24,6 +24,7 @@
                 <span v-text="article.views"></span><span>&nbsp;Views</span>
                 <span v-text="article.likes"></span><span>&nbsp;Like</span>
                 <span v-text="article.comments"></span><span>&nbsp;Comment</span>
+                <span v-text="article.charecter"></span><span>&nbsp;Charecter</span>
               </P>
               <Tag v-for="(item,index) in article.tag" :key="index" :color="tagsColor[index%10]">
                 <nuxt-link :to="`/tag/${item}`" :style="{'color': tagsColor[index%10]}"><span v-text="item"></span></nuxt-link>
@@ -286,6 +287,7 @@ export default {
             .title{
                 font-size:25px;
                 font-weight:bold;
+                margin-bottom: 5px;
             }
         }
     }
