@@ -13,12 +13,12 @@
             </el-form-item>
             <el-form-item label="Logo：">
                 <el-input v-model="site.logo" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleLogoImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                <el-button type="primary" plain @click="handleChangeImage('logo')" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.logo" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>
             <el-form-item label="脸面：">
                 <el-input v-model="site.face" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleFaceImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                <el-button type="primary" plain @click="handleChangeImage('face')" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.face" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>   
             <el-form-item label="关于站点：">
@@ -47,12 +47,12 @@
             </el-form-item> 
             <el-form-item label="qqCode：">
                 <el-input v-model="site.qqCode" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleQqCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                <el-button type="primary" plain @click="handleChangeImage('qqCode')" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.qqCode" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item>
             <el-form-item label="wechatCode：">
                 <el-input v-model="site.wechatCode" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                <el-button type="primary" plain @click="handleChangeImage('wechatCode')" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="site.wechatCode" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
 
@@ -78,7 +78,7 @@
             </el-form-item>
             <el-form-item label="头像：">
                 <el-input v-model="user.avatar" style="width:80%;"></el-input>
-                <el-button type="primary" plain @click="handleWechatCodeImage()" style="width:18%;"><i class="el-icon-picture"></i></el-button>
+                <el-button type="primary" plain @click="handleChangeImage('avatar')" style="width:18%;"><i class="el-icon-picture"></i></el-button>
                 <img :src="user.avatar" style="width:100%; margin-top:20px; padding: 4px; background-color:#ddd; border-radius:4px; border:1px solid #ddd"/>
             </el-form-item> 
 
@@ -142,21 +142,9 @@ export default {
                 this.commonAfterHandle(res)
             })
         },
-        handleLogoImage(){
+        handleChangeImage(type){
             this.dialogImage = true
-            this.changeImageType = 'logo'
-        },
-        handleFaceImage(){
-            this.dialogImage = true
-            this.changeImageType = 'face'
-        },
-        handleQqCodeImage(){
-            this.dialogImage = true
-            this.changeImageType = 'qqCode'
-        },
-        handleWechatCodeImage(){
-            this.dialogImage = true
-            this.changeImageType = 'wechatCode'
+            this.changeImageType = type
         },
         //接收子组件传来的更改的页码
         handleCurrentChange(data){
@@ -177,6 +165,9 @@ export default {
                     break;
                 case 'wechatCode':
                     this.site.wechatCode = data
+                    break;
+                case 'avatar':
+                    this.user.avatar = data
                     break;
             }
             this.changeImageType = ''
