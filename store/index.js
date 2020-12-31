@@ -1,6 +1,6 @@
 export const state = () => ({
     siteInfo: {},
-    compileArticle: {},
+    compilePosts: {},
     menuList: {},
     token: null,
     ipAddress: null,
@@ -11,8 +11,8 @@ export const mutations = {
     SET_SITEINFO: (state, data) => {
         state.siteInfo = data
     },
-    SET_COMPILEARTICLE: (state, data) => {
-        state.compileArticle = data
+    SET_COMPILEPOSTS: (state, data) => {
+        state.compilePosts = data
     },
     SET_MENU: (state, data) => {
         state.menuList = data

@@ -11,7 +11,7 @@
                         <el-input v-model="notice.content"></el-input>
                     </el-form-item>
                     <el-form-item label="状态">
-                        <el-switch :active-value="1" :inactive-value="0" v-model="notice.state" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                        <el-switch :active-value="'1'" :inactive-value="'0'" v-model="notice.status" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                     </el-form-item>
                     <el-form-item label="创建时间">
                         <el-input v-model="notice.created" :disabled="true"></el-input>
@@ -35,7 +35,7 @@
                     <el-table-column align="center" prop="content" label="内容" ></el-table-column>
                     <el-table-column align="center" prop="" label="状态" width="60">
                         <template slot-scope="scope">
-                            <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.state" @change="handleChangeState(scope.row.id, scope.row.state)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                            <el-switch :active-value="'1'" :inactive-value="'0'" v-model="scope.row.status" @change="handleStatus(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                         </template>
                     </el-table-column>
                     <el-table-column align="center" prop="created" label="创建时间"></el-table-column>
@@ -77,7 +77,7 @@ export default {
             notice: {
                 id: '',
                 content: '',
-                state: 1,
+                status: '1',
                 created: '',
             }
         }
@@ -116,8 +116,8 @@ export default {
             }
         },
         //修改状态
-        handleChangeState(id, state){
-           this.$api.updateNoticeState(id, state).then(res => {
+        handleStatus(row){
+           this.$api.updateNotice(row).then(res => {
                this.commonAfterHandle(res)
            })
         },
@@ -131,7 +131,7 @@ export default {
         goback(){
             this.addOrChange = true
             this.notice.id = this.notice.content = this.notice.created = ''
-            this.notice.state = 1
+            this.notice.status = 1
         },
         //修改分类
         setChangeInfo(row){

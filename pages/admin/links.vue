@@ -20,9 +20,9 @@
                         <el-input v-model="links.email"></el-input>
                     </el-form-item>   
                     <el-form-item label="状态">
-                        <el-select style="width:100%;" v-model="links.state">
-                            <el-option label="展示" :value="1"></el-option>
-                            <el-option label="隐藏" :value="0"></el-option>
+                        <el-select style="width:100%;" v-model="links.status">
+                            <el-option label="展示" :value="'1'"></el-option>
+                            <el-option label="隐藏" :value="'0'"></el-option>
                         </el-select>
                     </el-form-item>    
                     <div style="margin-top:20px;">
@@ -51,7 +51,7 @@
                     <el-table-column align="center" prop="email" label="联系邮箱"></el-table-column>
                     <el-table-column align="center" prop="" label="状态" width="60">
                         <template slot-scope="scope">
-                            <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.state" @change="changeCommentState(scope.row.id, scope.row.state)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                            <el-switch :active-value="'1'" :inactive-value="'0'" v-model="scope.row.status" @change="handleStatus(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                         </template>
                     </el-table-column>
                     <el-table-column align="center" label="排序" width="95">
@@ -101,7 +101,7 @@ export default {
                 url: '',
                 logo: '',
                 email: '',
-                state: 1,
+                status: '1',
             },
         }
     },
@@ -125,7 +125,7 @@ export default {
         //发送添加请求
         handleAdd(){
             if(this.commonBeforeHandle()){
-                this.$api.insertAddLinks(this.links).then(res => {
+                this.$api.insertLinks(this.links).then(res => {
                     this.commonAfterHandle(res)
                 })
             }            
@@ -142,7 +142,7 @@ export default {
         goback(){
             this.addOrChange = true
             this.links.name = this.links.url = this.links.logo = this.links.email = this.links.id = ''
-            this.links.state = 1
+            this.links.status = 1
         },
         //填充修改信息
         setChangeInfo(row){
@@ -158,20 +158,20 @@ export default {
             })
         },
         //修改状态
-        changeCommentState(id, state){
-            this.$api.updateLinksState(id, state).then(res => {
+        handleStatus(row){
+            this.$api.updateLinks(row).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //处理排序上升
         handleSortUp(data){
-            this.$api.updateLinksSortUp(data.id, data.sort).then(res => {
+            this.$api.updateLinksSortUp(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //处理排序下降
         handleSortNext(data){
-            this.$api.updateLinksSortNext(data.id, data.sort).then(res => {
+            this.$api.updateLinksSortNext(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
@@ -180,7 +180,7 @@ export default {
             if(this.links.name == '' ||
                 this.links.url == '' ||
                 this.links.logo == '' ||
-                this.links.state == null){
+                this.links.status == null){
                     this.$message.error('必填项不能为空')
                 return false
             }

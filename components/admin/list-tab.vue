@@ -31,22 +31,22 @@
             <!-- tab 已发布 操作 -->
             <el-table-column align="center" width="200" v-if="tabType == 'first'" label="操作">
                 <template slot-scope="scope">
-                    <el-button size="medium" type="primary" @click="changeArticle(scope.row)">编辑</el-button>
+                    <el-button size="medium" type="primary" @click="changePosts(scope.row)">编辑</el-button>
                     <el-button size="medium" type="danger" @click="moveRecycle(scope.row.id)">回收站</el-button>
                 </template>
             </el-table-column>
             <!-- tab 草稿箱 操作 -->
             <el-table-column align="center" width="200" v-if="tabType == 'second'" label="操作">
                 <template slot-scope="scope">
-                    <el-button size="medium" type="primary" @click="changeArticle(scope.row)">编辑</el-button>
+                    <el-button size="medium" type="primary" @click="changePosts(scope.row)">编辑</el-button>
                     <el-button size="medium" type="danger" @click="moveRecycle(scope.row.id)">回收站</el-button>
                 </template>
             </el-table-column>
             <!-- tab 回收站 操作 -->
             <el-table-column align="center" width="200" v-if="tabType == 'third'" label="操作">
                 <template slot-scope="scope">
-                    <el-button size="medium" type="primary" @click="changeArticle(scope.row)">编辑</el-button>
-                    <el-button size="medium" type="danger" @click="removeArticle(scope.row.id)">删除</el-button>
+                    <el-button size="medium" type="primary" @click="changePosts(scope.row)">编辑</el-button>
+                    <el-button size="medium" type="danger" @click="removePosts(scope.row.id)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -77,8 +77,8 @@ export default {
             this.$emit('pageCode', pageCode)
         },
         //修改文章
-        changeArticle(row){
-            this.$store.commit('SET_COMPILEARTICLE', row);
+        changePosts(row){
+            this.$store.commit('SET_COMPILEPOSTS', row);
             this.$router.push('/admin/issue');
         },
         //移送文章至回收站
@@ -86,8 +86,8 @@ export default {
             this.$emit('moveRecycle', id)
         },
         //删除文章
-        removeArticle(id){
-            this.$emit('removeArticle', id)
+        removePosts(id){
+            this.$emit('removePosts', id)
         },
         //修改评论状态
         changeCommentState(){

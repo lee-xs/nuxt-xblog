@@ -3,8 +3,7 @@
         <el-col :span="24" class="card-container-site">
           <p class="site-title">网站概况</p>
           <div class="site-img">
-            <!-- <img :src="siteInfo.site.face" /> -->
-            <el-image class="el-image" :src="siteInfo.admin.avatar">
+            <el-image class="el-image" :src="siteInfo.site.face">
                 <div slot="placeholder" class="image-slot">
                     <img :src="loadingImg" class="loading-img">
                 </div>

@@ -3,8 +3,8 @@
       <el-col :span="24" class="card-container">
         <p class="card-container-title">全部分类</p>
         <div class="card-container-content">
-          <Tag style="margin-bottom: 6px;" v-for="(item,index) in categoryList" :key="index" :color="color[index%17]">
-            <nuxt-link :to="'/category/' + item.name">
+          <Tag style="margin-bottom: 6px;" v-for="(item,index) in classifyList" :key="index" :color="color[index%17]">
+            <nuxt-link :to="'/classify/' + item.name">
               <span v-text="'# '+item.name"></span>
             </nuxt-link>
           </Tag> 
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ["categoryList"],
+  props: ["classifyList"],
   data() {
     return {
       color: ["primary","success","warning","error","blue","green","red","yellow","pink","magenta","volcano","orange","gold","lime","cyan","geekblue","purple"]

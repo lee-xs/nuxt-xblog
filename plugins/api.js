@@ -16,142 +16,116 @@ export default ({ app: { $request, $axios }}, inject) => {
                 }
             })
         },
-        visit(ipAddress){
+        visit(ip){
             return $axios({
-                url: '/user/visit',
+                url: `/user/i/visit/${ip}`,
                 method: 'post',
-                params: {
-                    ipAddress
-                }
             })
         },
  
         //#################### 文章相关 ####################
         //发布文章
-        insertArticle(article){
-            return $request.post('/admin/article', article)
+        insertPosts(posts){
+            return $request.post('/admin/posts/i', posts)
         },
         //点赞
-        addLikes(articleId, ipAddress){
+        addLikes(postsId, ip){
             return $axios({
-                url: `/article/likes`,
-                method: 'post',
-                params: {
-                    articleId,
-                    ipAddress,
-                }
+                url: `/posts/i/likes/${postsId}/${ip}`,
+                method: 'put'
             })
         },
         //查看
-        addViews(articleId, articleTitle, ipAddress){
+        addViews(postsId, title, ip){
             return $axios({
-                url: '/article/views',
+                url: `/posts/i/views/${postsId}/${title}/${ip}`,
                 method: 'post',
-                params: {
-                    articleId,
-                    articleTitle,
-                    ipAddress
-                }
             })
         },
         updateComments(id){
             return $request.put(`/article/comments/${id}`)
         },
         //移除到回收站
-        deleteRecycle(id){
-            return $request.delete(`/admin/article/recycle/${id}`)
+        movePosts(id){
+            return $request.put(`/admin/posts/move/${id}`)
         },
         //删除文章
-        deleteArticle(ids){
-            return $request.delete('/admin/article', ids)
+        deletePosts(ids){
+            return $request.delete('/admin/posts/d', ids)
         },
         //修改文章
-        updateArticle(article){
-            return $request.put('/admin/article', article)
+        updatePosts(posts){
+            return $request.put('/admin/posts/u', posts)
         },
         //首页默认分页查询文章
-        selectArticlePage(pageCode, pageSize){
-            return $request.get('/article/page', {pageCode, pageSize})
+        selectPostsPage(pageCode, pageSize, status){
+            return $request.get('/posts/s/page', {pageCode, pageSize, status})
         },
         //查询文章信息
-        selectArticle(id){
-            return $request.get(`/article/${id}`)
+        selectPosts(id){
+            return $request.get(`/posts/s/${id}`)
         },
         //根据标签查询文章列表
-        selectArticlePageByTag(pageCode, pageSize, name){
-            return $request.get('/article/tag', {pageCode, pageSize, name})
+        selectPostsPageByTag(pageCode, pageSize, name){
+            return $request.get('/posts/s/tag', {pageCode, pageSize, name})
         },
         //根据分类查询文章列表
-        selectArticlePageByCategory(pageCode, pageSize, name){
-            return $request.get('/article/category', {pageCode, pageSize, name})
-        },
-        //查草稿箱
-        selectDrafts(pageCode, pageSize){
-            return $request.get('/article/drafts', {pageCode, pageSize})
-        },
-        //查回收站
-        selectRecycle(pageCode, pageSize){
-            return $request.get('/article/recycle', {pageCode, pageSize})
+        selectPostsPageByClassify(pageCode, pageSize, name){
+            return $request.get('/posts/s/classify', {pageCode, pageSize, name})
         },
         //最热文章列表
         selectHotList(){
-            return $request.get('/article/hot')
+            return $request.get('/posts/s/hot')
         },
         //随机文章列表
         selectRandList(){
-            return $request.get('/article/rand')
+            return $request.get('/posts/s/rand')
         },
         //归档
         selectArchives(){
-            return $request.get('/article/archives')
+            return $request.get('/posts/s/archives')
         },
         //查看文章点赞数
         selectLikes(articleId){
-            return $request.get(`/article/likes/${articleId}`)
+            return $request.get(`/posts/s/likes/${articleId}`)
         },
         //文章搜索
         selectSearch(pageCode, pageSize, search){
-            return $request.get('/article/search', {pageCode, pageSize, search})
+            return $request.get('/posts/s/search', {pageCode, pageSize, search})
         },
                 
 
         //#################### 分类相关 ####################
         //新增分类
-        insertCategory(name){
-            return $axios({
-                method: 'post',
-                url: '/admin/category',
-                params:{
-                    name
-                }
-            })
+        insertClassify(name){
+            return $request.post(`/admin/classify/i/${name}`)
         },
         //删除分类
-        deleteCategory(ids){
-            return $request.delete('/admin/category', ids)
+        deleteClassify(ids){
+            return $request.delete('/admin/classify/d', ids)
         },
         //更新分类
-        updateCategory(category){
-            return $request.put('/admin/category', category)
+        updateClassify(category){
+            return $request.put('/admin/classify/u', category)
         },
         //查询所有分类信息
-        selectCategoryAll(){
-            return $request.get('/category/all')
+        selectClassifyList(){
+            return $request.get('/classify/s/list')
         },
         //查询分类的分页
-        selectCategoryPage(pageCode, pageSize){
-            return $request.get('/category/page', {pageCode, pageSize})
+        selectClassifyPage(pageCode, pageSize){
+            return $request.get('/classify/s/page', {pageCode, pageSize})
         },
 
         //#################### 图片相关 ####################
         //查询图片分页
         selectImagePage(pageCode, pageSize){
-            return $request.get('/image/page', {pageCode, pageSize})
+            return $request.get('/image/s/page', {pageCode, pageSize})
         },
         //上传图片
         upload(file){
             return $axios({
-                url: '/upload',
+                url: '/admin/upload',
                 method: 'post',
                 data: file,
                 headers: {
@@ -160,77 +134,70 @@ export default ({ app: { $request, $axios }}, inject) => {
             })
         },
         deleteImage(id){
-            return $request.delete(`/admin/image/${id}`)
+            return $request.delete(`/admin/image/d/${id}`)
         },
 
         //#################### 通知相关 ####################
         //新增通知
         insertNotice(notice){
-            return $request.post('/admin/notice', notice)
+            return $request.post('/admin/notice/i', notice)
         },
         //删除通知
         deleteNotice(id){
-            return $request.delete(`/admin/notice/${id}`)
+            return $request.delete(`/admin/notice/d/${id}`)
         },
         //更新通知
         updateNotice(notice){
-            return $request.put('/admin/notice', notice)
-        },
-        //更新通知状态
-        updateNoticeState(id, state){
-            return $request.put(`/admin/notice/state/${id}/${state}`)
+            return $request.put('/admin/notice/u', notice)
         },
         //查询通知
         selectNotice(){
-            return $request.get('/notice')
+            return $request.get('/notice/s/list')
         },
         //查询通知分页
         selectNoticePage(pageCode, pageSize){
-            return $request.get('/notice/page', {pageCode, pageSize})
+            return $request.get('/notice/s/page', {pageCode, pageSize})
         },
 
         //#################### 友联相关 ####################
         //后台添加友链
-        insertAddLinks(links){
-            return $request.post('/admin/links/add', links)
+        insertLinks(links){
+            return $request.post('/admin/links/i', links)
         },
         //前台添加友链
-        insertLinks(links){
-            return $request.post('/links', links)
+        applyLinks(links){
+            return $request.post('/links/i/apply', links)
         },
         //删除友联
         deleteLinks(ids){
-            return $request.delete('/admin/links', ids)
+            return $request.delete('/admin/links/d', ids)
         },
         //修改友联
         updateLinks(links){
-            return $request.put('/admin/links', links)
+            return $request.put('/admin/links/u', links)
         },
-        //修改友联状态
-        updateLinksState(id, state){
-            return $request.put(`/admin/links/state/${id}/${state}`)
-        },
+    
         //修改友链排序上升
-        updateLinksSortUp(id, sort){
-            return $request.put(`/admin/links/sort/up/${id}/${sort}`)
+        updateLinksSortUp(links){
+            return $request.put('/admin/links/u/sort/up', links)
         },
         //修改友链排序下降
-        updateLinksSortNext(id, sort){
-            return $request.put(`/admin/links/sort/next/${id}/${sort}`)
+        updateLinksSortNext(links){
+            return $request.put('/admin/links/u/sort/next/', links)
         },
         //查询全部友联
         selectLinksAll(){
-            return $request.get('/links')
+            return $request.get('/links/s/list')
         },
         //查询友联分页
         selectLinksPage(pageCode, pageSize){
-            return $request.get('/links/page', {pageCode, pageSize})
+            return $request.get('/links/s/page', {pageCode, pageSize})
         },
 
         //#################### 日志相关 ####################
         //查询日志分页
         selectLogPage(pageCode, pageSize){
-            return $request.get('/log/page', {pageCode, pageSize})
+            return $request.get('/log/s/page', {pageCode, pageSize})
         },
 
         //#################### 登陆相关 ####################
@@ -250,114 +217,102 @@ export default ({ app: { $request, $axios }}, inject) => {
         //#################### 菜单相关 ####################
         //新增菜单
         insertMenu(menu){
-            return $request.post('/admin/menu', menu)
+            return $request.post('/admin/menu/i', menu)
         },
         //删除菜单
         deleteMenu(id){
-            return $request.delete(`/admin/menu/${id}`)
+            return $request.delete(`/admin/menu/d/${id}`)
         },
         //更新菜单信息
         updateMenu(menu){
-            return $request.put('/admin/menu', menu)
-        },
-        //更新菜单可见状态
-        updateMenuState(id, state){
-            return $request.put(`/admin/menu/state/${id}/${state}`)
+            return $request.put('/admin/menu/u', menu)
         },
         //修改目录排序上升
-        updateMenuSortUp(id, sort){
-            return $request.put(`/admin/menu/sort/up/${id}/${sort}`)
+        updateMenuSortUp(menu){
+            return $request.put(`/admin/menu/u/sort/up`, menu)
         },
         //修改目录排序下降
-        updateMenuSortNext(id, sort){
-            return $request.put(`/admin/menu/sort/next/${id}/${sort}`)
+        updateMenuSortNext(menu){
+            return $request.put(`/admin/menu/u/sort/next`, menu)
         },
         //查询全部菜单
         selectMenuAll(){
-            return $request.get('/menu')
+            return $request.get('/menu/s/list')
         },
         //查询菜单分页
         selectMenuPage(pageCode, pageSize){
-            return $request.get('/menu/page', {pageCode, pageSize})
+            return $request.get('/menu/s/page', {pageCode, pageSize})
         },
 
         //#################### 站点相关 ####################
         //更新站点信息
         updateSite(site){
-            return $request.put('/admin/site', site)
+            return $request.put('/admin/site/u', site)
         },
         //查询站点信息
         selectSite(){
-            return $request.get('/site')
+            return $request.get('/site/s/info')
         },
         //查询站点信息
         selectSiteInfo(){
-            return $request.get('/site/info')
-        },
-
-        //#################### 管理员相关 ####################
-        updateAdmin(admin){
-            return $request.put('/admin', admin)
+            return $request.get('/site/s/info')
         },
 
         //#################### 幻灯片相关 ####################
         //新增幻灯片
         insertSlide(slide){
-            return $request.post('/admin/slide', slide)
+            return $request.post('/admin/slide/i', slide)
         },
         //删除幻灯片
         deleteSlide(id){
-            return $request.delete(`/admin/slide/${id}`)
+            return $request.delete(`/admin/slide/d/${id}`)
         },
         //修改幻灯片
         updateSlide(slide){
-            return $request.put('/admin/slide', slide)
+            return $request.put('/admin/slide/u', slide)
         },
         //修改幻灯片排序上升
-        updateSlideSortUp(id, sort){
-            return $request.put(`/admin/slide/sort/up/${id}/${sort}`)
+        updateSlideSortUp(slide){
+            return $request.put('/admin/slide/u/sort/up', slide)
         },
         //修改幻灯片排序下降
-        updateSlideSortNext(id, sort){
-            return $request.put(`/admin/slide/sort/next/${id}/${sort}`)
+        updateSlideSortNext(slide){
+            return $request.put('/admin/slide/u/sort/next', slide)
         },
         //查询全部幻灯片
-        selectSlideAll(){
-            return $request.get('/slide')
+        selectSlideList(){
+            return $request.get('/slide/s/list')
         },
 
         //#################### 标签相关 ####################
         //新增标签
         insertTag(name){
-            return $axios({
-                method: 'post',
-                url: '/admin/tag',
-                params:{
-                    name
-                }
-            })
+            return $request.post(`/admin/tag/i/${name}`)
         },
         //删除标签
         deleteTag(ids){
-            return $request.delete('/admin/tag', ids)
+            return $request.delete('/admin/tag/d', ids)
         },
         //更新标签信息
         updateTag(tag){
-            return $request.put('/admin/tag', tag)
+            return $request.put('/admin/tag/u', tag)
         },
         //查询全部标签
-        selectTagAll(){
-            return $request.get('/tag/all')
+        selectTagList(){
+            return $request.get('/tag/s/list')
         },
         //查询标签分页
         selectTagPage(pageCode, pageSize){
-            return $request.get('/tag/page', {pageCode, pageSize})
+            return $request.get('/tag/s/page', {pageCode, pageSize})
         },
         
         //#################### 用户相关 ####################
         //查询用户信息分页
         selectUserPage(pageCode, pageSize){
-            return $request.get('/user/page', {pageCode, pageSize})
+            return $request.get('/user/s/page', {pageCode, pageSize})
+        },
+        updateUser(user){
+            return $request.put('/admin/user/u/info', user)
         },
         //订阅网站
         subscribe(ipAddress, email){

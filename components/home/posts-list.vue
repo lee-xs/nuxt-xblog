@@ -22,8 +22,8 @@
                 <div class="list-con" style="margin-bottom: 1px;">
                     <p class="details">
                         <span v-text="item.author"></span>&nbsp;/&nbsp;
-                        <nuxt-link :to="'/category/' + item.category">
-                            <span v-text="item.category"></span>
+                        <nuxt-link :to="'/classify/' + item.classify">
+                            <span v-text="item.classify"></span>
                         </nuxt-link>&nbsp;/&nbsp;
                         <span v-text="item.publishTime.substring(0,10)"></span>
                         <i class="iconfont" style="font-size: 13px;">&#xe60e;&nbsp;<span class="list-tag"  v-text="item.views">0</span></i>
@@ -60,7 +60,7 @@
                 <div class="list-con">
                     <p class="details">
                         <span v-text="item.author"></span>&nbsp;/&nbsp;
-                        <span v-text="item.category"></span>&nbsp;/&nbsp;
+                        <span v-text="item.classify"></span>&nbsp;/&nbsp;
                         <span v-text="item.publishTime.substring(0,10)"></span>
                     </p>
                 </div>

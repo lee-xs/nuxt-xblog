@@ -6,7 +6,7 @@
 
         <!-- list -->
         <el-col :span="17" :xs="24" id="left">
-            <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
+            <v-posts-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-posts-list>
         </el-col>
 
         <!-- crad -->
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import VArticleList from '~/components/home/article-list'
+import VPostsList from '~/components/home/posts-list'
 import VNotice from '~/components/home/notice'
 import VSearchInput from "~/components/home/search-input"
 import VTagCard from '~/components/home/tag-card'
@@ -48,7 +48,7 @@ export default {
     },
     components:{
         VNotice,
-        VArticleList,
+        VPostsList,
         VSearchInput,
         VTagCard,
         VHotCard,
@@ -56,9 +56,9 @@ export default {
     },
     async asyncData({params, app}) {
         //获取文章列表
-        let { data } = await app.$api.selectArticlePageByTag(1, 10, params.name) 
+        let { data } = await app.$api.selectPostsPageByTag(1, 10, params.name) 
         //获取全部标签
-        let tagData = await app.$api.selectTagAll()
+        let tagData = await app.$api.selectTagList()
         //获取热门文章
         let hotData = await app.$api.selectHotList()
         //随机文章
@@ -81,7 +81,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //根据标签分页
-            this.$api.selectArticlePageByTag(this.pageCode, this.pageSize, this.tagName).then(res => {
+            this.$api.selectPostsPageByTag(this.pageCode, this.pageSize, this.tagName).then(res => {
                this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

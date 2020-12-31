@@ -10,7 +10,7 @@
             <v-slide :slideList="slideList"></v-slide>
 
             <!-- 文章list -->
-            <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
+            <v-posts-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-posts-list>
         </el-col>
 
         <!-- crad -->
@@ -35,7 +35,7 @@
 
 <script>
 import VSlide from '~/components/home/slide'
-import VArticleList from '~/components/home/article-list'
+import VPostsList from '~/components/home/posts-list'
 import VNotice from '~/components/home/notice'
 import VAboutme from '~/components/home/aboutme.vue'
 import VSearchInput from "~/components/home/search-input"
@@ -58,7 +58,7 @@ export default {
     components:{
         VSlide,
         VNotice,
-        VArticleList,
+        VPostsList,
         VAboutme,
         VSearchInput,
         VSiteCard,
@@ -67,17 +67,17 @@ export default {
     }, 
     async asyncData({ app, store }) {     
         //获取文章列表
-        let { data } = await app.$api.selectArticlePage(1, 10)
+        let { data } = await app.$api.selectPostsPage(1, 10, 1)
         //获取站点信息
         let siteInfoData = await app.$api.selectSite()
         //获取全部标签
-        let tagData = await app.$api.selectTagAll()
+        let tagData = await app.$api.selectTagList()
         //获取热门文章
         let hotData = await app.$api.selectHotList()
         //获取通知
         let noticeData = await app.$api.selectNotice()
         //获取幻灯片
-        let slideData = await app.$api.selectSlideAll()
+        let slideData = await app.$api.selectSlideList()
         return {
             list: data.records,//文章list
             total: data.total,//文章总数

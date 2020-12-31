@@ -9,24 +9,24 @@
               <!-- 标题 -->
               <el-row class="notice">
                 <el-col class="hidden-md-and-down">
-                  <p class="title" v-text="article.title">标题</p>
+                  <p class="title" v-text="posts.title">标题</p>
                 </el-col>
                 <el-col class="hidden-lg-only">
-                  <p class="title" v-text="article.title.substring(0,15) + '...'">标题</p>
+                  <p class="title" v-text="posts.title.substring(0,15) + '...'">标题</p>
                 </el-col>
               </el-row>
               <P>
-                <span>Author&nbsp;</span><span v-text="article.author"></span>&nbsp;
-                <span>In&nbsp;</span><span v-text="article.category"></span>&nbsp;
-                <span>Publish&nbsp;</span><span v-text="article.publishTime.substring(0,10)"></span>
+                <span>Author&nbsp;</span><span v-text="posts.author"></span>&nbsp;
+                <span>In&nbsp;</span><span v-text="posts.category"></span>&nbsp;
+                <span>Publish&nbsp;</span><span v-text="posts.publishTime.substring(0,10)"></span>
               </P>
               <P>
-                <span v-text="article.views"></span><span>&nbsp;Views</span>
-                <span v-text="article.likes"></span><span>&nbsp;Like</span>
-                <span v-text="article.comments"></span><span>&nbsp;Comment</span>
-                <span v-text="article.charecter"></span><span>&nbsp;Charecter</span>
+                <span v-text="posts.views"></span><span>&nbsp;Views</span>
+                <span v-text="posts.likes"></span><span>&nbsp;Like</span>
+                <span v-text="posts.comments"></span><span>&nbsp;Comment</span>
+                <span v-text="posts.charecter"></span><span>&nbsp;Charecter</span>
               </P>
-              <Tag v-for="(item,index) in article.tag" :key="index" :color="tagsColor[index%10]">
+              <Tag v-for="(item,index) in posts.tag" :key="index" :color="tagsColor[index%10]">
                 <nuxt-link :to="`/tag/${item}`" :style="{'color': tagsColor[index%10]}"><span v-text="item"></span></nuxt-link>
               </Tag>
             </div>
@@ -39,7 +39,7 @@
     <el-row class="article-container" style="z-index: 1;">
       <el-col :span="24" :md="21">
         <no-ssr>
-          <mavon-editor style="backgournd:none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; padding: 20px 20px 5px 20px;" v-model="article.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
+          <mavon-editor style="backgournd:none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; padding: 20px 20px 5px 20px;" v-model="posts.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
         </no-ssr>
 
         <div>
@@ -73,7 +73,7 @@
           <div>
             <el-row style="text-align: center;">
             <el-col :span="24" style="margin-bottom: 10px;">
-              <el-badge :value="article.likes">
+              <el-badge :value="posts.likes">
                 <el-button @click="handleLikes()" circle><span class="iconfont">&#xe60c;</span></el-button>
               </el-badge>
             </el-col>
@@ -125,7 +125,7 @@ import Comment from '~/components/home/comment'
 export default {
     head(){
         return{
-          title: `${this.$store.state.siteInfo.site.siteName} ♥ ${this.article.title}`,
+          title: `${this.$store.state.siteInfo.site.siteName} ♥ ${this.posts.title}`,
         }
     },
     components: {
@@ -133,15 +133,14 @@ export default {
     },
     async asyncData({params, app}){
         const id = params.id.substring(0, params.id.indexOf('.'))
-        let articleData = await app.$api.selectArticle(id)
-
+        let postsData = await app.$api.selectPosts(id)
         //获取站点信息
         let siteInfoData = await app.$api.selectSite()
         let siteInfo = siteInfoData.data
         return {
-          article: articleData.data.article,
-          previous: articleData.data.previous,
-          next: articleData.data.next,
+          posts: postsData.data.posts,
+          previous: postsData.data.previous,
+          next: postsData.data.next,
           siteInfo,
         }
     },
@@ -165,7 +164,7 @@ export default {
       },
       //点赞
       handleLikes(){
-        this.$api.addLikes(this.article.id, this.ipAddress).then(res => {
+        this.$api.addLikes(this.posts.id, this.ipAddress).then(res => {
           if(res.code == 20000){
             this.$message({
               type: 'success',
@@ -179,7 +178,7 @@ export default {
       handleShare(){
         if(process.browser){
           //分享到qq好友
-          window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + window.location.href + '&sharesource=qzone&title=' + this.article.title + '&pics=' + this.$store.state.siteInfo.site.logo +'&summary=记录知识记录美');
+          window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + window.location.href + '&sharesource=qzone&title=' + this.posts.title + '&pics=' + this.$store.state.siteInfo.site.logo +'&summary=记录知识记录美');
         }
       },
       //生成页面分享二维码
@@ -229,7 +228,7 @@ export default {
       jsonp('https://apis.map.qq.com/ws/location/v1/ip?output=jsonp&key=A4BBZ-67HC6-Z6RSV-EPT44-5WE4F-XFFEP', null, (err, data) => {
         //发送访问网站的请求
         this.ipAddress = data.result.ip
-        this.$api.addViews(this.article.id, this.article.title, this.ipAddress).then(res => {
+        this.$api.addViews(this.posts.id, this.posts.title, this.ipAddress).then(res => {
 
         })
       })

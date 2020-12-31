@@ -6,7 +6,7 @@
 
         <!-- list -->
         <el-col :span="17" :xs="24" id="left">
-            <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
+            <v-posts-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-posts-list>
         </el-col>
 
         <!-- crad -->
@@ -16,7 +16,7 @@
             <!-- 随机文章 -->
             <v-rand-card :randList="randList"></v-rand-card>
             <!-- 全部分类 -->
-            <v-category-card :categoryList="categoryList"></v-category-card>
+            <v-classify-card :classifyList="classifyList"></v-classify-card>
             <Affix :offset-top="15">
                 <!-- 热门文章 -->
                 <v-hot-card :hotList="hotList"></v-hot-card>
@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import VArticleList from '~/components/home/article-list'
+import VPostsList from '~/components/home/posts-list'
 import VNotice from '~/components/home/notice'
 import VSearchInput from "~/components/home/search-input"
-import VCategoryCard from '~/components/home/category-card'
+import VClassifyCard from '~/components/home/classify-card'
 import VHotCard from '~/components/home/hot-card'
 import VRandCard from '~/components/home/rand-card'
 export default {
@@ -48,17 +48,17 @@ export default {
     },
     components:{
         VNotice,
-        VArticleList,
+        VPostsList,
         VSearchInput,
-        VCategoryCard,
+        VClassifyCard,
         VHotCard,
         VRandCard,
     },
     async asyncData({params, app}) {
         //获取文章列表
-        let { data } = await app.$api.selectArticlePageByCategory(1, 10, params.name)
+        let { data } = await app.$api.selectPostsPageByClassify(1, 10, params.name)
         //获取全部分类
-        let categoryData = await app.$api.selectCategoryAll()
+        let classifyData = await app.$api.selectClassifyList()
         //获取热门文章
         let hotData = await app.$api.selectHotList()
         //随机文章
@@ -70,7 +70,7 @@ export default {
             name: params.name,//标签Id
             list: data.records,//文章list
             total: data.total,//文章总数
-            categoryList: categoryData.data,//全部标签
+            classifyList: classifyData.data,//全部标签
             hotList: hotData.data,//热门文章list
             randList: randData.data,//随机文章
             noticeList: noticeData.data,//通知列表
@@ -81,7 +81,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //根据标签分页
-            this.$api.selectArticlePageByCategory(this.pageCode, this.pageSize, this.name).then(res => {
+            this.$api.selectPostsPageByClassify(this.pageCode, this.pageSize, this.name).then(res => {
                this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

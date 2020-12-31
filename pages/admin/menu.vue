@@ -17,7 +17,7 @@
                         <el-input v-model="menu.title"></el-input>
                     </el-form-item>      
                     <el-form-item label="状态">
-                        <el-select style="width:100%;" v-model="menu.state">
+                        <el-select style="width:100%;" v-model="menu.status">
                             <el-option label="展示" :value="1"></el-option>
                             <el-option label="隐藏" :value="0"></el-option>
                         </el-select>
@@ -49,7 +49,7 @@
                     </el-table-column>
                     <el-table-column prop="" label="状态" align="center">
                         <template slot-scope="scope">
-                            <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.state" @change="handleState(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                            <el-switch :active-value="'1'" :inactive-value="'0'" v-model="scope.row.status" @change="handleStatus(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="180px" align="center">
@@ -93,7 +93,7 @@ export default {
                 url: '',
                 title: '',
                 sort: '',
-                state: 1,
+                status: '1',
             },
         }
     },
@@ -132,7 +132,7 @@ export default {
         goback(){
             this.addOrChange = true
             this.menu.indexes = this.menu.url = this.menu.title = this.menu.sort = this.menu.id = ''
-            this.menu.state = 1
+            this.menu.status = '1'
         },
         //修改分类
         setChangeInfo(row){
@@ -140,8 +140,8 @@ export default {
             this.addOrChange = false
         },
         //修改状态
-        handleState(row){
-            this.$api.updateMenuState(row.id, row.state).then(res => {
+        handleStatus(row){
+            this.$api.updateMenu(row).then(res => {
                 this.commonAfterHandle(res)
             })
         },

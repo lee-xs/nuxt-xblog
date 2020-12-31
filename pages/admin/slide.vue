@@ -14,14 +14,14 @@
                         <el-input v-model="slide.url"></el-input>
                     </el-form-item>
                     <el-form-item label="文章ID">
-                        <el-input v-model="slide.articleId"></el-input>
+                        <el-input v-model="slide.postsId"></el-input>
                     </el-form-item>
                     <el-form-item label="图片链接">
                         <el-input v-model="slide.cover" style="width:78%;"></el-input>
                         <el-button type="primary" plain @click="dialogImage = true" style="width:20%;"><i class="el-icon-picture"></i></el-button>
                     </el-form-item>
                     <div style="margin-top:20px;">
-                        <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAddSlide()">添加</el-button>
+                        <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAdd()">添加</el-button>
                         <div v-else>
                             <el-button type="primary" @click="handleChangeSlide()" plain>修改</el-button>
                             <el-button type="primary" @click="goback()" plain>返回添加</el-button>
@@ -42,7 +42,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column align="center" prop="url" label="外部链接"></el-table-column>
-                    <el-table-column align="center" prop="articleId" label="文章ID" width="65"></el-table-column>
+                    <el-table-column align="center" prop="postsId" label="文章ID" width="65"></el-table-column>
                     <el-table-column align="center" label="排序" width="95">
                         <template slot-scope="scope">
                             <el-button type="primary" plain circle size="mini" @click="handleSortUp(scope.row)"><i class="el-icon-arrow-up"></i></el-button>
@@ -52,7 +52,7 @@
                     <el-table-column align="center" label="操作" width="150">
                         <template slot-scope="scope">
                             <el-button type="primary" plain size="mini" @click="setSlideInfo(scope.row)">修改</el-button>
-                            <el-button type="danger" plain size="mini" @click="handleDelSlide(scope.row)">删除</el-button>
+                            <el-button type="danger" plain size="mini" @click="handleRemove(scope.row)">删除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -78,7 +78,7 @@ export default {
     },
     async asyncData({ app }){
         let imageData = await app.$api.selectImagePage(1,12)
-        let slideData = await app.$api.selectSlideAll()
+        let slideData = await app.$api.selectSlideList()
         return {
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
@@ -95,7 +95,7 @@ export default {
                 id: '',
                 title: '',
                 url: '',
-                articleId: '',
+                postsId: '',
                 cover: '',
             },
         }
@@ -103,7 +103,7 @@ export default {
     methods:{
         //发送获取幻灯片列表请求
         handleSlideList(){
-            this.$api.selectSlideAll().then(res => {
+            this.$api.selectSlideList().then(res => {
                 this.slideList = res.data
             })
         },
@@ -148,7 +148,7 @@ export default {
         /**
          * 向后台发送添加幻灯片请求
          */
-        handleAddSlide(){
+        handleAdd(){
             if(this.commonBeforeHandle()){
                 this.$api.insertSlide(this.slide).then(res => {
                     this.commonAfterHandle(res)
@@ -158,7 +158,7 @@ export default {
         /**
          * 处理删除幻灯片 向后台发送删除请求
          */
-        handleDelSlide(row){
+        handleRemove(row){
             this.$api.deleteSlide(row.id).then(res => {
                 this.commonAfterHandle(res)
             })
@@ -166,23 +166,23 @@ export default {
         //返回至添加幻灯片
         goback(){
             this.addOrChange = true
-            this.slide.id = this.slide.title = this.slide.url = this.slide.articleId = this.slide.cover = ''
+            this.slide.id = this.slide.title = this.slide.url = this.slide.postsId = this.slide.cover = ''
         },
         //处理排序上升
         handleSortUp(data){
-            this.$api.updateSlideSortUp(data.id, data.sort).then(res => {
+            this.$api.updateSlideSortUp(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //处理排序下降
         handleSortNext(data){
-            this.$api.updateSlideSortNext(data.id, data.sort).then(res => {
+            this.$api.updateSlideSortNext(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //公共前置处理方法
         commonBeforeHandle(){
-            if((this.slide.url == '' && this.slide.articleId == '') || 
+            if((this.slide.url == '' && this.slide.postsId == '') || 
                 this.slide.title == '' ||
                 this.slide.cover == ''){
                     this.$message.error("参数不能留空")

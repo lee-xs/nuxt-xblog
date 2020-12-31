@@ -15,7 +15,7 @@
             <h3 class="tl-year-month" v-text="list.time"></h3>
           </li>
           <div class="tl-body">
-            <li class="tl-item" v-for="(item,index) in list.articleList" :key="index">
+            <li class="tl-item" v-for="(item,index) in list.postsList" :key="index">
               <div class="tl-wrap b-info">
                 <span class="tl-date" v-text="item.publishTime.substring(8,10) + '日'"></span>
                 <p class="tl-content panel padder bg-info">
@@ -69,7 +69,7 @@ export default {
   },
   async asyncData({ app }) {
     //获取全部标签
-    let tagData = await app.$api.selectTagAll()
+    let tagData = await app.$api.selectTagList()
     //随机文章
     let randData = await app.$api.selectRandList();
     //归档

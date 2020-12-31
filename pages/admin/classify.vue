@@ -3,15 +3,15 @@
         <el-col :span="8">
             <div class="slide-box" style="margin-right:5px; background-color:#fff;">
                 <h3 v-text="addOrChange?'添加分类':'修改分类'"></h3>
-                <el-form class="form" :data="category" label-position="top" label-width="80px">
+                <el-form class="form" :data="classify" label-position="top" label-width="80px">
                     <el-form-item label="ID">
-                        <el-input v-model="category.id" :disabled="true"></el-input>
+                        <el-input v-model="classify.id" :disabled="true"></el-input>
                     </el-form-item>
                     <el-form-item label="分类名称">
-                        <el-input v-model="category.name"></el-input>
+                        <el-input v-model="classify.name"></el-input>
                     </el-form-item>
                     <el-form-item label="文章数">
-                        <el-input v-model="category.count" :disabled="true"></el-input>
+                        <el-input v-model="classify.count" :disabled="true"></el-input>
                     </el-form-item>    
                     <div style="margin-top:20px;">
                         <el-button v-if="addOrChange" type="primary" plain style="width:100%" @click="handleAdd()">添加</el-button>
@@ -66,7 +66,7 @@ export default {
             pageCode: 1,
             pageSize: 10,
             addOrChange: true, //默认为添加
-            category:{
+            classify:{
                 id: '',
                 name:'',
                 count: '',
@@ -74,7 +74,7 @@ export default {
         }
     },
     async asyncData({ app }){
-        let result = await app.$api.selectCategoryPage(1, 10)
+        let result = await app.$api.selectClassifyPage(1, 10)
         return {
             list: result.data.records,//分类列表
             total: result.data.total,//分类总数
@@ -84,7 +84,7 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            this.$api.selectCategoryPage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectClassifyPage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false
@@ -92,14 +92,14 @@ export default {
         },
         handleAdd(){
             if(this.commonBeforeHandle()){
-                this.$api.insertCategory(this.category.name).then(res => {
+                this.$api.insertClassify(this.classify.name).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
         },
         handleChange(){
             if(this.commonBeforeHandle()){
-                this.$api.updateCategory(this.category).then(res => {
+                this.$api.updateClassify(this.classify).then(res => {
                     this.commonAfterHandle(res)
                 })
             }
@@ -107,24 +107,24 @@ export default {
         //返回至添加
         goback(){
             this.addOrChange = true
-            this.category.name = this.category.count = this.category.id = ''
+            this.classify.name = this.classify.count = this.classify.id = ''
         },
         //修改分类
         setChangeInfo(row){
-            this.category = JSON.parse(JSON.stringify(row))
+            this.classify = JSON.parse(JSON.stringify(row))
             this.addOrChange = false
         },
         //删除分类
         handleRemove(id){
             let ids = []
             ids.push(id)
-            this.$api.deleteCategory(ids).then(res => {
+            this.$api.deleteClassify(ids).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //公共处理方法
         commonBeforeHandle(){
-            if(this.category.name == ''){
+            if(this.classify.name == ''){
                 this.$message.error('必填项不能为空')
                 return false
             }

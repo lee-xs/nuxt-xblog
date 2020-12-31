@@ -9,7 +9,7 @@
               <p v-text="'网站名称：' + $store.state.siteInfo.site.siteName"></p>
               <p v-text="'网站logo：' + $store.state.siteInfo.site.logo"></p>
               <p v-text="'网站地址：' + $store.state.siteInfo.site.siteUrl"></p>
-              <p v-text="'联系邮箱：' + $store.state.siteInfo.admin.email"></p>
+              <p v-text="'联系邮箱：' + $store.state.siteInfo.user.email"></p>
               <p>注意：申请友链时请将本站设为贵站的友链</p>
               <el-button @click="drawer = true" style="width: 400px; margin-top: 10px;  background-color: rgba(254,219,207,0)">填写友链信息</el-button>
 
@@ -47,8 +47,6 @@
         <v-links-box :linksList="linksList"></v-links-box>
     </el-row>
 
-    
-
     <el-drawer
       :visible.sync="drawer">
       <el-form id="form" :label-position="labelPosition" label-width="100px" :model="links">
@@ -84,6 +82,7 @@ export default {
   },
   async asyncData({ app }){
     let linksListData = await app.$api.selectLinksAll()
+    console.log(linksListData)
     return{
       linksList: linksListData.data,//友链列表
     }
@@ -120,7 +119,7 @@ export default {
         return;
       }
       //发送添加友链请求
-      this.$api.insertLinks(this.links).then(res => {
+      this.$api.applyLinks(this.links).then(res => {
         if(res.code == 20000){
           this.$message({
             type: 'success',

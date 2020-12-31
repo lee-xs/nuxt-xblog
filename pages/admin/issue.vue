@@ -1,9 +1,9 @@
 <template>
     <el-row :gutter="10" class="animated fadeInUp">
         <el-col :span="18">
-            <el-input v-model="article.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
+            <el-input v-model="posts.title" placeholder="请输入文章标题" style="margin-bottom:10px;"></el-input>
             <no-ssr>
-                <mavon-editor style="height: 650px;" ref="md" :toolbars="toolbars" v-model="article.content" @imgAdd="handleUploadImg"/>
+                <mavon-editor style="height: 650px;" ref="md" :toolbars="toolbars" v-model="posts.content" @imgAdd="handleUploadImg"/>
             </no-ssr>
         </el-col>
         <el-col :span="6">
@@ -18,11 +18,11 @@
                         <div v-show="issueShow" class="details">
                             <div>
                                 <span><b>发布作者：</b></span>
-                                <el-input type="text" v-model="article.author"  style="width:200px;" placeholder="添加作者名称"/>
+                                <el-input type="text" v-model="posts.author"  style="width:200px;" placeholder="添加作者名称"/>
                             </div>
                             <div style="margin-top:15px;">
                                 <span><b>文章类型：</b></span>
-                                <el-select style="width:200px;" v-model="article.source">
+                                <el-select style="width:200px;" v-model="posts.source">
                                     <el-option label="原创" :value="1"></el-option>
                                     <el-option label="转载" :value="2"></el-option>
                                     <el-option label="翻译" :value="3"></el-option>
@@ -30,14 +30,14 @@
                             </div>
                             <div style="margin-top:15px;">
                                 <span><b>开启评论：</b></span>
-                                <el-select style="width:200px;" v-model="article.allowComment">
+                                <el-select style="width:200px;" v-model="posts.allowComment">
                                     <el-option label="是" :value="1"></el-option>
                                     <el-option label="否" :value="0"></el-option>
                                 </el-select>
                             </div>
                             <div style="margin-top:15px;">
-                                <el-button style="width:46%;" @click="handleArticle(2)">保存草稿</el-button>
-                                <el-button style="width:46%;" type="primary" @click="handleArticle(1)">发布</el-button>
+                                <el-button style="width:46%;" @click="handlePosts(0)">保存草稿</el-button>
+                                <el-button style="width:46%;" type="primary" @click="handlePosts(1)">发布</el-button>
                             </div>
                         </div>
                     </el-collapse-transition>
@@ -47,21 +47,21 @@
                 <el-col :span="24" class="box-card" style="background-color:#fff;">
                     <div class="clearfix">
                         <span><b>分类/标签</b></span>
-                        <el-button style="float: right; padding: 6px 0" type="text" @click="categoryTagShow=!categoryTagShow"><i :class="categoryTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
+                        <el-button style="float: right; padding: 6px 0" type="text" @click="classifyTagShow=!classifyTagShow"><i :class="classifyTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
                     </div>
                     <el-collapse-transition>
-                        <div v-show="categoryTagShow" class="details">
+                        <div v-show="classifyTagShow" class="details">
                             <div>
                                 <span><b>分类：</b></span>
-                                <el-select style="width:200px;" v-model="article.category" placeholder="请选择">
-                                    <el-option v-for="(item,index) in categoryList" :key="index" :label="item.name" :value="item.name"></el-option>
+                                <el-select style="width:200px;" v-model="posts.classify" placeholder="请选择">
+                                    <el-option v-for="(item,index) in classifyList" :key="index" :label="item.name" :value="item.name"></el-option>
                                 </el-select>
                             </div>
                             <div style="margin-top:15px;">
                                 <span><b>标签：</b></span>
                                 <el-input type="text" v-model="inputTag" @keyup.enter.native="handleAdd()" @blur="handleAdd()" style="width:200px;" placeholder="添加标签"/>
                                 <div style="width:100%; margin:10px 0;">
-                                    <el-tag :key="item" v-for="item in article.tag" closable :disable-transitions="false" @close="handleClose(item)" style="margin:3px;">
+                                    <el-tag :key="item" v-for="item in posts.tag" closable :disable-transitions="false" @close="handleClose(item)" style="margin:3px;">
                                         <span v-text="item"></span>
                                     </el-tag>
                                 </div>
@@ -78,7 +78,7 @@
                 <el-col :span="24" class="box-card" style="background-color:#fff;">
                     <div class="clearfix">
                         <span><b>封面图</b></span>
-                        <el-button style="float: right; padding: 6px 0" type="text" @click="coverTagShow=!coverTagShow"><i :class="categoryTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
+                        <el-button style="float: right; padding: 6px 0" type="text" @click="coverTagShow=!coverTagShow"><i :class="classifyTagShow?'fa fa-minus':'fa fa-plus'"></i></el-button>
                     </div>
                     <el-collapse-transition>
                         <div v-show="coverTagShow" class="details">
@@ -109,21 +109,21 @@ export default {
         }
     },
     async asyncData({ app }){
-        let categoryData = await app.$api.selectCategoryAll()
-        let tagData = await app.$api.selectTagAll()
+        let classifyData = await app.$api.selectClassifyList()
+        let tagData = await app.$api.selectTagList()
         let imageData = await app.$api.selectImagePage(1,12)
         return {
-            categoryList: categoryData.data,//全部分类
+            classifyList: classifyData.data,//全部分类
             tagList: tagData.data,//全部标签
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
         }
     },
     created(){
-        if(this.$store.state.compileArticle.id != undefined){
-            this.article = this.$store.state.compileArticle
-            this.cover = this.article.cover
-            this.$store.commit('SET_COMPILEARTICLE', {})
+        if(this.$store.state.compilePosts.id != undefined){
+            this.posts = this.$store.state.compilePosts
+            this.cover = this.posts.cover
+            this.$store.commit('SET_COMPILEPOSTS', {})
         }
     },
     data(){
@@ -164,7 +164,7 @@ export default {
                 subfield: true, // 单双栏模式
                 preview: true, // 预览
             },
-            article:{
+            posts:{
                 title: '',//文章标题
                 author: '',//作者
                 cover: '',//封面图片
@@ -174,11 +174,11 @@ export default {
                 state: '',//状态 0 回收站 1 已发布 2 草稿箱
                 source: 1,//文章来源 原创1 转载2 翻译3
                 allowComment: 1,//是否允许评论（允许1，禁止0）
-                category: '',//文章所属分类
+                classify: '',//文章所属分类
                 tag: [],//文章所属标签
             },
             issueShow: true,
-            categoryTagShow:true,
+            classifyTagShow:true,
             coverTagShow: true,
             dynamicTags: [],
             selectTag: '',
@@ -198,42 +198,42 @@ export default {
         /**
          * 处理文章
          */
-        handleArticle(state){
-            this.article.state = state    
-            if(this.article.title == '' ||
-            this.article.content == '' ||
-            this.article.author == '' ||
-            this.article.cover == '' ||
-            this.article.category == '' ||
-            this.article.tag == ''){
+        handlePosts(status){
+            this.posts.status = status    
+            if(this.posts.title == '' ||
+            this.posts.content == '' ||
+            this.posts.author == '' ||
+            this.posts.cover == '' ||
+            this.posts.classify == '' ||
+            this.posts.tag == ''){
                 this.$message.error('必填项不能为空')
                 return
             }
-            this.article.html = this.$refs.md.d_render
+            this.posts.html = this.$refs.md.d_render
 
-            if(this.article.id == null)
-                this.handleAddArticle(state)
+            if(this.posts.id == null)
+                this.handleAddPosts()
             else
-                this.handleUpdateArticle(state)     
+                this.handleUpdatePosts()     
         },
         /**
          * 发送文章发布请求
          */
-        handleAddArticle(state){
-            this.$api.insertArticle(this.article).then(res => {
-                this.afterHandleArticle(res)
+        handleAddPosts(){
+            this.$api.insertPosts(this.posts).then(res => {
+                this.afterHandlePosts(res)
             })
         },
         /**
          * 发送修改文章发布请求
          */
-        handleUpdateArticle(state){
-            this.$api.updateArticle(this.article).then(res => {
-                this.afterHandleArticle(res)
+        handleUpdatePosts(){
+            this.$api.updatePosts(this.posts).then(res => {
+                this.afterHandlePosts(res)
             })
         },
         //处理文章后置处理方法
-        afterHandleArticle(res){
+        afterHandlePosts(res){
             if(res.code == 20000){
                 this.$message({
                     type: 'success',
@@ -253,7 +253,7 @@ export default {
          * markdown子组件向父组件传入文章内容
          */
         handleEditorContent(data){
-            this.article.content = data
+            this.posts.content = data
         },
 
         handleUploadImg(pos, file){
@@ -276,7 +276,7 @@ export default {
         //接收子组件传来的imageUrl 修改图片路径
         handleImageUrl(data){
             this.cover = data
-            this.article.cover = data
+            this.posts.cover = data
             this.dialogImage = false
         },
 
@@ -285,7 +285,7 @@ export default {
          * 标签添加相关
          */
         handleClose(item){
-            this.article.tag.splice(this.article.tag.indexOf(item), 1);
+            this.posts.tag.splice(this.posts.tag.indexOf(item), 1);
         },
         handleAdd(){
             if(this.inputTag != ''){
@@ -300,16 +300,16 @@ export default {
         },
         commonHandle(tag){
             let bool = true
-            if(this.article.tag == null){
-                this.article.tag = []
+            if(this.posts.tag == null){
+                this.posts.tag = []
             }
-            this.article.tag.forEach(element => {
+            this.posts.tag.forEach(element => {
                 if(element == tag){
                     bool = false
                     return
                 }
             });
-            if(bool) this.article.tag.push(tag)
+            if(bool) this.posts.tag.push(tag)
         },
         //##################################################
     },

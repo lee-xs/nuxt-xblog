@@ -52,10 +52,10 @@ export default {
             menuSpan:'',
             navs: [
                 {name: '', title: '首页', type: 'el-icon-menu'},
-                {name: 'article', title: '文章管理' , type: 'el-icon-tickets', child: [
+                {name: 'posts', title: '文章管理' , type: 'el-icon-tickets', child: [
                     {name: 'list', title: '全部文章', type: 'el-icon-takeaway-box'},
                     {name: 'issue', title: '发布文章', type: 'el-icon-edit-outline'},
-                    {name: 'category', title: '分类', type: 'el-icon-bank-card'},
+                    {name: 'classify', title: '分类', type: 'el-icon-bank-card'},
                     {name: 'tag', title: '标签', type: 'el-icon-discount'},
                 ]},
                 {name: 'menu', title: '菜单管理', type: 'el-icon-menu'},

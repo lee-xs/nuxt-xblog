@@ -1,13 +1,13 @@
 <template>
-    <el-tabs v-model="activeName" class="animated fadeInUp">
-        <el-tab-pane v-loading="loading" label="已发布" name="first">
-            <v-list-tab key="first" @moveRecycle="moveRecycle" :tabType="'first'" :list="articleList" :total="articleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
+    <el-tabs v-model="status" class="animated fadeInUp">
+        <el-tab-pane v-loading="loading" label="已发布" name="1">
+            <v-list-tab key="first" @moveRecycle="moveRecycle" :tabType="'first'" :list="postsList" :total="postsListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
-        <el-tab-pane v-loading="loading" label="草稿箱" name="second">
+        <el-tab-pane v-loading="loading" label="草稿箱" name="0">
             <v-list-tab key="second" @moveRecycle="moveRecycle" :tabType="'second'" :list="draftsList" :total="draftsListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
-        <el-tab-pane v-loading="loading" label="回收站" name="third">
-            <v-list-tab key="third" @removeArticle="removeArticle" :tabType="'third'" :list="recycleList" :total="recycleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
+        <el-tab-pane v-loading="loading" label="回收站" name="2">
+            <v-list-tab key="third" @removePosts="removePosts" :tabType="'third'" :list="recycleList" :total="recycleListTotal" @pageCode="handleCurrentChange"></v-list-tab>
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -19,7 +19,7 @@ export default {
     data(){
         return{
             loading: false,
-            activeName: 'first',
+            status: '1',
             value: 0,
             pageCode: 1,
             pageSize: 10,
@@ -34,13 +34,13 @@ export default {
         VListTab
     },
     async asyncData({ app }){
-        let articleListData = await app.$api.selectArticlePage(1, 10)
-        let draftsListData = await app.$api.selectDrafts(1, 10)
-        let recycleListData = await app.$api.selectRecycle(1, 10)
+        let postsListData = await app.$api.selectPostsPage(1, 10, 1)
+        let draftsListData = await app.$api.selectPostsPage(1, 10, 0)
+        let recycleListData = await app.$api.selectPostsPage(1, 10, 2)
         return {
             //已发布的
-            articleList: articleListData.data.records,
-            articleListTotal: articleListData.data.total,
+            postsList: postsListData.data.records,
+            postsListTotal: postsListData.data.total,
             //草稿箱内
             draftsList: draftsListData.data.records,
             draftsListTotal: draftsListData.data.total,
@@ -53,24 +53,30 @@ export default {
         handleCurrentChange(data){
             this.loading = true
             this.pageCode = data
-            switch(this.activeName){
-                case 'first':
-                    //默认分页
-                    this.findPageArticle()
-                break;
-                case 'second':
-                    //草稿箱分页
-                    this.findDrafts()
-                break;
-                case 'third':
-                    //回收站分页
-                    this.findRecycle()
-                break;
-            }
+            this.handlePostsPage(this.pageCode, this.status)
+        },
+        handlePostsPage(pageCode, status){
+            this.$api.selectPostsPage(pageCode, this.pageSize, status).then(res => {
+                switch(status){
+                    case "0":
+                        this.draftsList = res.data.records
+                        this.draftsListTotal = res.data.totall
+                        break;
+                    case "1":
+                        this.postsList = res.data.records
+                        this.postsListTotal = res.data.total
+                        break;
+                    case "2":
+                        this.recycleList = res.data.records
+                        this.recycleListTotal = res.data.total
+                        break;
+                }
+                this.loading = false
+            })
         },
         //移除文章
         moveRecycle(id){
-            this.$api.deleteRecycle(id).then(res => {
+            this.$api.movePosts(id).then(res => {
                 if(res.code == 20000){
                     this.$message({
                         type: 'success',
@@ -78,16 +84,17 @@ export default {
                     })
                 }
 
-                //重载草稿箱和回收站的分页数据
-                this.handleCurrentChange(1)
-                this.findRecycle()
+                //重载分页数据
+                this.handlePostsPage(1, '0')
+                this.handlePostsPage(1, '1')
+                this.handlePostsPage(1, '2')
             })
         },
         //回收站彻底删除文章
-        removeArticle(id){
+        removePosts(id){
             let ids = []
             ids.push(id)
-            this.$api.deleteArticle(ids).then(res => {
+            this.$api.deletePosts(ids).then(res => {
                 if(res.code == 20000){
                     this.$message({
                         type: 'success',
@@ -97,30 +104,6 @@ export default {
 
                 //重载草稿箱和回收站的分页数据
                 this.handleCurrentChange(1)
-            })
-        },
-        //默认分页
-        findPageArticle(){
-            this.$api.selectArticlePage(this.pageCode, this.pageSize).then(res => {
-                this.articleList = res.data.records
-                this.articleListTotal = res.data.total
-                this.loading = false
-            })
-        },
-        //草稿箱分页
-        findDrafts(){
-            this.$api.selectDrafts(this.pageCode, this.pageSize).then(res => {
-                this.draftsList = res.data.records
-                this.draftsListTotal = res.data.total
-                this.loading = false
-            })
-        },
-        //回收站分页
-        findRecycle(){
-            this.$api.selectRecycle(this.pageCode, this.pageSize).then(res => {
-                this.recycleList = res.data.records
-                this.recycleListTotal = res.data.total
-                this.loading = false
             })
         },
     },

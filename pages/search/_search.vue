@@ -6,7 +6,7 @@
 
         <!-- list -->
         <el-col :span="17" :xs="24" id="left">
-            <v-article-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-article-list>
+            <v-posts-list :list="list" :total="total" @pageCode="handleCurrentChange"></v-posts-list>
         </el-col>
 
        
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import VArticleList from '~/components/home/article-list'
+import VPostsList from '~/components/home/posts-list'
 import VNotice from '~/components/home/notice'
 import VSearchInput from "~/components/home/search-input"
 import VRandCard from "~/components/home/rand-card"
@@ -45,7 +45,7 @@ export default {
     },
     components:{
         VNotice,
-        VArticleList,
+        VPostsList,
         VSearchInput,
         VRandCard,
         VTagCard,
@@ -54,7 +54,7 @@ export default {
         //搜索
         let { data } = await app.$api.selectSearch(1, 10, params.search);
         //获取全部标签
-        let tagData = await app.$api.selectTagAll()
+        let tagData = await app.$api.selectTagList()
         //随机文章
         let randData = await app.$api.selectRandList();
         //获取通知

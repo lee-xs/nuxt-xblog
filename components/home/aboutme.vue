@@ -2,8 +2,7 @@
     <div class="card-container animated fadeInUp">
         <p class="card-container-title">关于本站</p>
         <div>
-            <!-- <img :src="siteInfo.admin.avatar" style="width: 100%; height: 200px;"/> -->
-            <el-image class="el-image" :src="siteInfo.admin.avatar">
+            <el-image class="el-image" :src="siteInfo.user.avatar">
                 <div slot="placeholder" class="image-slot">
                     <img :src="loadingImg" class="loading-img">
                 </div>
