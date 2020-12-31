@@ -255,7 +255,7 @@ export default ({ app: { $request, $axios }}, inject) => {
         },
         //查询站点信息
         selectSiteInfo(){
-            return $request.get('/site/s/info')
+            return $request.get('/site/s/siteInfo')
         },
 
         //#################### 幻灯片相关 ####################

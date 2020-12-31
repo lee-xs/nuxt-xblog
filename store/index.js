@@ -33,7 +33,7 @@ export const actions = {
     async nuxtServerInit({commit}, {req, app}){      
         const cookie = parseCookie(req.headers.cookie)
         commit('SET_TOKEN', cookie.token)
-        commit('SET_SITEINFO', (await app.$api.selectSite()).data)
+        commit('SET_SITEINFO', (await app.$api.selectSiteInfo()).data)
         commit('SET_MENU', (await app.$api.selectMenuAll()).data)
     },
 }

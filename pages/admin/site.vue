@@ -104,7 +104,7 @@ export default {
         }
     },
     async asyncData({ app }){
-        let siteInfoData = await app.$api.selectSiteInfo()
+        let siteInfoData = await app.$api.selectSite()
         let imageData = await app.$api.selectImagePage(1,12)
         return{
             siteInfo: siteInfoData.data,

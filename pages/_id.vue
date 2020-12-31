@@ -135,7 +135,7 @@ export default {
         const id = params.id.substring(0, params.id.indexOf('.'))
         let postsData = await app.$api.selectPosts(id)
         //获取站点信息
-        let siteInfoData = await app.$api.selectSite()
+        let siteInfoData = await app.$api.selectSiteInfo()
         let siteInfo = siteInfoData.data
         return {
           posts: postsData.data.posts,

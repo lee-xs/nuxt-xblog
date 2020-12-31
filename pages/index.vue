@@ -69,7 +69,7 @@ export default {
         //获取文章列表
         let { data } = await app.$api.selectPostsPage(1, 10, 1)
         //获取站点信息
-        let siteInfoData = await app.$api.selectSite()
+        let siteInfoData = await app.$api.selectSiteInfo()
         //获取全部标签
         let tagData = await app.$api.selectTagList()
         //获取热门文章
