@@ -13,7 +13,7 @@
            <tbody>
               <tr>
                 <td>文章总数：</td>
-                <td v-text="siteInfo.articleCount + ' 篇'">0</td>
+                <td v-text="siteInfo.postsCount + ' 篇'">0</td>
               </tr>
               <tr class="gray">
                 <td>留言数量：</td>

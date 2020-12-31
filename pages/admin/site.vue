@@ -31,10 +31,10 @@
                 <el-input v-model="site.run"></el-input>
             </el-form-item>  
             <el-form-item label="文章总数：">
-                <el-input v-model="site.postsNum" :disabled="true"></el-input>
+                <el-input v-model="siteInfo.postsCount" :disabled="true"></el-input>
             </el-form-item>  
             <el-form-item label="留言总数：">
-                <el-input v-model="site.leaveWords" :disabled="true"></el-input>
+                <el-input v-model="siteInfo.commentsCount" :disabled="true"></el-input>
             </el-form-item>  
             <el-form-item label="github：">
                 <el-input v-model="site.github"></el-input>
@@ -104,11 +104,12 @@ export default {
         }
     },
     async asyncData({ app }){
-        let siteData = await app.$api.selectSiteInfo()
+        let siteInfoData = await app.$api.selectSiteInfo()
         let imageData = await app.$api.selectImagePage(1,12)
         return{
-            site: siteData.data.site,
-            user: siteData.data.user,
+            siteInfo: siteInfoData.data,
+            site: siteInfoData.data.site,
+            user: siteInfoData.data.user,
             imageList: imageData.data.records,//分页图片集合
             imageTotal: imageData.data.total,//图片总数
         }
