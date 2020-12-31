@@ -183,7 +183,7 @@ export default ({ app: { $request, $axios }}, inject) => {
         },
         //修改友链排序下降
         updateLinksSortNext(links){
-            return $request.put('/admin/links/u/sort/next/', links)
+            return $request.put('/admin/links/u/sort/next', links)
         },
         //查询全部友联
         selectLinksAll(){
@@ -229,11 +229,11 @@ export default ({ app: { $request, $axios }}, inject) => {
         },
         //修改目录排序上升
         updateMenuSortUp(menu){
-            return $request.put(`/admin/menu/u/sort/up`, menu)
+            return $request.put('/admin/menu/u/sort/up', menu)
         },
         //修改目录排序下降
         updateMenuSortNext(menu){
-            return $request.put(`/admin/menu/u/sort/next`, menu)
+            return $request.put('/admin/menu/u/sort/next', menu)
         },
         //查询全部菜单
         selectMenuAll(){

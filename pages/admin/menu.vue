@@ -155,13 +155,13 @@ export default {
         },
         //处理排序上升
         handleSortUp(data){
-            this.$api.updateMenuSortUp(data.id, data.sort).then(res => {
+            this.$api.updateMenuSortUp(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
         //处理排序下降
         handleSortNext(data){
-            this.$api.updateMenuSortNext(data.id, data.sort).then(res => {
+            this.$api.updateMenuSortNext(data).then(res => {
                 this.commonAfterHandle(res)
             })
         },
