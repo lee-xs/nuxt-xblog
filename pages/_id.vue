@@ -17,7 +17,7 @@
               </el-row>
               <P>
                 <span>Author&nbsp;</span><span v-text="posts.author"></span>&nbsp;
-                <span>In&nbsp;</span><span v-text="posts.category"></span>&nbsp;
+                <span>In&nbsp;</span><span v-text="posts.classify"></span>&nbsp;
                 <span>Publish&nbsp;</span><span v-text="posts.publishTime.substring(0,10)"></span>
               </P>
               <P>

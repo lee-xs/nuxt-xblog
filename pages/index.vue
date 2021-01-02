@@ -93,7 +93,7 @@ export default {
             this.loading = true
             this.pageCode = data
             //默认分页
-            this.$api.selectArticlePage(this.pageCode, this.pageSize).then(res => {
+            this.$api.selectPostsPage(this.pageCode, this.pageSize).then(res => {
                 this.list = res.data.records
                 this.total = res.data.total
                 this.loading = false

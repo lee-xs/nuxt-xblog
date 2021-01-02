@@ -8,7 +8,7 @@
                         <div v-text="item.title" class="title"></div>
                     </div>
                 </el-link>
-                <nuxt-link v-else :to="'/'+item.articleId + '.html'" style="width: 100%; display: block;">
+                <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 315px;">
                         <img :src="item.cover">
                         <div v-text="item.title" class="title"></div>
@@ -30,7 +30,7 @@
                             <div v-text="item.title" class="title"></div>
                         </div>
                     </el-link>
-                    <nuxt-link v-else :to="'/'+item.articleId + '.html'" style="width: 100%; display: block;">
+                    <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
                             <!-- <img :src="item.cover"> -->
                             <el-image class="el-image" :src="item.cover">

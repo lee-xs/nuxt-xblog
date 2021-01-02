@@ -42,8 +42,9 @@ export default ({ app: { $request, $axios }}, inject) => {
                 method: 'post',
             })
         },
+        //更新文章评论量
         updateComments(id){
-            return $request.put(`/article/comments/${id}`)
+            return $request.put(`/posts/u/comments/${id}`)
         },
         //移除到回收站
         movePosts(id){
@@ -85,10 +86,6 @@ export default ({ app: { $request, $axios }}, inject) => {
         selectArchives(){
             return $request.get('/posts/s/archives')
         },
-        //查看文章点赞数
-        selectLikes(articleId){
-            return $request.get(`/posts/s/likes/${articleId}`)
-        },
         //文章搜索
         selectSearch(pageCode, pageSize, search){
             return $request.get('/posts/s/search', {pageCode, pageSize, search})
@@ -105,8 +102,8 @@ export default ({ app: { $request, $axios }}, inject) => {
             return $request.delete('/admin/classify/d', ids)
         },
         //更新分类
-        updateClassify(category){
-            return $request.put('/admin/classify/u', category)
+        updateClassify(classify){
+            return $request.put('/admin/classify/u', classify)
         },
         //查询所有分类信息
         selectClassifyList(){
