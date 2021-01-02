@@ -36,7 +36,7 @@
 
 
     <!-- 文章内容 -->
-    <el-row class="article-container" style="z-index: 1;">
+    <el-row class="posts-container" style="z-index: 1;">
       <el-col :span="24" :md="21">
         <no-ssr>
           <mavon-editor style="backgournd:none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; padding: 20px 20px 5px 20px;" v-model="posts.content" :imageClick="imageClick()" :toolbarsFlag="false" :subfield="false" defaultOpen="preview" :boxShadow="false"/>
@@ -170,7 +170,7 @@ export default {
               type: 'success',
               message: res.message
             })
-            this.article.likes += 1
+            this.posts.likes += 1
           }
         })
       },
@@ -216,7 +216,7 @@ export default {
       },
       //更新评论量
       handleComments(){
-        this.$api.updateComments(this.article.id).then(res => {})
+        this.$api.updateComments(this.posts.id).then(res => {})
       }
     },
     created(){
@@ -293,7 +293,7 @@ export default {
 }
 //=================================
 
-.article-container{ 
+.posts-container{ 
     margin:0 auto 20px;
 }
 @media (max-width:768px) {
@@ -316,7 +316,7 @@ export default {
             }
         }
     }
-    .article-container{
+    .posts-container{
         width: 100%;
         .content {
             height: 100%;
@@ -351,7 +351,7 @@ export default {
             }
         }
     }
-    .article-container{
+    .posts-container{
         width: 850px;
        
         font-size: 15px;
