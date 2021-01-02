@@ -44,7 +44,7 @@
                     <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
                             <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
-                                <div slot="placeholder" class="image-slot" v-if="loadingImgVisible">
+                                <div slot="placeholder" class="image-slot" style="disploy:none;" v-if="loadingImgVisible">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
@@ -54,7 +54,7 @@
                     <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
                             <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
-                                <div slot="placeholder" class="image-slot" v-if="loadingImgVisible">
+                                <div slot="placeholder" class="image-slot" style="disploy:none;" v-if="loadingImgVisible">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
