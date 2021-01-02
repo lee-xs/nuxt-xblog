@@ -1,6 +1,6 @@
 <template>
     <div class="slide-container animated fadeInUp">
-        <!-- <el-carousel trigger="click" height="315px" :interval="6000">
+        <el-carousel trigger="click" height="315px" :interval="6000">
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
                 <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 315px;">
@@ -23,9 +23,9 @@
                     </div>
                 </nuxt-link>
             </el-carousel-item>
-        </el-carousel> -->
+        </el-carousel>
 
-        <!-- <Carousel  loop :autoplay="true" autoplay-speed="1000">
+        <!-- <Carousel  loop :autoplay="true" autoplay-speed="3000">
             <CarouselItem v-for="(item, index) in slideList" :key="index">
                 <div style="width: 100%; height: 315px;">
                     <el-image class="el-image" :src="item.cover">
@@ -38,23 +38,24 @@
             </CarouselItem>
         </Carousel> -->
 
-        <div v-swiper:mySwiper="swiperOption" class="swiperWrap">
+        <!-- <div v-swiper:mySwiper="swiperOption" class="swiperWrap">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item,index) in slideList" :key="index">
                     <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
-                            <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
-                                <div slot="placeholder" class="image-slot" style="disploy:none;" v-if="loadingImgVisible">
+                            <el-image class="el-image" :src="item.cover">
+                                <div slot="placeholder" class="image-slot">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
+                            <img :src="item.cover" />
                             <div v-text="item.title" class="title"></div>
                         </div>
                     </el-link>
                     <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
                             <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
-                                <div slot="placeholder" class="image-slot" style="disploy:none;" v-if="loadingImgVisible">
+                                <div slot="placeholder" class="image-slot" v-if="swiperOption.loopedSlides[0]">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
@@ -64,7 +65,7 @@
                 </div>
             </div>
             <div class="swiper-pagination swiper-pagination-bullets"></div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -125,7 +126,6 @@ export default {
     // img{
     //     width: 100%;
     //     height: 100%;
-        
     // }
     .title{
         background-color: #c40000; 
