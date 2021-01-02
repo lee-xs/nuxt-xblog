@@ -4,26 +4,47 @@
             <el-carousel-item v-for="(item,index) in slideList" :key="index">
                 <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 315px;">
-                        <img :src="item.cover">
+                        <el-image class="el-image" :src="item.cover">
+                            <div slot="placeholder" class="image-slot">
+                                <img :src="loadingImg" class="loading-img">
+                            </div>
+                        </el-image>
                         <div v-text="item.title" class="title"></div>
                     </div>
                 </el-link>
                 <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                     <div style="width: 100%; height: 315px;">
-                        <img :src="item.cover">
+                        <el-image class="el-image" :src="item.cover">
+                            <div slot="placeholder" class="image-slot">
+                                <img :src="loadingImg" class="loading-img">
+                            </div>
+                        </el-image>
                         <div v-text="item.title" class="title"></div>
                     </div>
                 </nuxt-link>
             </el-carousel-item>
         </el-carousel> -->
+
+        <!-- <Carousel  loop :autoplay="true" autoplay-speed="1000">
+            <CarouselItem v-for="(item, index) in slideList" :key="index">
+                <div style="width: 100%; height: 315px;">
+                    <el-image class="el-image" :src="item.cover">
+                        <div slot="placeholder" class="image-slot">
+                            <img :src="loadingImg" class="loading-img">
+                        </div>
+                    </el-image>
+                    <div v-text="item.title" class="title"></div>
+                </div>
+            </CarouselItem>
+        </Carousel> -->
+
         <div v-swiper:mySwiper="swiperOption" class="swiperWrap">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item,index) in slideList" :key="index">
                     <el-link v-if="item.url != ''" :href="item.url" :underline="false" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
-                            <!-- <img :src="item.cover"> -->
-                            <el-image class="el-image" :src="item.cover">
-                                <div slot="placeholder" class="image-slot">
+                            <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
+                                <div slot="placeholder" class="image-slot" v-if="loadingImgVisible">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
@@ -32,9 +53,8 @@
                     </el-link>
                     <nuxt-link v-else :to="'/'+item.postsId + '.html'" style="width: 100%; display: block;">
                         <div style="width: 100%; height: 100%;">
-                            <!-- <img :src="item.cover"> -->
-                            <el-image class="el-image" :src="item.cover">
-                                <div slot="placeholder" class="image-slot">
+                            <el-image class="el-image" :src="item.cover" @load="handleLoadingImgVisible()">
+                                <div slot="placeholder" class="image-slot" v-if="loadingImgVisible">
                                     <img :src="loadingImg" class="loading-img">
                                 </div>
                             </el-image>
@@ -54,8 +74,10 @@ export default {
     props:['slideList'],
     data: () => ({
         loadingImg: stripe,
+        loadingImgVisible: true,
         swiperOption: {
             loop: true,
+            loopedSlides: 1,
             //滚动切换的步数
             //speed: 3000, 
             //自动轮播间隔时间
@@ -70,9 +92,15 @@ export default {
                 el: '.swiper-pagination',
                 //dynamicBullets: true,
                 clickable :true,
-            },
+            }
         }
-    })
+    }),
+    methods: {
+        handleLoadingImgVisible(){
+            this.loadingImgVisible = false
+            this.loadingImg = null
+        }
+    }
 }
 </script>
 
@@ -94,6 +122,11 @@ export default {
             }
         }
     }
+    // img{
+    //     width: 100%;
+    //     height: 100%;
+        
+    // }
     .title{
         background-color: #c40000; 
         position: absolute; 
@@ -115,6 +148,9 @@ export default {
         .el-image{
             height: 315px;
         }
+        // img{
+        //     height: 315px;
+        // }
     }
 }
 @media (max-width:768px) {
@@ -123,6 +159,9 @@ export default {
         .el-image{
             height: 240px;
         }
+        // img{
+        //     height: 240px;
+        // }
     }
 }
 </style>
