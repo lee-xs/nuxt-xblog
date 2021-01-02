@@ -81,7 +81,7 @@
               <el-button circle><span class="iconfont">&#xe670;</span></el-button>
             </el-col> -->
             <el-col :span="24" style="margin-bottom: 3px;">
-              <el-button circle><span class="iconfont">&#xe63a;</span></el-button>
+              <el-button circle><a href="#comment"><span class="iconfont">&#xe63a;</span></a></el-button>
             </el-col>
             <el-col :span="24" style="margin-bottom: 3px;">
               <span class="iconfont">&#xe604;</span>
