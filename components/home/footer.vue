@@ -3,7 +3,7 @@
         <div id="footer-content">
             <p>Copyright ©  <span v-text="siteInfo.site.siteName + '博客'">XIN博客</span> 版权所有 <span class="hidden-md-and-down">网站已运行 <span v-text="time"></span></span></p>
             <a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" id="upyun">本网站由 <img src="https://upyun.aleestar.cn/upyun_logo.png"/> 提供CDN加速/云存储服务</a>
-            <p v-text="siteInfo.site.icp"></p>
+            <p><a href="https://beian.miit.gov.cn" v-text="siteInfo.site.icp"></a></p>
         </div>
     </div>
 </template>
@@ -75,6 +75,10 @@ export default {
                 vertical-align: middle;
             }
         }
+        a{
+            color: #999999;
+        }
     }
 }
+
 </style>
