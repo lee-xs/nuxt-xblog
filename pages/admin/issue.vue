@@ -82,7 +82,7 @@
                     </div>
                     <el-collapse-transition>
                         <div v-show="coverTagShow" class="details">
-                            <img :src="cover || 'https://upyun.aleestar.cn/thumbnail.png'" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
+                            <img :src="cover || 'https://up.alees.cn/thumbnail.png'" @click="dialogImage = true" style="width:100%; padding: 4px; border-radius:4px; border:1px solid #ddd"/>
                         </div>
                     </el-collapse-transition>
                 </el-col>

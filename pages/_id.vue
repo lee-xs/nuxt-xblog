@@ -157,7 +157,7 @@ export default {
     methods: {
       randomSketckBg(){
         const rand = Math.floor(Math.random()*5)+1
-        this.sketchBg = 'https://upyun.aleestar.cn/sketchBg0' + rand+'.jpg'
+        this.sketchBg = 'https://up.alees.cn/sketchBg0' + rand+'.jpg'
       },
       imageClick(){
         

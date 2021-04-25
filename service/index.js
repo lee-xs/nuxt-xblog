@@ -4,7 +4,7 @@ import { Message } from 'element-ui'
 import { state } from '@/store'
 
 if(process.server){
-    //config.baseURL = `http://${process.env.HOST || 'aleestar.cn'}:${process.env.PORT || 2922}`
+    //config.baseURL = `http://${process.env.HOST || 'alees.cn'}:${process.env.PORT || 2922}`
     config.baseURL = `http://${process.env.HOST || 'localhost'}:${process.env.PORT || 2922}`
 }
 
