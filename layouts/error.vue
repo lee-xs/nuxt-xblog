@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="whole">
-            <img src="http://qiniu.aleestar.cn/404back20200330013019.jpg" />
+            <img src="https://up.alees.cn/404back20200330013019.jpg" />
             <div class="mask"></div>
         </div>
         <div class="b">
-            <img src="http://qiniu.aleestar.cn/40420200330012942.png" class="center"/>
+            <img src="https://up.alees.cn/40420200330012942.png" class="center"/>
             <p>
                 暂时未能找到您查找的页面<br>
                 可能输入的网址错误或此页面不存在<br>

@@ -80,9 +80,9 @@ export default {
             (function (d) {
                 var c = d.createElement('link')
                 c.rel = 'stylesheet'
-                c.href = 'https://apip.weatherdt.com/simple/static/css/weather-simple.css?v=2.0'
+                c.href = 'http://apip.weatherdt.com/simple/static/css/weather-simple.css?v=2.0'
                 var s = d.createElement('script')
-                s.src = 'https://apip.weatherdt.com/simple/static/js/weather-simple.js?v=2.0'
+                s.src = 'http://apip.weatherdt.com/simple/static/css/weather-simple.css?v=2.0'
                 var sn = d.getElementsByTagName('script')[0]
                 sn.parentNode.insertBefore(c, sn)
                 sn.parentNode.insertBefore(s, sn)
