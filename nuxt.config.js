@@ -11,7 +11,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
       //{ 'http-equiv': 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
-      { itemprop:"name", content:"Aleestar'Blog"},
+      { itemprop:"name", content:"Alees'Blogs"},
       { itemprop:"image", content:"https://up.alees.cn/logo.jpg" },
       { name:"description", itemprop:"description", content:"一觉醒来，诸事完美，继续努力呀!" },
       { name:"baidu_union_verify", content:"2385b7b0e375df395d056152b0d59454" },
