@@ -68,20 +68,24 @@ export default {
     VTagCard,
   },
   async asyncData({ app }) {
-    //获取全部标签
-    let tagData = await app.$api.selectTagList()
-    //随机文章
-    let randData = await app.$api.selectRandList();
-    //归档
-    let archivesData = await app.$api.selectArchives();
-    //获取通知
-    let noticeData = await app.$api.selectNotice()
-    return {
-      randList: randData.data,
-      archivesList: archivesData.data,
-      tagList: tagData.data,//全部标签
-      noticeList: noticeData.data,//通知列表
-    };
+    try{
+      //获取全部标签
+      let tagData = await app.$api.selectTagList()
+      //随机文章
+      let randData = await app.$api.selectRandList();
+      //归档
+      let archivesData = await app.$api.selectArchives();
+      //获取通知
+      let noticeData = await app.$api.selectNotice()
+      return {
+        randList: randData.data,
+        archivesList: archivesData.data,
+        tagList: tagData.data,//全部标签
+        noticeList: noticeData.data,//通知列表
+      }
+    } catch (error) {
+        return app.context.error({statusCode: 500})
+    }
   },
   methods: {
     handleSearch(data){

@@ -132,6 +132,7 @@ export default {
       Comment
     },
     async asyncData({params, app}){
+      try {
         const id = params.id.substring(0, params.id.indexOf('.'))
         let postsData = await app.$api.selectPosts(id)
         //获取站点信息
@@ -143,6 +144,9 @@ export default {
           next: postsData.data.next,
           siteInfo,
         }
+      } catch (error) {
+        return app.context.error({statusCode: 500})
+      }
     },
     data(){
       return{

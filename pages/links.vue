@@ -1,21 +1,31 @@
 <template>
   <div>
     <div class="sketch">
-      <div class="sketch-bg" :style="{backgroundImage:'url('+sketchBg+')'}"></div>
+      <div
+        class="sketch-bg"
+        :style="{ backgroundImage: 'url(' + sketchBg + ')' }"
+      ></div>
       <div class="gray-glass">
         <div class="sketch-info animated fadeInUp">
-            <div>
-              <!-- 标题 -->
-              <p v-text="'网站名称：' + $store.state.siteInfo.site.siteName"></p>
-              <p v-text="'网站logo：' + $store.state.siteInfo.site.logo"></p>
-              <p v-text="'网站地址：' + $store.state.siteInfo.site.siteUrl"></p>
-              <p v-text="'联系邮箱：' + $store.state.siteInfo.user.email"></p>
-              <p>注意：申请友链时请将本站设为贵站的友链</p>
-              <el-button @click="drawer = true" style="width: 400px; margin-top: 10px;  background-color: rgba(254,219,207,0)">填写友链信息</el-button>
+          <div>
+            <!-- 标题 -->
+            <p v-text="'网站名称：' + $store.state.siteInfo.site.siteName"></p>
+            <p v-text="'网站logo：' + $store.state.siteInfo.site.logo"></p>
+            <p v-text="'网站地址：' + $store.state.siteInfo.site.siteUrl"></p>
+            <p v-text="'联系邮箱：' + $store.state.siteInfo.user.email"></p>
+            <p>注意：申请友链时请将本站设为贵站的友链</p>
+            <el-button
+              @click="drawer = true"
+              style="
+                width: 400px;
+                margin-top: 10px;
+                background-color: rgba(254, 219, 207, 0);
+              "
+              >填写友链信息</el-button
+            >
 
-
-              <!-- 申请友情链接 -->
-              <!-- <el-form>
+            <!-- 申请友情链接 -->
+            <!-- <el-form>
                 <el-form-item class="input_wrap">
                   <input class="input" placeholder="键入网站名称"  autocomplete="off" v-model="links.name"/>
                   <div class="after"></div>
@@ -37,207 +47,227 @@
                   <el-button class="input-btn" @click="handleSubmit()">提交</el-button>
                 </el-form-item>
               </el-form> -->
-            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- 友链列表 -->
     <el-row class="links-list-container">
-        <v-links-box :linksList="linksList"></v-links-box>
+      <v-links-box :linksList="linksList"></v-links-box>
     </el-row>
 
-    <el-drawer
-      :visible.sync="drawer">
-      <el-form id="form" :label-position="labelPosition" label-width="100px" :model="links">
-        <h1 style="margin-bottom: 20px;">友链提交</h1>
+    <el-drawer :visible.sync="drawer">
+      <el-form
+        id="form"
+        :label-position="labelPosition"
+        label-width="100px"
+        :model="links"
+      >
+        <h1 style="margin-bottom: 20px">友链提交</h1>
         <el-form-item label="网站名称">
-          <el-input autocomplete="off" v-model="links.name"/>
+          <el-input autocomplete="off" v-model="links.name" />
         </el-form-item>
         <el-form-item label="网站LOGO">
-          <el-input autocomplete="off" v-model="links.logo"/>
+          <el-input autocomplete="off" v-model="links.logo" />
         </el-form-item>
         <el-form-item label="网站URL">
-          <el-input autocomplete="off" v-model="links.url"/>
+          <el-input autocomplete="off" v-model="links.url" />
         </el-form-item>
         <el-form-item label="联系邮箱">
-          <el-input autocomplete="off"  v-model="links.email"/>
+          <el-input autocomplete="off" v-model="links.email" />
         </el-form-item>
-        <el-button style="width:48%;" @click="handleReset()" plain>重置</el-button>
-        <el-button style="width:48%;" @click="handleSubmit()" type="primary" plain>提交</el-button>
+        <el-button style="width: 48%" @click="handleReset()" plain
+          >重置</el-button
+        >
+        <el-button
+          style="width: 48%"
+          @click="handleSubmit()"
+          type="primary"
+          plain
+          >提交</el-button
+        >
       </el-form>
     </el-drawer>
   </div>
 </template>
 
 <script>
-import '~/assets/css/input.scss'
-import { validateLinks } from '~/assets/js/validate'
-import VLinksBox from '~/components/home/links-box'
+import "~/assets/css/input.scss";
+import { validateLinks } from "~/assets/js/validate";
+import VLinksBox from "~/components/home/links-box";
 export default {
-  head(){
-    return{
+  head() {
+    return {
       title: `${this.$store.state.siteInfo.site.siteName} ♥ 友情链接`,
+    };
+  },
+  async asyncData({ app }) {
+    try {
+      let linksListData = await app.$api.selectLinksAll();
+      console.log(linksListData);
+      return {
+        linksList: linksListData.data, //友链列表
+      }
+    } catch (error) {
+      return app.context.error({ statusCode: 500 });
     }
   },
-  async asyncData({ app }){
-    let linksListData = await app.$api.selectLinksAll()
-    console.log(linksListData)
-    return{
-      linksList: linksListData.data,//友链列表
-    }
-  },
-  data(){
-    return{
-      sketchBg: '',
-      links:{
-        name: '',
-        logo: '',
-        url: '',
-        email: '',
+  data() {
+    return {
+      sketchBg: "",
+      links: {
+        name: "",
+        logo: "",
+        url: "",
+        email: "",
       },
-      labelPosition: 'left',
-      drawer: false
-    }
+      labelPosition: "left",
+      drawer: false,
+    };
   },
-  components:{
-    VLinksBox
+  components: {
+    VLinksBox,
   },
-  methods:{
-    randomSketckBg(){
-      const rand = Math.floor(Math.random()*5)+1
-      this.sketchBg = 'https://up.alees.cn/sketchBg0' + rand+'.jpg'
+  methods: {
+    randomSketckBg() {
+      const rand = Math.floor(Math.random() * 5) + 1;
+      this.sketchBg = "https://up.alees.cn/sketchBg0" + rand + ".jpg";
     },
     //重置links信息
-    handleReset(){
-      this.links = {}
+    handleReset() {
+      this.links = {};
     },
     //提交友链
-    handleSubmit(){
+    handleSubmit() {
       //验证友情链接的信息格式
-      if(!validateLinks(this.links)){
+      if (!validateLinks(this.links)) {
         return;
       }
       //发送添加友链请求
-      this.$api.applyLinks(this.links).then(res => {
-        if(res.code == 20000){
+      this.$api.applyLinks(this.links).then((res) => {
+        if (res.code == 20000) {
           this.$message({
-            type: 'success',
-            message: res.message
-          })
+            type: "success",
+            message: res.message,
+          });
         }
-        this.links = {}
-      })
-    }
+        this.links = {};
+      });
+    },
   },
-  mounted(){
-    this.$store.state.header.style.top = '0px';
-    this.randomSketckBg()
+  mounted() {
+    this.$store.state.header.style.top = "0px";
+    this.randomSketckBg();
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
 //=================================
-.sketch,.sketch-bg,.gray-glass{
-    width: 100%;
+.sketch,
+.sketch-bg,
+.gray-glass {
+  width: 100%;
 }
-.sketch{
-    overflow:hidden;
-    position: relative;
-    .sketch-bg{
-        box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        -webkit-filter: blur(4px);
-        -moz-filter: blur(4px);
-        -o-filter: blur(4px);
-        -ms-filter: blur(4px);
-        filter: blur(4px);
+.sketch {
+  overflow: hidden;
+  position: relative;
+  .sketch-bg {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
+  }
+  .gray-glass {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    .sketch-info {
+      line-height: 36px;
+      color: #ffffff;
     }
-    .gray-glass{
-        background-color: rgba(0,0,0,.5);
-        position: absolute;
-        top: 0;
-        left: 0;
-        .sketch-info{
-            line-height: 36px;
-            color: #ffffff;
-        }
-    }
-}
-
-.input-btn{
-  width:50%; 
-  border:none; 
-  border-radius:0; 
-  color:#fff; 
-  background: rgba(255, 255, 255, 0.1); 
-  float:left; 
-  margin:0;
-  &:hover{
-    color: black;
-    background-color: #ECF5FF;
   }
 }
-.links-list-container{
+
+.input-btn {
+  width: 50%;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  float: left;
+  margin: 0;
+  &:hover {
+    color: black;
+    background-color: #ecf5ff;
+  }
+}
+.links-list-container {
   width: 1020px;
   margin: auto;
   //box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
 
-#form{
+#form {
   padding: 20px;
 }
 
 //去掉抽屉的框
-/deep/ :focus{
-  outline:0;
+/deep/ :focus {
+  outline: 0;
 }
 //======================================
-@media (max-width:768px) {
-    .sketch,.sketch-bg,.gray-glass{
-        height:200px;
+@media (max-width: 768px) {
+  .sketch,
+  .sketch-bg,
+  .gray-glass {
+    height: 200px;
+  }
+  .sketch {
+    .sketch-bg {
+      -webkit-filter: blur(2px);
+      -moz-filter: blur(2px);
+      -o-filter: blur(2px);
+      -ms-filter: blur(2px);
+      filter: blur(2px);
     }
-    .sketch{
-        .sketch-bg{
-            -webkit-filter: blur(2px);
-            -moz-filter: blur(2px);
-            -o-filter: blur(2px);
-            -ms-filter: blur(2px);
-            filter: blur(2px);
-        }
-        .gray-glass{
-            .sketch-info{
-                margin:30px auto;
-                width: 100%;
-                padding: 10px;
-            }
-        }
+    .gray-glass {
+      .sketch-info {
+        margin: 30px auto;
+        width: 100%;
+        padding: 10px;
+      }
     }
-
+  }
 }
 @media (min-width: 1200px) {
-    .sketch,.sketch-bg,.gray-glass{
-        height:360px;
+  .sketch,
+  .sketch-bg,
+  .gray-glass {
+    height: 360px;
+  }
+  .sketch {
+    .sketch-bg {
+      -webkit-filter: blur(4px);
+      -moz-filter: blur(4px);
+      -o-filter: blur(4px);
+      -ms-filter: blur(4px);
+      filter: blur(4px);
     }
-    .sketch{
-      .sketch-bg{
-          -webkit-filter: blur(4px);
-          -moz-filter: blur(4px);
-          -o-filter: blur(4px);
-          -ms-filter: blur(4px);
-          filter: blur(4px);
+    .gray-glass {
+      .sketch-info {
+        margin: 60px auto;
+        width: 400px;
+        font-size: 17px;
       }
-        .gray-glass{
-            .sketch-info{
-                margin:60px auto;
-                width: 400px;
-                font-size: 17px;
-            }
-        }
-    
     }
+  }
 }
 </style>
