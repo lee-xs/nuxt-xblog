@@ -20,7 +20,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://hm.baidu.com/hm.js?86a28727a22fc484486d01e00c8e3776' },
+      { src: 'https://hm.baidu.com/hm.js?2df4f14b97781219dcdf53cda2911ed1' },
     ]
   },
   /*
