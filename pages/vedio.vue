@@ -13,7 +13,7 @@
                  <el-form-item label="播放地址">
                      <el-input type="text" v-model="vedioUrl"></el-input>
                 </el-form-item>
-                <el-button  style="width:100%;" type="primary" @click="handleParseUrl()">点接开始解析</el-button>
+                <el-button  style="width:100%; margin-bottom: 15px;" type="primary" @click="handleParseUrl()">点接开始解析</el-button>
             </el-form>      
         </el-col>
     </el-row>
@@ -27,37 +27,13 @@ export default {
         }
     },
     data: () => ({
-        prefixUrl: 'https://8090.ylybz.cn/jiexi2019/?url=',
+        prefixUrl: 'https://www.8090.la/8090/?url=',
         vedioUrl: '',
         iframeUrl: '',
         analysis: [
             {
                 label: '【1】通用vip引擎系统【全网解析】',
-                value: 'https://8090.ylybz.cn/jiexi2019/?url=',
-            },
-            {
-                label: '【2】通用vip引擎系统【全网解析】',
-                value: 'http://jx.du2.cc/?url=',
-            },
-            {
-                label: '【3】通用vip引擎系统【全网解析】',
-                value: 'http://jx.598110.com/?url=',
-            },
-            {
-                label: '【4】通用vip引擎系统【全网解析】',
-                value: 'http://jx.618ge.com/?url=',
-            },
-            {
-                label: '【5】通用vip引擎系统【全网解析】',
-                value: 'http://vip.jlsprh.com/?url=',
-            },
-            {
-                label: '【6】通用vip引擎系统【全网解析】',
-                value: 'http://jx.drgxj.com/?url=',
-            },
-            {
-                label: '【7】通用vip引擎系统【全网解析】',
-                value: 'http://jx.598110.com/?url=',
+                value: 'https://www.8090.la/8090/?url=',
             },
         ]
     }),
@@ -71,7 +47,7 @@ export default {
         },
 
     },
-}
+}   
 </script>
 
 <style lang="scss" scoped>
