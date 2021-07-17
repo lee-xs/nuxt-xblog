@@ -22,17 +22,18 @@
             </el-table-column>
             <el-table-column align="center" label="开启评论" width="80">
                 <template slot-scope="scope">
-                    <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.allowComment" @change="changeCommentState()" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+                    <el-switch :active-value="1" :inactive-value="0" v-model="scope.row.allowComment" @change="changeCommentState(scope.row)" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
                 </template>
             </el-table-column>
             <el-table-column align="center" v-if="tabType == 'first'" prop="publishTime" label="发布时间" width="200"></el-table-column>
             <el-table-column align="center" v-if="tabType == 'second'" prop="createTime" label="创建时间" width="200"></el-table-column>
             <el-table-column align="center" v-if="tabType == 'third'" prop="editTime" label="修改时间" width="200"></el-table-column>
             <!-- tab 已发布 操作 -->
-            <el-table-column align="center" width="200" v-if="tabType == 'first'" label="操作">
+            <el-table-column align="center" width="300" v-if="tabType == 'first'" label="操作">
                 <template slot-scope="scope">
+                    <el-button size="medium" type="primary" @click="previewPosts(scope.row.id)">预览</el-button>
                     <el-button size="medium" type="primary" @click="changePosts(scope.row)">编辑</el-button>
-                    <el-button size="medium" type="danger" @click="moveRecycle(scope.row.id)">回收站</el-button>
+                    <el-button size="medium" type="danger"  @click="moveRecycle(scope.row.id)">回收站</el-button>
                 </template>
             </el-table-column>
             <!-- tab 草稿箱 操作 -->
@@ -90,9 +91,19 @@ export default {
             this.$emit('removePosts', id)
         },
         //修改评论状态
-        changeCommentState(){
-
+        changeCommentState(row){
+            this.$api.updatePosts(row).then((res) => {
+                if (res.code == 20000) {
+                    this.$message({
+                        type: "success",
+                        message: res.message,
+                    });
+                }
+            });
         },
+        previewPosts(id){
+            window.location.href = '/' + id + '.html'
+        }
     },
 }
 </script>

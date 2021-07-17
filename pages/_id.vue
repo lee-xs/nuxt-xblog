@@ -65,7 +65,7 @@
           </el-row>
         </div>
 
-        <Comment class="animated fadeInUp" @handleComments="handleComments"/>
+        <Comment class="animated fadeInUp" :allowComment="allowComment" @handleComments="handleComments"/>
       </el-col>
       
       <el-col :span="3" style="padding-top: 25px;" class="hidden-md-and-down">
@@ -140,6 +140,7 @@ export default {
         let siteInfo = siteInfoData.data
         return {
           posts: postsData.data.posts,
+          allowComment: postsData.data.posts.allowComment,
           previous: postsData.data.previous,
           next: postsData.data.next,
           siteInfo,
