@@ -43,6 +43,18 @@
         {
           label: '【3】通用解析(偶尔失效，加载慢)',
           value: 'https://www.administratorw.com/index.php?url='
+        },
+        {
+          label: '【4】okjx解析',
+          value: 'https://okjx.cc/?url='
+        },
+        {
+          label: '【5】jx4k解析',
+          value: 'https://vip.jx4k.com/vip/?url='
+        },
+        {
+          label: '【6】qimihe解析',
+          value: 'https://qimihe.com/?url='
         }
       ]
     }),

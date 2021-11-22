@@ -13,7 +13,6 @@ export default {
         'X-Requested-With': 'XMLHttpRequest'
     },
     //超时设置 10s
-    timeout: 10000,
     //跨域是否携带token
     withCredentials: true,
     //响应的数据格式 json/ blob/ document/ arraybuffer/ text/ stream
