@@ -28,7 +28,7 @@
       }
     },
     data: () => ({
-      prefixUrl: 'https://www.8090.la/8090/?url=',
+      prefixUrl: 'https://jx.parwix.com:4433/player/?url=',
       vedioUrl: '',
       iframeUrl: '',
       analysis: [
