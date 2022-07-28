@@ -28,46 +28,22 @@
       }
     },
     data: () => ({
-      prefixUrl: 'https://jx.parwix.com:4433/player/?url=',
+      prefixUrl: 'https://jx.bozrc.com:4433/player/analysis.php?v=',
       vedioUrl: '',
       iframeUrl: '',
       analysis: [
         {
           label: '【1】泩泩1【全网解析】',
-          value: 'https://jx.parwix.com:4433/player/?url=',
+          value: 'https://jx.bozrc.com:4433/player/analysis.php?v=',
         },
         {
           label: '【2】泩泩2【全网解析】',
-          value: 'https://sb.5gseo.net/?url=',
+          value: 'https://jx.parwix.com:4433/player/?url=',
         },
         {
-          label: '【3】泩泩3【全网解析】',
-          value: 'https://jx.iztyy.com/jx.php?url=',
-        },
-        {
-          label: '【4】通用vip引擎系统【全网解析】',
-          value: 'https://www.8090.la/8090/?url=',
-        },
-        {
-          label: '【5】稳定通用解析',
+          label: '【3】泩泩3 稳定通用解析',
           value: 'https://z1.m1907.cn/?jx='
         },
-        {
-          label: '【6】通用解析(偶尔失效，加载慢)',
-          value: 'https://www.administratorw.com/index.php?url='
-        },
-        {
-          label: '【7】okjx解析',
-          value: 'https://okjx.cc/?url='
-        },
-        {
-          label: '【8】jx4k解析',
-          value: 'https://vip.jx4k.com/vip/?url='
-        },
-        {
-          label: '【9】qimihe解析',
-          value: 'https://qimihe.com/?url='
-        }
       ]
     }),
     methods: {
