@@ -4,9 +4,10 @@
             <el-row style="height:68px;">
                 <!-- logo -->
                 <el-col :span="9" :xs="22">
-                    <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">
-                        <img :src="siteInfo.site.logo" />
-                    </nuxt-link>
+<!--                    <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">-->
+<!--                        <img :src="siteInfo.site.logo" />-->
+<!--                    </nuxt-link>-->
+                    <p>知识记录</p>
 
                     <div id="weather-v2-plugin-simple"></div> 
                 </el-col>
