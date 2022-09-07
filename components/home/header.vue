@@ -7,7 +7,7 @@
 <!--                    <nuxt-link class="logo" to="/" @click="this.$router.push('/home')">-->
 <!--                        <img :src="siteInfo.site.logo" />-->
 <!--                    </nuxt-link>-->
-                    <p style="font-size: 20px; line-height: 15px;">知识记录</p>
+                    <p style="font-size: 25px; margin-top : 15px;">知识记录</p>
 
                     <div id="weather-v2-plugin-simple"></div> 
                 </el-col>
