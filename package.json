@@ -39,7 +39,7 @@
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {
-    "node-sass": "^4.14.0",
+    "node-sass": "^9.0.0",
     "nodemon": "^1.18.9",
     "sass-loader": "^8.0.2",
     "scss-loader": "0.0.1"
